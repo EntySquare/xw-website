@@ -1,16 +1,30 @@
 // 按照网站自己的需求，提供公用的样式
+:root{
+  --bgc-top:#F0EBF2;
+  --bgc-bom:#FFF;
+  --bgc-top-dark:#000;
+  --bgc-bom-dark:#000;
+  --none:#ff000000 !important;
+}
+.dark{
+  background: linear-gradient(180deg, var(--bgc-top-dark) 50%, var(--bgc-bom-dark) 100%) !important;
+}
 * {
     box-sizing: border-box;
   }
   
   html {
-    height: 100%;
+    // height: 100%;
     font-size: 14px;
   }
   body {
-    height: 100%;
-    color: #333;
-    min-width: 1240px;
+    // height: 100%;
+    height: 3000px;
+    padding-top: 85px;
+    color: var(--color-text-1);
+    // min-width: 1240px;
+    background: linear-gradient(180deg, var(--bgc-top) 50%, var(--bgc-bom) 100%) ;
+    box-sizing: border-box;
     font: 1em/1.4 'Microsoft Yahei', 'PingFang SC', 'Avenir', 'Segoe UI', 'Hiragino Sans GB',
       'STHeiti', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif;
   }
@@ -19,11 +33,13 @@
   h1,
   h3,
   h4,
+  h5,
+  h6,
   p,
   dl,
   dd {
     padding: 0;
-    margin: 0;
+    margin: 0 !important;
   }
   
   a {
@@ -43,7 +59,7 @@
     padding: 0;
     outline: none;
     border: none;
-    -webkit-appearance: none;
+    // -webkit-appearance: none;
     &::placeholder {
       color: #ccc;
     }

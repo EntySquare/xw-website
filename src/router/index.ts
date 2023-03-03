@@ -10,9 +10,21 @@ let router = createRouter({
   history: createWebHashHistory(),
   // 设置路由对象
   routes: [
-    { path: "/", redirect: "/layout" },
-    { path: "/layout", component: layout },
-    { path: "/login", component: () => import("@/views/login/index.vue") },
+    { path: "/", redirect: "/zh-CN" },
+    {
+      path: "/zh-CN",
+      component: layout,
+      children: [
+        // 首页
+        { path: "/zh-CN", component: () => import("@/views/home/index.vue") },
+        // 一级分类
+        {
+          path: "/category/:id",
+          component: () => import("@/views/category/index.vue"),
+        },
+      ],
+    },
+    // { path: "/login", component: () => import("@/views/login/index.vue") },
   ],
 });
 NProgress.configure({ showSpinner: false }); // 显示右上角螺旋加载提示

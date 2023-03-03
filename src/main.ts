@@ -10,6 +10,19 @@ import "@/assets/styles/common.less";
 import router from "@/router";
 // 导入 pinia
 import { createPinia } from "pinia";
+// 额外引入图标库
+import ArcoVueIcon from "@arco-design/web-vue/es/icon";
+
+import VueSplide from "@splidejs/vue-splide";
+
 let pinia = createPinia();
 
-createApp(App).use(router).use(ArcoVue).use(pinia).mount("#app");
+const app = createApp(App);
+
+app
+  .use(router)
+  .use(ArcoVue)
+  .use(ArcoVueIcon)
+  .use(VueSplide)
+  .use(pinia)
+  .mount("#app");
