@@ -1,11 +1,25 @@
 /* <=1200px时 */
+@media (min-width:1280px) {
+    .listcar {  
+          .body-listcar-item{
+            min-height: 212px !important;
+          } 
+    }
+}
+/* <=1200px时 */
 @media (max-width:1280px) {
     .listcar {
         .listcar-item{
             width: 50% !important;
           }   
+          .body-listcar-item{
+            width: 32.5% !important;
+            height: 22vw !important;
+          } 
     }
-    
+    .home-banner{
+        padding: 40px 0px 40px !important;
+    }
 }
 
 /* <=992px时 */
@@ -21,8 +35,13 @@
     .listcar {
         .listcar-item{
             min-width: 280px !important;
+            height: 42vw !important;
             width: 100% !important;
           }   
+          .body-listcar-item{
+            height: 40vw !important;
+            width: 49.4% !important;
+          } 
     }
     .nonetitle{
         display: none !important;
@@ -33,7 +52,10 @@
     .containergrap{
         gap: 15px !important;
     }
-}
+    .home-banner{
+        padding: 20px 0px 20px !important;
+    }
+   }
 
 /* <=700px时 */
 @media (max-width:700px) {

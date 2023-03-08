@@ -1,8 +1,7 @@
 // 管理分类导航的数据
 import { defineStore } from "pinia";
 // 导入 axios
-import request from "@/utils/request";
-import { TResult, TCate } from "@/types/cate";
+import { getTheme_value } from "@/utils/storage";
 // 导入默认分类数据
 import { topNavCategory } from "../constants";
 // 将默认的分类数据转为对象
@@ -14,16 +13,16 @@ let defaultNav = topNavCategory.map((item) => {
 
 let useCateStore = defineStore("cate", {
   state: () => ({
-    test: "我是测试数据",
+    themenum: getTheme_value() || "1",
     // 头部分类数据
-    cateList: defaultNav as TCate[],
   }),
   actions: {
     // 获取头部分类数据
-    async getCateList() {
-      let res = await request.get<TResult>("/home/category/head");
-      // 保存数据源
-      this.cateList = res.data.result;
+    setThemenum(i: string) {
+      this.$state.themenum = i;
+    },
+    getThemenum() {
+      return this.$state.themenum;
     },
   },
   getters: {},

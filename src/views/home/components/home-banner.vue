@@ -68,6 +68,7 @@ const data: TBanner[] = [
 .home-banner {
   // width: 100%;
   padding: 53px 0px 64px;
+
   .banner {
     width: 100%;
   }
@@ -76,16 +77,20 @@ const data: TBanner[] = [
 ::v-deep .splide__pagination {
   display: none;
 }
+
 ::v-deep .splide__arrow--prev {
   left: -10px;
 }
+
 ::v-deep .splide__arrow--next {
   right: -10px;
 }
+
 ::v-deep .splide__arrow {
   background-color: #fff;
   height: 47px;
   width: 47px;
+
   svg {
     fill: rgba(28, 90, 184, 1);
     height: 25px;

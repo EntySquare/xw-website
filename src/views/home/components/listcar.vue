@@ -1,33 +1,35 @@
 <script setup lang="ts">
 import { TBanner } from "@/types/cate";
-defineProps<{
+import { ref } from "vue";
+const prop = defineProps<{
   data: TBanner[];
   type: number;
   num: number;
 }>();
+const datas = ref()
+datas.value = prop.data
+const setCollect = (i: number) => {
+  datas.value[i].collect = datas.value[i].collect ? 0 : 1
+}
 </script>
 <template>
   <div>
     <div class="listcar">
-      <div
-        v-for="(item, i) in data"
-        :style="{ 'background-image': 'url(' + item.img[0] + ')' }"
-        :class="[
-          {
-            none:
-              (i > num * (type - 1) && num == 1) || //
-              i < (num - 1) * type ||
-              i > num * type - 1,
-          },
-          'listcar-item',
-        ]"
-      >
+      <div v-for="(item, i) in datas" :style="{ 'background-image': 'url(' + item.img[0] + ')' }" :class="[
+        {
+          none:
+            (i > num * (type - 1) && num == 1) || //
+            i < (num - 1) * type ||
+            i > num * type - 1,
+        },
+        'listcar-item',
+      ]">
         <div class="item-top">
-          <i :class="item.collect ? 'i2' : 'i1'"></i>
+          <i @click="setCollect(i)" :class="item.collect ? 'i2' : 'i1'"></i>
         </div>
         <div class="item-bom">
           <div class="left">
-            <div class="u">{{ i + item.name }}</div>
+            <div class="u">{{ item.name }}</div>
             <div class="d">地板价：{{ item.lowest_price }}</div>
           </div>
           <div class="right">
@@ -44,9 +46,11 @@ defineProps<{
   display: flex;
   padding: 0 1%;
   gap: 2%;
+
   .none {
     display: none !important;
   }
+
   .listcar-item {
     // min-width: 436px;
     position: relative;
@@ -64,6 +68,7 @@ defineProps<{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
     &::before {
       content: "";
       display: block;
@@ -74,18 +79,32 @@ defineProps<{
       transition: all 1s;
       background: linear-gradient(rgba(255, 255, 255, 0) 20%, #326abf 100%);
     }
+
     &:hover {
       background-size: 108%;
+
       &::before {
         background: linear-gradient(rgba(255, 255, 255, 0) 20%, #c460c6 100%);
       }
     }
+
     .item-top {
       position: relative;
       z-index: 1;
       padding: 1vw;
       display: flex;
       justify-content: end;
+
+      @keyframes animation1 {
+        0% {
+          transform: scale(0.5)
+        }
+
+        100% {
+          transform: scale(0.9)
+        }
+      }
+
       .i1,
       .i2 {
         display: block;
@@ -94,10 +113,15 @@ defineProps<{
         background-size: cover;
         background-image: url("@/assets/icon/xx0.png");
       }
+
       .i2 {
         background-image: url("@/assets/icon/xx1.png");
+        transform-style: preserve-3d;
+        animation: animation1 .1s linear;
+
       }
     }
+
     .item-bom {
       padding: 18px 15px;
       position: relative;
@@ -105,32 +129,38 @@ defineProps<{
       display: flex;
       justify-content: space-between;
       align-items: end;
+
       .left {
         .u {
           font-weight: 500;
-          font-size: 16px;
+          font-size: 20px;
           line-height: 24px;
           margin-bottom: 5px;
         }
+
         .d {
           font-weight: 700;
-          font-size: 12px;
+          font-size: 14px;
           line-height: 18px;
         }
       }
+
       .right {
         display: flex;
         flex-direction: column;
         align-items: center;
+
         .u {
           font-weight: 700;
-          font-size: 12px;
+          font-size: 14px;
           line-height: 18px;
         }
+
         .d {
           font-weight: 600;
           font-size: 20px;
           line-height: 30px;
+
           i {
             display: inline-block;
             width: 45px;

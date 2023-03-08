@@ -1,5 +1,11 @@
 import { nextTick } from "vue";
-
+import useStore from "@/store/index";
+let cate;
+let setThemenum: any;
+nextTick(() => {
+  cate = useStore().cate;
+  setThemenum = cate.setThemenum;
+});
 const Theme_value = "1";
 
 const isTheme_value = () => {
@@ -19,6 +25,7 @@ const clearTheme_value = () => {
 };
 
 const setTheme = (value: string) => {
+  setThemenum(value);
   if (+value) {
     // color = "blue";
     setTheme_value(value);
