@@ -1,36 +1,64 @@
 <script lang="ts" setup>
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
+import { ref } from "vue";
+import { TBanner } from "@/types/cate";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-let img =
-  "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg";
+import Listcar from "./listcar.vue";
+import { type } from "@/utils/banner";
+let mqList = ref(3);
+const getWindowInfo = () => {
+  mqList.value = window.matchMedia("(max-width: 1280px)").matches ? 2 : 3;
+  if (mqList.value == 2) {
+    mqList.value = window.matchMedia("(max-width: 845px)").matches ? 1 : 2;
+  }
+};
+window.addEventListener("resize", getWindowInfo);
+getWindowInfo();
+const data: TBanner[] = [
+  {
+    collect: 1,
+    name: "Crypto Citizens",
+    lowest_price: "1W",
+    countdown: 12323,
+    img: [
+      "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+    ],
+  },
+  {
+    collect: 0,
+    name: "Crypto Citizens",
+    lowest_price: "2W",
+    countdown: 12323,
+    img: [
+      "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+    ],
+  },
+  {
+    collect: 1,
+    name: "Crypto Citizens",
+    lowest_price: "3W",
+    countdown: 12323,
+    img: [
+      "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+    ],
+  },
+  {
+    collect: 1,
+    name: "Crypto Citizens",
+    lowest_price: "4W",
+    countdown: 12323,
+    img: [
+      "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+    ],
+  },
+];
 </script>
 <template>
   <div class="home-banner">
     <!-- 轮播图 -->
     <Splide class="banner" :options="{ rewind: false }">
-      <SplideSlide>
-        <div class="listcar">
-          <div
-            v-for="item in 3"
-            class="listcar-item"
-            :style="{ 'background-image': 'url(' + img + ')' }"
-          >
-            <div class="item-top"><i></i></div>
-            <div class="item-bom">
-              <div class="left">
-                <div class="u">Crypto Citizens</div>
-                <div class="d">地板价：xxx</div>
-              </div>
-              <div class="right">
-                <div class="u">倒计时</div>
-                <div class="d"><i>05</i>:<i>05</i>:<i>05</i></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </SplideSlide>
-      <SplideSlide>
-        <div class="listcar"></div>
+      <SplideSlide class="bannerstree" v-for="i in type(mqList, data.length)">
+        <Listcar :num="i" :type="mqList" :data="data"></Listcar>
       </SplideSlide>
     </Splide>
   </div>
@@ -38,108 +66,10 @@ let img =
 
 <style scoped lang="less">
 .home-banner {
-  width: 100%;
-  height: 14.2vw;
+  // width: 100%;
   padding: 53px 0px 64px;
   .banner {
     width: 100%;
-    height: 14.2vw;
-  }
-}
-
-.listcar {
-  display: flex;
-  padding: 0 1%;
-  gap: 2%;
-  .listcar-item {
-    // min-width: 436px;
-    position: relative;
-    width: 32%;
-    height: 14.2vw;
-    background-size: 100%;
-    background-position: center;
-    border-radius: 14px;
-    overflow: hidden;
-    transition: all 0.5s;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    &::before {
-      content: "";
-      display: block;
-      position: absolute;
-      z-index: 0;
-      width: 100%;
-      height: 100%;
-      transition: all 1s;
-      background: linear-gradient(rgba(255, 255, 255, 0) 20%, #326abf 100%);
-    }
-    &:hover {
-      background-size: 108%;
-      &::before {
-        background: linear-gradient(rgba(255, 255, 255, 0) 20%, #c460c6 100%);
-      }
-    }
-    .item-top {
-      position: relative;
-      z-index: 1;
-      padding: 1vw;
-      display: flex;
-      justify-content: end;
-      i {
-        display: block;
-        width: 38px;
-        height: 38px;
-        background-size: cover;
-        background-image: url("@/assets/icon/星星.png");
-      }
-    }
-    .item-bom {
-      padding: 18px 15px;
-      position: relative;
-      z-index: 1;
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      .left {
-        .u {
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 24px;
-          margin-bottom: 5px;
-        }
-        .d {
-          font-weight: 700;
-          font-size: 12px;
-          line-height: 18px;
-        }
-      }
-      .right {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        .u {
-          font-weight: 700;
-          font-size: 12px;
-          line-height: 18px;
-        }
-        .d {
-          font-weight: 600;
-          font-size: 20px;
-          line-height: 30px;
-          i {
-            display: inline-block;
-            width: 45px;
-            height: 45px;
-            line-height: 45px;
-            border-radius: 12px;
-            background-color: #00000081;
-            text-align: center;
-          }
-        }
-      }
-    }
   }
 }
 

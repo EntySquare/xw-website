@@ -1,22 +1,8 @@
 // 定义类型
-export type TResult = {
-  code: string;
-  msg: string;
-  result: TCate[];
-};
-export type TCate = {
-  id: string;
+export type TBanner = {
+  collect: number;
   name: string;
-  picture: string;
-  children: TCate[];
-  goods: TGoods[];
-};
-export type TGoods = {
-  id: string;
-  name: string;
-  desc: string;
-  price: string;
-  picture: string;
-  discount: null;
-  orderNum: null;
+  lowest_price: string;
+  countdown: number;
+  img: string[];
 };
