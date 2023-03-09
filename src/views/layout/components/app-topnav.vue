@@ -87,7 +87,9 @@ export default { name: "AppTopnav" };
               fill="#2c2c2c" p-id="1058"></path>
           </svg>
           <template #content>
-            <a-doption>个人资料</a-doption>
+            <RouterLink to="/account/collected">
+              <a-doption>个人资料</a-doption>
+            </RouterLink>
             <a-doption>收藏夹</a-doption>
             <a-doption>关注列表</a-doption>
             <a-doption>我的系列</a-doption>
@@ -117,11 +119,11 @@ export default { name: "AppTopnav" };
       </div>
       <div class="blacktitle">
         <a-dropdown @select="handleSelect" trigger="hover" class="dropdown" style="
-                          position: fixed;
-                          top: 60px;
-                          border-radius: 15px;
-                          overflow: hidden;
-                        ">
+                                    position: fixed;
+                                    top: 60px;
+                                    border-radius: 15px;
+                                    overflow: hidden;
+                                  ">
           <icon-menu size="20px" />
           <template #content>
             <a-doption>

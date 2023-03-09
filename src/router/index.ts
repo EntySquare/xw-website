@@ -22,6 +22,14 @@ let router = createRouter({
           path: "/category/:id",
           component: () => import("@/views/category/index.vue"),
         },
+        {
+          path: "/account/:id",
+          component: () => import("@/views/account/index.vue"),
+        },
+        {
+          path: "/rankings/:id",
+          component: () => import("@/views/rankings/index.vue"),
+        },
       ],
     },
     // { path: "/login", component: () => import("@/views/login/index.vue") },

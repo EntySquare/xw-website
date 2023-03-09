@@ -3,6 +3,7 @@
 // 导入组件
 import homeBannerVue from "./components/home-banner.vue";
 import HomeBody from "./components/home-body.vue";
+import HomeFooter from "./components/home-footer.vue";
 import Ranking from "./components/home-ranking.vue";
 </script>
 
@@ -14,6 +15,7 @@ import Ranking from "./components/home-ranking.vue";
       <Ranking />
       <HomeBody />
     </div>
+    <HomeFooter />
   </div>
 </template>
 <style scoped lang="less">

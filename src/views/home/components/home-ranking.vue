@@ -16,8 +16,8 @@ getWindowInfo();
         <a-tabs default-active-key="1" size="large">
             <template #extra>
                 <div style="display: flex;gap: 10px;">
-                    <a-button type="outline">查看全部</a-button>
-                    <a-button type="primary">24小时 <icon-caret-down /> </a-button>
+                    <RouterLink to="/rankings/trending"><a-button type="outline">查看全部</a-button></RouterLink>
+                    <RouterLink to=""><a-button type="primary">24小时 <icon-caret-down /> </a-button></RouterLink>
                 </div>
             </template>
             <a-tab-pane key="1">
