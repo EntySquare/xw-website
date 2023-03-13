@@ -30,6 +30,14 @@ let router = createRouter({
           path: "/rankings/:id",
           component: () => import("@/views/rankings/index.vue"),
         },
+        {
+          path: "/collection/:id",
+          component: () => import("@/views/collection/index.vue"),
+        },
+        {
+          path: "/assets/ethereum/:id",
+          component: () => import("@/views/assets/index.vue"),
+        },
       ],
     },
     // { path: "/login", component: () => import("@/views/login/index.vue") },

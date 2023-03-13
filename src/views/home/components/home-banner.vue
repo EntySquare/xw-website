@@ -6,6 +6,7 @@ import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import Listcar from "./listcar.vue";
 import { type } from "@/utils/banner";
 let mqList = ref(3);
+let length = ref()
 const getWindowInfo = () => {
   mqList.value = window.matchMedia("(max-width: 1280px)").matches ? 2 : 3;
   if (mqList.value == 2) {
@@ -14,50 +15,73 @@ const getWindowInfo = () => {
 };
 window.addEventListener("resize", getWindowInfo);
 getWindowInfo();
-const data: TBanner[] = [
-  {
-    collect: 1,
-    name: "Crypto Citizens",
-    lowest_price: "1W",
-    countdown: 12323,
-    img: [
-      "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
-    ],
-  },
-  {
-    collect: 0,
-    name: "Crypto Citizens",
-    lowest_price: "2W",
-    countdown: 12323,
-    img: [
-      "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
-    ],
-  },
-  {
-    collect: 1,
-    name: "Crypto Citizens",
-    lowest_price: "3W",
-    countdown: 12323,
-    img: [
-      "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
-    ],
-  },
-  {
-    collect: 1,
-    name: "Crypto Citizens",
-    lowest_price: "4W",
-    countdown: 12323,
-    img: [
-      "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
-    ],
-  },
-];
+let data = ref();
+setTimeout(() => {
+  data.value = [
+    {
+      id: 454,
+      collect: 1,
+      name: "Crypto Citizens",
+      lowest_price: "1W",
+      countdown: 12323,
+      img: [
+        "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+      ],
+    },
+    {
+      id: 454,
+      collect: 1,
+      name: "Crypto Citizens",
+      lowest_price: "1W",
+      countdown: 12323,
+      img: [
+        "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+      ],
+    },
+    {
+      id: 454,
+      collect: 1,
+      name: "Crypto Citizens",
+      lowest_price: "1W",
+      countdown: 12323,
+      img: [
+        "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+      ],
+    },
+    {
+      id: 454,
+      collect: 1,
+      name: "Crypto Citizens",
+      lowest_price: "1W",
+      countdown: 12323,
+      img: [
+        "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+      ],
+    },
+    {
+      id: 454,
+      collect: 1,
+      name: "Crypto Citizens",
+      lowest_price: "1W",
+      countdown: 12323,
+      img: [
+        "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+      ],
+    },
+  ]
+  length.value = type(mqList.value, data.value.length)
+}, 0);
+
+
 </script>
 <template>
   <div class="home-banner">
     <!-- 轮播图 -->
     <Splide class="banner" :options="{ rewind: false }">
-      <SplideSlide class="bannerstree" v-for="i in type(mqList, data.length)">
+      <SplideSlide class="bannerstree" v-if="!data">
+        <Listcar :num="0" :type="mqList" :data="[]"></Listcar>
+      </SplideSlide>
+      <SplideSlide class="bannerstree" v-for="i in length">
         <Listcar :num="i" :type="mqList" :data="data"></Listcar>
       </SplideSlide>
     </Splide>

@@ -67,7 +67,7 @@ p {
 
 .listcar {
   display: flex;
-  padding: 10px 1% 10px;
+  // padding: 10px 1% 10px;
   gap: 1.2%;
 
   .none {

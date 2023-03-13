@@ -59,13 +59,13 @@ export default { name: "AppTopnav" };
             <a-doption>更多</a-doption>
           </template>
         </a-dropdown>
-        <a-dropdown trigger="hover" style="border-radius: 15px; overflow: hidden">
-          <a-typography-title :heading="6"> 排行 </a-typography-title>
-          <template #content>
-            <a-doption>你好</a-doption>
-            <a-doption>你好</a-doption>
-          </template>
-        </a-dropdown>
+        <RouterLink to="/rankings/trending"> <a-typography-title :heading="6"> 排行 </a-typography-title> </RouterLink>
+        <!-- <a-dropdown trigger="hover" style="border-radius: 15px; overflow: hidden">
+              <template #content>
+                <a-doption>你好</a-doption>
+                <a-doption>你好</a-doption>
+              </template>
+            </a-dropdown> -->
         <div class="themer">
           <a-switch :size="mqList ? 'small' : 'medium'" checked-color="#F0EBF2" unchecked-color="#000" v-model="value"
             checked-value="0" unchecked-value="1" @change="setTheme(value)">
@@ -119,11 +119,11 @@ export default { name: "AppTopnav" };
       </div>
       <div class="blacktitle">
         <a-dropdown @select="handleSelect" trigger="hover" class="dropdown" style="
-                                    position: fixed;
-                                    top: 60px;
-                                    border-radius: 15px;
-                                    overflow: hidden;
-                                  ">
+                                                position: fixed;
+                                                top: 60px;
+                                                border-radius: 15px;
+                                                overflow: hidden;
+                                              ">
           <icon-menu size="20px" />
           <template #content>
             <a-doption>

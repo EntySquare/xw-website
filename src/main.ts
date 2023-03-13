@@ -15,6 +15,8 @@ import ArcoVueIcon from "@arco-design/web-vue/es/icon";
 
 import VueSplide from "@splidejs/vue-splide";
 
+import plugin from "./components/index";
+
 let pinia = createPinia();
 
 const app = createApp(App);
@@ -25,4 +27,5 @@ app
   .use(ArcoVueIcon)
   .use(VueSplide)
   .use(pinia)
+  .use(plugin)
   .mount("#app");

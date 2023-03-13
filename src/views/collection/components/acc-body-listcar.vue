@@ -34,27 +34,24 @@ defineProps<{
         },
         'body-listcar-item',
       ]">
-        <RouterLink style="height: 100%;"
-          :to="{ path: `/collection/${item.name.replaceAll(' ', '')}`, query: { id: `${item.id}` } }">
-          <div class="item-top" :style="{ 'background-image': 'url(' + item.img[0] + ')' }"></div>
-          <div class="item-bom">
-            <div class="u">
-              <a-typography-title :heading="+mqList">
-                醒目猴</a-typography-title>
-              <icon-check-circle-fill style="color:blue" :size="20" />
-            </div>
-            <div class="d">
-              <a-typography-title>
-                <p>地板价</p>
-                <p>¥500</p>
-              </a-typography-title>
-              <a-typography-title>
-                <p>总交易量</p>
-                <p>27901832</p>
-              </a-typography-title>
-            </div>
+        <div class="item-top" :style="{ 'background-image': 'url(' + item.img[0] + ')' }"></div>
+        <div class="item-bom">
+          <div class="u">
+            <a-typography-title :heading="+mqList">
+              醒目猴</a-typography-title>
+            <icon-check-circle-fill style="color:blue" :size="20" />
           </div>
-        </RouterLink>
+          <div class="d">
+            <a-typography-title>
+              <p>地板价</p>
+              <p>¥500</p>
+            </a-typography-title>
+            <a-typography-title>
+              <p>总交易量</p>
+              <p>27901832</p>
+            </a-typography-title>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -82,9 +79,8 @@ p {
   }
 
   .body-listcar-item {
-    box-sizing: border-box;
     position: relative;
-    width: 19.14%;
+    width: 24.1%;
     height: 12.8vw;
     background: var(--color-bg-1);
     box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);

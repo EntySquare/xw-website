@@ -15,6 +15,9 @@ const setCollect = (i: number) => {
 <template>
   <div>
     <div class="listcar">
+      <div v-if="!datas">
+        <XtxSkeleton :width="100" heightB="14.2vw" :fade="true" :animated="true"></XtxSkeleton>
+      </div>
       <div v-for="(item, i) in datas" :style="{ 'background-image': 'url(' + item.img[0] + ')' }" :class="[
         {
           none:

@@ -16,6 +16,7 @@ window.addEventListener("resize", getWindowInfo);
 getWindowInfo();
 const data: TBanner[] = [
     {
+        id: 23,
         collect: 1,
         name: "Crypto Citizens",
         lowest_price: "1W",
@@ -25,6 +26,7 @@ const data: TBanner[] = [
         ],
     },
     {
+        id: 343,
         collect: 1,
         name: "Crypto Citizens",
         lowest_price: "1W",
@@ -34,6 +36,7 @@ const data: TBanner[] = [
         ],
     },
     {
+        id: 656,
         collect: 0,
         name: "Crypto Citizens",
         lowest_price: "2W",
@@ -43,6 +46,7 @@ const data: TBanner[] = [
         ],
     },
     {
+        id: 74,
         collect: 1,
         name: "Crypto Citizens",
         lowest_price: "3W",
@@ -52,6 +56,7 @@ const data: TBanner[] = [
         ],
     },
     {
+        id: 256,
         collect: 1,
         name: "Crypto Citizens",
         lowest_price: "4W",
@@ -61,6 +66,7 @@ const data: TBanner[] = [
         ],
     },
     {
+        id: 7543,
         collect: 1,
         name: "Crypto Citizens",
         lowest_price: "3W",
@@ -70,6 +76,7 @@ const data: TBanner[] = [
         ],
     },
     {
+        id: 34985,
         collect: 1,
         name: "Crypto Citizens",
         lowest_price: "4W",

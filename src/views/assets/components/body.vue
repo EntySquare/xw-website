@@ -3,11 +3,11 @@ import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { ref } from "vue";
 import { TBanner } from "@/types/cate";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-import Listcar from "./acc-body-listcar.vue";
+import Listcar from "./body-listcar.vue";
 import { type } from "@/utils/banner";
 let mqList = ref(3);
 const getWindowInfo = () => {
-    mqList.value = window.matchMedia("(max-width: 1280px)").matches ? 3 : 4;
+    mqList.value = window.matchMedia("(max-width: 1280px)").matches ? 3 : 5;
     if (mqList.value == 3) {
         mqList.value = window.matchMedia("(max-width: 845px)").matches ? 2 : 3;
     }
@@ -16,7 +16,7 @@ window.addEventListener("resize", getWindowInfo);
 getWindowInfo();
 const data: TBanner[] = [
     {
-        id: 34434,
+        id: 23,
         collect: 1,
         name: "Crypto Citizens",
         lowest_price: "1W",
@@ -26,7 +26,7 @@ const data: TBanner[] = [
         ],
     },
     {
-        id: 34434,
+        id: 343,
         collect: 1,
         name: "Crypto Citizens",
         lowest_price: "1W",
@@ -36,7 +36,7 @@ const data: TBanner[] = [
         ],
     },
     {
-        id: 34434,
+        id: 656,
         collect: 0,
         name: "Crypto Citizens",
         lowest_price: "2W",
@@ -46,7 +46,7 @@ const data: TBanner[] = [
         ],
     },
     {
-        id: 34434,
+        id: 74,
         collect: 1,
         name: "Crypto Citizens",
         lowest_price: "3W",
@@ -56,7 +56,7 @@ const data: TBanner[] = [
         ],
     },
     {
-        id: 34434,
+        id: 256,
         collect: 1,
         name: "Crypto Citizens",
         lowest_price: "4W",
@@ -66,7 +66,7 @@ const data: TBanner[] = [
         ],
     },
     {
-        id: 34434,
+        id: 7543,
         collect: 1,
         name: "Crypto Citizens",
         lowest_price: "3W",
@@ -76,7 +76,7 @@ const data: TBanner[] = [
         ],
     },
     {
-        id: 34434,
+        id: 34985,
         collect: 1,
         name: "Crypto Citizens",
         lowest_price: "4W",
@@ -91,7 +91,7 @@ const data: TBanner[] = [
     <div class="home-banner">
         <!-- 轮播图 -->
         <div style="padding-bottom: 10px;">
-            <Listcar v-for="i in data.length" :num="i" :type="mqList" :data="data"></Listcar>
+            <Listcar :num="1" :type="mqList" :data="data"></Listcar>
         </div>
     </div>
 </template>
