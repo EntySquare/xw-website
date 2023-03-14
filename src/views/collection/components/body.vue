@@ -20,6 +20,7 @@ for (let i = 0; i < 50; i++) {
 </script>
 <template>
     <div class="collect-banner">
+        <slot></slot>
         <div class="collectionbody" id="collectionbody">
             <div class="item" :style="{ background: +getThemenum() ? 'white' : '#363840' }" v-for="item in data">
                 <RouterLink :to="`/assets/ethereum/${item.id}`">

@@ -51,6 +51,7 @@ router.beforeEach((to, from, next) => {
 });
 
 router.afterEach(() => {
+  document.documentElement.scrollTop = 0;
   NProgress.done(); //完成进度条
 });
 // 暴露路由对象
