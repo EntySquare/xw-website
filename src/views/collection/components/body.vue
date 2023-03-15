@@ -22,14 +22,15 @@ for (let i = 0; i < 50; i++) {
     <div class="collect-banner">
         <slot></slot>
         <div class="collectionbody" id="collectionbody">
-            <div class="item" :style="{ background: +getThemenum() ? 'white' : '#363840' }" v-for="item in data">
+            <LockDiv xyb="143%" class="item" :style="{ background: +getThemenum() ? 'white' : '#363840' }"
+                v-for="item in data">
                 <RouterLink :to="`/assets/ethereum/${item.id}`">
-                    <div class="top" :style="{ 'background-image': 'url(' + item.img[0] + ')' }"></div>
+                    <LockDiv class="top" :style="{ 'background-image': 'url(' + item.img[0] + ')' }"></LockDiv>
                     <div class="bom">
                         {{ item.name }}
                     </div>
                 </RouterLink>
-            </div>
+            </LockDiv>
         </div>
     </div>
 </template>
@@ -39,18 +40,18 @@ for (let i = 0; i < 50; i++) {
 }
 
 .collectionbody {
-    width: 100%;
+    // width: 100%;
     display: grid;
     gap: 20px;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(7, 1fr);
 
 
     .item {
+        // max-width: 350px;
         border-radius: 20px;
         overflow: hidden;
 
         .top {
-            height: 250px;
             background-position: center;
             background-size: cover;
             border-bottom-right-radius: 20px;

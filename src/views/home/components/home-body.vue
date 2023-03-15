@@ -7,9 +7,15 @@ import Listcar from "./body-listcar.vue";
 import { type } from "@/utils/banner";
 let mqList = ref(3);
 const getWindowInfo = () => {
-    mqList.value = window.matchMedia("(max-width: 1280px)").matches ? 3 : 5;
-    if (mqList.value == 3) {
-        mqList.value = window.matchMedia("(max-width: 845px)").matches ? 2 : 3;
+    mqList.value = window.matchMedia("(max-width: 1600px)").matches ? 5 : 6;
+    if (mqList.value == 5) {
+        mqList.value = window.matchMedia("(max-width: 1280px)").matches ? 4 : 5;
+        if (mqList.value == 4) {
+            mqList.value = window.matchMedia("(max-width: 1024px)").matches ? 3 : 4;
+            if (mqList.value == 3) {
+                mqList.value = window.matchMedia("(max-width: 768px)").matches ? 2 : 3;
+            }
+        }
     }
 };
 window.addEventListener("resize", getWindowInfo);

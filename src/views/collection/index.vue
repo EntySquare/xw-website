@@ -18,6 +18,8 @@ function myscroll() {
     tabnum = tabnum + 1
     y = document.documentElement.scrollTop //页面滚动距离
     if (y > tabnum) {
+        dropDownBoxH.value = window.innerHeight - 190 + 'px'
+
         // document.getElementById('collectionscrollbar')!.style.height = window.innerHeight - 260 + 'px'
         document.getElementById('screening')!.style.width = document.getElementById('collectionbody')!.offsetWidth + 1 + 'px'
         document.getElementById('down-box')!.style.width = document.getElementById('lefttt')!.offsetWidth + 'px'
@@ -37,9 +39,8 @@ const getWindowInfo = () => {
             document.getElementById('screening')!.style.width = `100%`
             document.getElementById('down-box')!.style.width = `100%`
         }
-        console.log(
-            dropDownBoxH.value = window.innerHeight - 190 + 'px'
-        );
+        // console.log(
+        // );
     })
 };
 window.addEventListener("resize", getWindowInfo);
@@ -75,6 +76,24 @@ const dropdata = {
     owner: [
         '全部',
         '我'
+    ],
+    quantity: [
+        '所有项目',
+        '单个项目',
+        '套餐',
+    ],
+    attribute: [
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+    ],
+    price: [
+        '从',
+        '到',
     ]
 }
 
@@ -98,20 +117,15 @@ const dropdata = {
         <div class="container" id="container">
             <div style=" width: 100%; display: flex;gap: 20px;padding-top: 20px;">
                 <!-- 左侧筛选begin -->
-                <div style="flex: 2;" id="lefttt">
+                <div style="width: 360px;" id="lefttt">
                     <div :class="[show1 ? 'fixedtwo' : '']" id="fixedtwo"
-                        :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', height: '100%' }">
-                        <div :style="{ height: dropDownBoxH, 'overflow-y': 'scroll' }">
-                            <DropDownBox v-model:modelValue="mbdata" title="状态" :data="dropdata.state" />
-                            <DropDownBox v-model:modelValue="mbdata" title="状态1" :data="dropdata.state" />
-                            <DropDownBox v-model:modelValue="mbdata" title="状态2" :data="dropdata.state" />
-                            <DropDownBox v-model:modelValue="mbdata" title="状态3" :data="dropdata.state" />
-                            <DropDownBox v-model:modelValue="mbdata" title="状态4" :data="dropdata.state" />
-                            <DropDownBox v-model:modelValue="mbdata" title="状态5" :data="dropdata.state" />
-                            <DropDownBox v-model:modelValue="mbdata" title="状态6" :data="dropdata.state" />
-                            <DropDownBox v-model:modelValue="mbdata" title="状态7" :data="dropdata.state" />
-                            <DropDownBox v-model:modelValue="mbdata" title="所有者" :data="dropdata.owner" />
-                        </div>
+                        :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', height: dropDownBoxH, 'overflow-y': 'scroll', width: '350px' }">
+                        <DropDownBox v-model:modelValue="mbdata" title="状态" :data="dropdata.state" />
+                        <DropDownBox v-model:modelValue="mbdata" title="所有者" :data="dropdata.owner" />
+                        <DropDownBox v-model:modelValue="mbdata" title="价格" :data="dropdata.price" :state="true" />
+                        <DropDownBox v-model:modelValue="mbdata" title="稀有度等级" :data="dropdata.price" :state="true" />
+                        <DropDownBox v-model:modelValue="mbdata" title="数量" :data="dropdata.quantity" />
+                        <DropDownBox v-model:modelValue="mbdata" title="属性" :data="dropdata.attribute" />
                     </div>
                 </div>
                 <!-- 左侧筛选end -->
@@ -143,11 +157,13 @@ const dropdata = {
                     <Accbody>
                         <div class="mbxue">
                             <div v-for="(item, index) in mbdata">
-                                <div class="item" v-if="item.item">
-                                    {{ item.item }}<icon-close @click="mbdata[index].item = ''" :strokeWidth="8" />
+                                <div class="item" v-if="item.title">
+                                    {{ ((item.title == '价格' || item.title == '稀有度等级') ? '' : item.title + '' + ':') + ' ' +
+                                        item.item
+                                    }}<icon-close @click="mbdata[index].title = ''" :strokeWidth="8" />
                                 </div>
                             </div>
-                            <div class="itemall" v-if="mbdata.find(i => i.item)"
+                            <div class="itemall" v-if="mbdata.find(i => i.title)"
                                 @click="mbdata.forEach(i => { i.item = '', i.title = '' })">
                                 全部清除</div>
                         </div>
@@ -310,12 +326,12 @@ const dropdata = {
     .itemall {
         margin-right: 10px;
         margin-bottom: 10px;
-        font-weight: 800;
-        font-size: 20px;
+        font-weight: 500;
+        font-size: 16px;
         display: flex;
         align-items: center;
         padding: 10px;
-        background-color: #afafaf76;
+        background-color: #cecdcd76;
         border-radius: 10px;
         gap: 10px;
     }

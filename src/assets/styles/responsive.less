@@ -1,28 +1,76 @@
-/* <=1200px时 */
-@media (min-width:1280px) {
-    .listcar {  
-          .body-listcar-item{
-            min-height: 212px !important;
-          } 
-    }
-}
-/* <=1200px时 */
-@media (max-width:1280px) {
+/* <=2400px时 */
+@media (max-width:2400px) {
   .collectionbody{
+    grid-template-columns: repeat(6, 1fr) !important;
+  }
+}
+/* <=2080px时 */
+@media (max-width:2080px) {
+  .collectionbody{
+    grid-template-columns: repeat(5, 1fr) !important;
+  }
+}
+/* <=1760px时 */
+@media (max-width:1760px) {
+  .container {
+    padding: 0 40px !important;
+  }
+  .collectionbody{
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+/* <=1760px时 */
+@media (min-width:1600px) {
+  .listcar {  
+    gap: .8% !important;
+        .body-listcar-item{
+          width: 16% !important;
+        } 
+  }
+}
+/* <=1760px时 */
+@media (max-width:1600px) {
+  .listcar {  
+    gap: .625% !important;
+        .body-listcar-item{
+          width: 19.5% !important;
+        } 
+  }
+}
+/* <=1515px时 */
+@media (max-width:1515px) {
+    .collectionbody{
     grid-template-columns: repeat(3, 1fr) !important;
   }
+}
+/* <=1120px时 */
+@media (max-width:1120px) {
+  .collectionbody{
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+/* >=1280px时 */
+@media (max-width:1280px) {
+  .listcar {  
+    gap: .8% !important;
+        .body-listcar-item{
+          width: 24.4% !important;
+        } 
+  }
+}
+/* <=1280px时 */
+@media (max-width:1280px) {
     .listcar {
         .listcar-item{
             width: 50% !important;
-          }   
-          .body-listcar-item{
-            width: 32.5% !important;
-            height: 22vw !important;
-          } 
+          }
     }
     .home-banner{
-        padding: 40px 0px 40px !important;
+        padding: 20px 0px 20px !important;
     }
+    .container {
+        padding: 0 20px !important;
+      }
 }
 
 /* <=1080px时 */
@@ -30,11 +78,31 @@
         .joinnone{display: none !important;}
         .joinflex{display: flex !important;}
 }
+/* <=1024px时 */
+@media (max-width:1024px) {
+  .listcar {  
+    gap: 1.2% !important;
+        .body-listcar-item{
+          width: 32.1% !important;
+        } 
+  }
+}
 /* <=960px时 */
 @media (max-width:960px) {
   .collectionbody{
     grid-template-columns: repeat(2, 1fr) !important;
   }
+}
+
+/* <=768px时 */
+@media (max-width:768px) {
+  .listcar {
+    gap: 3% !important;
+   
+      .body-listcar-item{
+        width: 47% !important;
+      } 
+}
 }
 
 /* <=800px时 */
@@ -44,14 +112,8 @@
       }
     .listcar {
         .listcar-item{
-            min-width: 280px !important;
-            height: 42vw !important;
             width: 100% !important;
-          }   
-          .body-listcar-item{
-            height: 40vw !important;
-            width: 49.4% !important;
-          } 
+          }  
     }
     .nonetitle{
         display: none !important;
@@ -69,6 +131,14 @@
 
 /* <=700px时 */
 @media (max-width:700px) {
-    
+  .listcar {
+    .listcar-item{
+        width: 100% !important;
+      }   
+      .body-listcar-item{
+        width: 48% !important;
+        border-radius: 20px !important;
+      } 
+}
 }
 

@@ -1,7 +1,6 @@
 <script setup lang='ts'>
-import { onMounted, reactive, ref, watch, defineEmits, defineProps } from 'vue'
+import { onMounted, reactive, ref, watch, defineEmits, defineProps, nextTick } from 'vue'
 const props = defineProps({
-    // 模态框标题
     title: {
         type: String,
         default: '标题',
@@ -13,9 +12,20 @@ const props = defineProps({
     modelValue: {
         type: Object,
         default: () => { },
-
+    },
+    state: {
+        type: Boolean,
+        default: false
     }
 })
+
+let Min: HTMLInputElement | null
+let Max: HTMLInputElement | null
+nextTick(() => {
+    Min = document.getElementById(`${props.title}min`) as HTMLInputElement
+    Max = document.getElementById(`${props.title}max`) as HTMLInputElement
+})
+//用来 选中反馈
 const itemnum = () => {
     const data = JSON.parse(JSON.stringify(props.modelValue))
     let item
@@ -30,20 +40,33 @@ const emit = defineEmits(['update:modelValue'])
 const update = (item: any) => {
     const data = JSON.parse(JSON.stringify(props.modelValue))
     // && i.item == item
-    const i = data.findIndex((i: { item: string; }) => i.item == '')
+    const i = data.findIndex((i: { title: string; }) => i.title == '')
     const show = data.findIndex((i: { title: string; }) => i.title == props.title)
+    if (props.state) {
+        if (!Min!.value || !Max!.value) {
+            return
+        }
+        if (show != -1) {
+            data[show].title = props.title
+            data[show].item = `${props.title == '稀有度等级' ? '稀有度' + Min!.value + '～' + Max!.value : '数量' + Min!.value + '～' + Max!.value}`
+            emit('update:modelValue', data)
+        } else {
+            data[i].title = props.title
+            data[i].item = `${props.title == '稀有度等级' ? '稀有度' + Min!.value + '～' + Max!.value : '数量' + Min!.value + '～' + Max!.value}`
+            emit('update:modelValue', data)
+        }
+        Min!.value = ''
+        Max!.value = ''
+        return
+    }
 
     if (show != -1) {
         data[show].title = props.title
         data[show].item = item
-        props.modelValue[show].title = props.title
-        props.modelValue[show].item = item
         emit('update:modelValue', data)
     } else {
         data[i].title = props.title
         data[i].item = item
-        props.modelValue[i].title = props.title
-        props.modelValue[i].item = item
         emit('update:modelValue', data)
     }
     itemnum()
@@ -54,8 +77,13 @@ let show = ref(false)
 <template>
     <div class="down-box" id="down-box">
         <p @click="show = !show" class="title">{{ title }} <icon-caret-down v-if="!show" /><icon-caret-up v-else /></p>
-        <div class="show" v-if="show">
-            <div class="listitem" v-for="(item, index) in data">
+        <div class="show" v-show="show">
+            <div v-if="state" class="interval">
+                从 <div><input :id="`${title}min`" type="number"></div>
+                到 <div><input :id="`${title}max`" type="number"> </div>
+                <icon-check @click="update('')" />
+            </div>
+            <div v-else class="listitem" v-for="(item, index) in data">
                 <p>{{ item }}</p>
                 <div :class="[{ checkboxactive: itemnum() == item }, 'checkbox']" @click="update(item)"></div>
             </div>
@@ -64,15 +92,17 @@ let show = ref(false)
 </template>
 <style scoped lang='less'>
 .down-box {
+    width: 350px !important;
     display: flex;
     gap: 18px;
     flex-direction: column;
-    margin-bottom: 20px;
-    align-items: center;
+    margin-bottom: 10px;
+    justify-content: center;
     font-weight: 800;
+    padding: 10px 10px;
     font-size: 24px;
-    padding: 20px;
     min-height: 55px;
+    box-sizing: border-box;
     border-top: 2px solid rgba(63, 255, 243, 1);
     border-left: 2px solid rgba(63, 255, 243, 1);
     border-right: 2px solid rgba(225, 39, 255, 1);
@@ -87,10 +117,50 @@ let show = ref(false)
     }
 
     .show {
+        margin-bottom: 5px;
         width: 100%;
         display: flex;
         gap: 18px;
         flex-direction: column;
+
+        .interval {
+            display: flex;
+            width: 100%;
+            gap: 10px;
+            justify-content: space-around;
+            align-items: center;
+
+            div {
+                height: 35px;
+                width: 80px;
+                display: flex;
+                align-items: center;
+                border-radius: 10px;
+                padding: 0 10px;
+                background: #D9D9D9;
+
+                input::-webkit-outer-spin-button,
+                input::-webkit-inner-spin-button {
+                    -webkit-appearance: none !important;
+                }
+
+                // input[type='number'] {
+                //     -moz-appearance: textfield;
+                // }
+
+                input {
+                    height: 100%;
+                    font-size: 16px;
+                    // color: white;
+                    font-weight: 800;
+                    width: 100%;
+                    outline: none;
+                    background-color: #00000000;
+                    border: none;
+                }
+
+            }
+        }
 
         .listitem {
             width: 100%;

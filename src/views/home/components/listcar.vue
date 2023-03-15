@@ -27,19 +27,23 @@ const setCollect = (i: number) => {
         },
         'listcar-item',
       ]">
-        <div class="item-top">
-          <i @click="setCollect(i)" :class="item.collect ? 'i2' : 'i1'"></i>
-        </div>
-        <div class="item-bom">
-          <div class="left">
-            <div class="u">{{ item.name }}</div>
-            <div class="d">地板价：{{ item.lowest_price }}</div>
+        <LockDiv xyb="56%">
+          <div class="bannercontent">
+            <div class="item-top">
+              <i @click="setCollect(i)" :class="item.collect ? 'i2' : 'i1'"></i>
+            </div>
+            <div class="item-bom">
+              <div class="left">
+                <div class="u">{{ item.name }}</div>
+                <div class="d">地板价：{{ item.lowest_price }}</div>
+              </div>
+              <div class="right">
+                <div class="u">倒计时</div>
+                <div class="d"><i>05</i>:<i>05</i>:<i>05</i></div>
+              </div>
+            </div>
           </div>
-          <div class="right">
-            <div class="u">倒计时</div>
-            <div class="d"><i>05</i>:<i>05</i>:<i>05</i></div>
-          </div>
-        </div>
+        </LockDiv>
       </div>
     </div>
   </div>
@@ -55,12 +59,8 @@ const setCollect = (i: number) => {
   }
 
   .listcar-item {
-    // min-width: 436px;
     position: relative;
     width: 32%;
-    // min-width: 380px;
-    min-height: 245px;
-    height: 14.2vw;
     background-size: 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -177,5 +177,13 @@ const setCollect = (i: number) => {
       }
     }
   }
+}
+
+.bannercontent {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // background-color: plum;
 }
 </style>

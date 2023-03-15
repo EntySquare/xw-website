@@ -1,6 +1,7 @@
 import { createApp } from "vue";
 import ArcoVue from "@arco-design/web-vue";
 import App from "./App.vue";
+import LockDiv from "@/components/lockdiv/index";
 import "@arco-design/web-vue/dist/arco.css";
 // 导入 normalize
 import "normalize.css";
@@ -28,4 +29,5 @@ app
   .use(VueSplide)
   .use(pinia)
   .use(plugin)
+  .use(LockDiv)
   .mount("#app");
