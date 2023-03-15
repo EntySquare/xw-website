@@ -40,7 +40,7 @@ export default { name: "AppTopnav" };
         <div class="logo">
           <a-avatar :size="55">
             <img alt="avatar"
-              src="https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp" />
+              src="https://img.zcool.cn/community/01c2ff62145f9c11013e8cd0962dd3.jpg@1280w_1l_2o_100sh.jpg" />
           </a-avatar>
           <a-typography-title class="title nonetitle" :heading="5">
             玄武数藏
@@ -61,11 +61,11 @@ export default { name: "AppTopnav" };
         </a-dropdown>
         <RouterLink to="/rankings/trending"> <a-typography-title :heading="6"> 排行 </a-typography-title> </RouterLink>
         <!-- <a-dropdown trigger="hover" style="border-radius: 15px; overflow: hidden">
-              <template #content>
-                <a-doption>你好</a-doption>
-                <a-doption>你好</a-doption>
-              </template>
-            </a-dropdown> -->
+                <template #content>
+                  <a-doption>你好</a-doption>
+                  <a-doption>你好</a-doption>
+                </template>
+              </a-dropdown> -->
         <div class="themer">
           <a-switch :size="mqList ? 'small' : 'medium'" checked-color="#F0EBF2" unchecked-color="#000" v-model="value"
             checked-value="0" unchecked-value="1" @change="setTheme(value)">
@@ -119,11 +119,11 @@ export default { name: "AppTopnav" };
       </div>
       <div class="blacktitle">
         <a-dropdown @select="handleSelect" trigger="hover" class="dropdown" style="
-                                                position: fixed;
-                                                top: 60px;
-                                                border-radius: 15px;
-                                                overflow: hidden;
-                                              ">
+                                                  position: fixed;
+                                                  top: 60px;
+                                                  border-radius: 15px;
+                                                  overflow: hidden;
+                                                ">
           <icon-menu size="20px" />
           <template #content>
             <a-doption>
