@@ -18,6 +18,16 @@ const getWindowInfo = () => {
         }
     }
 };
+
+
+
+
+
+
+// https://pic4.zhimg.com/80/v2-80d6ebd2e2f5f6c980b3a22aeca06a9b_720w.webp
+// https://pic3.zhimg.com/80/v2-6d0c77e8cc42048d73f6f7f0b4c23426_720w.webp
+// https://pic2.zhimg.com/80/v2-8debb400ce45c6e81a8b2bd1e5a53625_720w.webp
+// https://pic3.zhimg.com/80/v2-c1d657aaa7842e8d99e5b7403d8912f6_720w.webp
 window.addEventListener("resize", getWindowInfo);
 getWindowInfo();
 const data: TBanner[] = [
@@ -28,7 +38,7 @@ const data: TBanner[] = [
         lowest_price: "1W",
         countdown: 12323,
         img: [
-            "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+            "https://pic4.zhimg.com/80/v2-9d30314c4e59d98a183f9b80247fbae3_720w.webp",
         ],
     },
     {
@@ -38,7 +48,7 @@ const data: TBanner[] = [
         lowest_price: "1W",
         countdown: 12323,
         img: [
-            "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+            "https://pic1.zhimg.com/80/v2-6861bbbf235b9410cf18f2a8744b9988_720w.webp",
         ],
     },
     {
@@ -48,7 +58,7 @@ const data: TBanner[] = [
         lowest_price: "2W",
         countdown: 12323,
         img: [
-            "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+            "https://pic1.zhimg.com/80/v2-9592edbf76d825ccbc97b410a0029e04_720w.webp",
         ],
     },
     {
@@ -58,7 +68,7 @@ const data: TBanner[] = [
         lowest_price: "3W",
         countdown: 12323,
         img: [
-            "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+            "https://pic3.zhimg.com/80/v2-db1ce32f3362ab9ed48b93cf999a8bba_720w.webp",
         ],
     },
     {
@@ -68,7 +78,7 @@ const data: TBanner[] = [
         lowest_price: "4W",
         countdown: 12323,
         img: [
-            "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+            "https://pic4.zhimg.com/80/v2-11afbf42542c5bb7b3f3c98eeac8c5d3_720w.webp",
         ],
     },
     {
@@ -78,7 +88,7 @@ const data: TBanner[] = [
         lowest_price: "3W",
         countdown: 12323,
         img: [
-            "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+            "https://pic2.zhimg.com/80/v2-52075cb4d04817fc904c4dfc67b90f25_720w.webp",
         ],
     },
     {
@@ -88,7 +98,7 @@ const data: TBanner[] = [
         lowest_price: "4W",
         countdown: 12323,
         img: [
-            "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+            "https://pic2.zhimg.com/80/v2-ea5e9a1029ab8091fe8b48efa9dbcdf9_720w.webp",
         ],
     },
 ];
@@ -104,30 +114,30 @@ const data: TBanner[] = [
                 </SplideSlide>
             </Splide>
         </div>
-        <div style="padding-bottom: 10px;">
-            <a-typography-title :heading="3" style="padding:20px 20px 10px;"> 类别1</a-typography-title>
-            <Splide class="banner" :options="{ rewind: false }">
-                <SplideSlide class="bannerstree" v-for="i in type(mqList, data.length)">
-                    <Listcar :num="i" :type="mqList" :data="data"></Listcar>
-                </SplideSlide>
-            </Splide>
-        </div>
-        <div style="padding-bottom: 10px;">
-            <a-typography-title :heading="3" style="padding:20px 20px 10px;"> 类别2</a-typography-title>
-            <Splide class="banner" :options="{ rewind: false }">
-                <SplideSlide class="bannerstree" v-for="i in type(mqList, data.length)">
-                    <Listcar :num="i" :type="mqList" :data="data"></Listcar>
-                </SplideSlide>
-            </Splide>
-        </div>
-        <div style="padding-bottom: 10px;">
-            <a-typography-title :heading="3" style="padding:20px 20px 10px;"> 类别3</a-typography-title>
-            <Splide class="banner" :options="{ rewind: false }">
-                <SplideSlide class="bannerstree" v-for="i in type(mqList, data.length)">
-                    <Listcar :num="i" :type="mqList" :data="data"></Listcar>
-                </SplideSlide>
-            </Splide>
-        </div>
+        <!-- <div style="padding-bottom: 10px;">
+                <a-typography-title :heading="3" style="padding:20px 20px 10px;"> 类别1</a-typography-title>
+                <Splide class="banner" :options="{ rewind: false }">
+                    <SplideSlide class="bannerstree" v-for="i in type(mqList, data.length)">
+                        <Listcar :num="i" :type="mqList" :data="data"></Listcar>
+                    </SplideSlide>
+                </Splide>
+            </div>
+            <div style="padding-bottom: 10px;">
+                <a-typography-title :heading="3" style="padding:20px 20px 10px;"> 类别2</a-typography-title>
+                <Splide class="banner" :options="{ rewind: false }">
+                    <SplideSlide class="bannerstree" v-for="i in type(mqList, data.length)">
+                        <Listcar :num="i" :type="mqList" :data="data"></Listcar>
+                    </SplideSlide>
+                </Splide>
+            </div>
+            <div style="padding-bottom: 10px;">
+                <a-typography-title :heading="3" style="padding:20px 20px 10px;"> 类别3</a-typography-title>
+                <Splide class="banner" :options="{ rewind: false }">
+                    <SplideSlide class="bannerstree" v-for="i in type(mqList, data.length)">
+                        <Listcar :num="i" :type="mqList" :data="data"></Listcar>
+                    </SplideSlide>
+                </Splide>
+            </div> -->
     </div>
 </template>
 <style scoped lang='less'>

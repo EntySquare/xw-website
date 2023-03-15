@@ -7,7 +7,6 @@ import Listcar from "./listcar.vue";
 import { type } from "@/utils/banner";
 let mqList = ref(3);
 let data = ref();
-let length = ref()
 data.value = [
   {
     id: 454,
@@ -61,11 +60,7 @@ data.value = [
   },
 ]
 
-nextTick(() => {
-  length.value = type(mqList.value, data.value.length)
-})
 const getWindowInfo = () => {
-  length.value = type(mqList.value, data.value.length)
   mqList.value = window.matchMedia("(max-width: 1600px)").matches ? 2 : 3;
   if (mqList.value == 2) {
     mqList.value = window.matchMedia("(max-width: 1280px)").matches ? 1 : 2;
@@ -82,7 +77,7 @@ getWindowInfo();
       <SplideSlide class="bannerstree" v-if="!data">
         <Listcar :num="0" :type="mqList" :data="[]"></Listcar>
       </SplideSlide>
-      <SplideSlide class="bannerstree" v-for="i in length">
+      <SplideSlide class="bannerstree" v-for="i in type(mqList, data.length)">
         <Listcar :num="i" :type="mqList" :data="data"></Listcar>
       </SplideSlide>
     </Splide>
