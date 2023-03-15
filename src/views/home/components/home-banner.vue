@@ -8,9 +8,9 @@ import { type } from "@/utils/banner";
 let mqList = ref(3);
 let length = ref()
 const getWindowInfo = () => {
-  mqList.value = window.matchMedia("(max-width: 1280px)").matches ? 2 : 3;
+  mqList.value = window.matchMedia("(max-width: 1600px)").matches ? 2 : 3;
   if (mqList.value == 2) {
-    mqList.value = window.matchMedia("(max-width: 845px)").matches ? 1 : 2;
+    mqList.value = window.matchMedia("(max-width: 1280px)").matches ? 1 : 2;
   }
 };
 window.addEventListener("resize", getWindowInfo);

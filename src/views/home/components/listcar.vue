@@ -52,7 +52,6 @@ const setCollect = (i: number) => {
 .listcar {
   display: flex;
   padding: 0 1%;
-  gap: 2%;
 
   .none {
     display: none !important;
@@ -60,7 +59,7 @@ const setCollect = (i: number) => {
 
   .listcar-item {
     position: relative;
-    width: 32%;
+    width: 32.8%;
     background-size: 100%;
     background-position: center;
     background-repeat: no-repeat;
