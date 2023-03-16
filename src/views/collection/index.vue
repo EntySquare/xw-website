@@ -19,10 +19,9 @@ function myscroll() {
     y = document.documentElement.scrollTop //页面滚动距离
     if (y > tabnum) {
         dropDownBoxH.value = window.innerHeight - 190 + 'px'
-
         // document.getElementById('collectionscrollbar')!.style.height = window.innerHeight - 260 + 'px'
-        document.getElementById('screening')!.style.width = document.getElementById('collectionbody')!.offsetWidth + 1 + 'px'
-        document.getElementById('down-box')!.style.width = document.getElementById('lefttt')!.offsetWidth + 'px'
+        document.getElementById('screening')!.style.width = document.getElementById('collectionbody')!.offsetWidth + 'px'
+        // document.getElementById('down-box')!.style.width = document.getElementById('lefttt')!.offsetWidth + 'px'
     }
     y > tabnum ? show.value = true : show.value = false //滚动距离大于tab栏距离顶部的高度时候 修改样式值
     y > tabnum ? show1.value = true : show1.value = false //滚动距离大于tab栏距离顶部的高度时候 修改样式值
@@ -30,17 +29,18 @@ function myscroll() {
     // 动态计算左侧筛选栏总体宽度 ， div占用宽度给到它
 }
 // 设置一个窗口事件 用于窗口大小发生变化时候出发
+let mqList = ref(1);
 const getWindowInfo = () => {
+    mqList.value = window.matchMedia("(max-width: 987px)").matches ? 0 : 1;
+
     nextTick(() => {//页面元素加载完毕后再执行，避免报错
         if (y > tabnum) {
-            document.getElementById('screening')!.style.width = document.getElementById('collectionbody')!.offsetWidth + 1 + 'px'
-            document.getElementById('down-box')!.style.width = document.getElementById('lefttt')!.offsetWidth + 'px'
+            document.getElementById('screening')!.style.width = document.getElementById('collectionbody')!.offsetWidth + 'px'
+            // document.getElementById('down-box')!.style.width = document.getElementById('lefttt')!.offsetWidth + 'px'
         } else {
             document.getElementById('screening')!.style.width = `100%`
-            document.getElementById('down-box')!.style.width = `100%`
+            // document.getElementById('down-box')!.style.width = `100%`
         }
-        // console.log(
-        // );
     })
 };
 window.addEventListener("resize", getWindowInfo);
@@ -97,6 +97,8 @@ const dropdata = {
     ]
 }
 
+
+
 </script>
 <template>
     <div class="page-account">
@@ -105,8 +107,8 @@ const dropdata = {
         <div class="tabtop" id="tabtop">
             <div :class="[show ? 'fixed' : '']"
                 style="overflow: hidden;width: 100%;border-bottom: 1px solid rgb(var(--arcoblue-6));display: flex;justify-content: center;">
-                <ul :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000' }">
-                    <li>项目</li>
+                <ul class="container" :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000' }">
+                    <li class="liactive">项目</li>
                     <li>分析</li>
                     <li>活动</li>
                 </ul>
@@ -115,17 +117,19 @@ const dropdata = {
         <!-- tab栏end -->
         <!-- 主体部分 begin -->
         <div class="container" id="container">
-            <div style=" width: 100%; display: flex;gap: 20px;padding-top: 20px;">
+            <div :style="{ gap: mqList ? '20px' : '0px' }" style="width: 100%; display: flex;padding-top: 10px;">
                 <!-- 左侧筛选begin -->
-                <div style="width: 360px;" id="lefttt">
+                <div :style="{ width: mqList ? '360px' : '0px' }" id="lefttt">
                     <div :class="[show1 ? 'fixedtwo' : '']" id="fixedtwo"
-                        :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', height: dropDownBoxH, 'overflow-y': 'scroll', width: '350px' }">
-                        <DropDownBox v-model:modelValue="mbdata" title="状态" :data="dropdata.state" />
-                        <DropDownBox v-model:modelValue="mbdata" title="所有者" :data="dropdata.owner" />
-                        <DropDownBox v-model:modelValue="mbdata" title="价格" :data="dropdata.price" :state="true" />
-                        <DropDownBox v-model:modelValue="mbdata" title="稀有度等级" :data="dropdata.price" :state="true" />
-                        <DropDownBox v-model:modelValue="mbdata" title="数量" :data="dropdata.quantity" />
-                        <DropDownBox v-model:modelValue="mbdata" title="属性" :data="dropdata.attribute" />
+                        :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', height: dropDownBoxH, 'overflow-y': 'scroll' }">
+                        <div v-if="mqList">
+                            <DropDownBox v-model:modelValue="mbdata" title="状态" :data="dropdata.state" />
+                            <DropDownBox v-model:modelValue="mbdata" title="所有者" :data="dropdata.owner" />
+                            <DropDownBox v-model:modelValue="mbdata" title="价格" :data="dropdata.price" :state="true" />
+                            <DropDownBox v-model:modelValue="mbdata" title="稀有度等级" :data="dropdata.price" :state="true" />
+                            <DropDownBox v-model:modelValue="mbdata" title="数量" :data="dropdata.quantity" />
+                            <DropDownBox v-model:modelValue="mbdata" title="属性" :data="dropdata.attribute" />
+                        </div>
                     </div>
                 </div>
                 <!-- 左侧筛选end -->
@@ -133,15 +137,15 @@ const dropdata = {
                     <div :style="{ height: show1 ? '50px' : '' }"></div>
                     <!-- 右侧 搜索筛选 展示切换begin -->
                     <div id="screening" :class="['screening', show1 ? 'fixedtwo' : '']"
-                        :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000' }">
+                        :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', padding: `${show1 ? '15px 0px' : '20px 0px'}` }">
                         <div class="search">
-                            <icon-search size="30" style="color:#3159b4;margin-left: 18px;" />
+                            <icon-search size="30" style="color:#3159b4;margin-left: 18px;min-width: 20px;" />
                             <input type="text" placeholder="按名称或属性搜索" />
                         </div>
                         <div class="search">
-                            {{ y }}
+                            <span>价格从高到底</span><icon-caret-down />
                         </div>
-                        <div class="search" style="min-width: 150px;">
+                        <div class="search" style="min-width: 100px;">
                             <div class="bom">
                                 <p>网格</p>
                                 <p>列表</p>
@@ -154,7 +158,7 @@ const dropdata = {
                         </div>
                     </div>
                     <!-- 右侧 搜索筛选 展示切换 end -->
-                    <Accbody>
+                    <Accbody :style="{ padding: `${show1 ? '15px 0px 0px' : '0px 0px 0px'}` }">
                         <div class="mbxue">
                             <div v-for="(item, index) in mbdata">
                                 <div class="item" v-if="item.title">
@@ -178,19 +182,25 @@ const dropdata = {
     display: none;
 }
 
+.liactive {
+    background: linear-gradient(162.55deg, #3FFFF3 3.18%, #E127FF 82.44%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .page-account {
     position: relative;
 
     .fixedtwo {
         position: fixed !important;
-        top: 151px;
-        padding: 20px 0px;
+        top: 136px;
+        padding: 10px 0px;
         z-index: 100;
         background-color: var(--bgc-top-dark);
     }
 
     .tabtop {
-        height: 65px;
+        height: 50px;
         width: 100%;
         display: flex;
         justify-content: center;
@@ -207,15 +217,18 @@ const dropdata = {
 
         ul {
             flex: 1;
-            padding: 0 70px;
-            padding-top: 15px;
             max-width: 2560px;
-            height: 65px;
+            height: 50px;
             display: flex;
             gap: 10px;
             // border-bottom: 1px solid rgb(var(--arcoblue-6)) !important;
 
             li {
+                // background-color: #3159b4;
+                font-weight: 600;
+                margin-left: 10px;
+                line-height: 50px;
+                display: flex;
                 font-size: 24px;
             }
         }
@@ -238,9 +251,8 @@ const dropdata = {
                 display: flex;
                 align-items: center;
                 gap: 10px;
-                flex: 1;
-                height: 50px;
-                border-radius: 15px;
+                height: 40px;
+                border-radius: 10px;
                 overflow: hidden;
                 background: rgba(255, 255, 255, 1);
                 box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -249,9 +261,9 @@ const dropdata = {
                     position: absolute;
                     display: flex;
                     justify-content: space-around;
-                    width: 150px;
+                    width: 100px;
                     color: black;
-                    font-size: 20px;
+                    font-size: 16px;
                     font-weight: 800;
                 }
 
@@ -272,12 +284,12 @@ const dropdata = {
 
                     .item {
                         color: white;
-                        font-size: 20px;
+                        font-size: 16px;
                         font-weight: 800;
+                        border: 1px solid #3159b4;
                         background-color: #3159b4;
                         box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-
-                        border-radius: 15px;
+                        border-radius: 8px;
                         display: flex;
                         justify-content: center;
                         align-items: center;
@@ -286,12 +298,20 @@ const dropdata = {
                     }
                 }
 
+                &:nth-child(1) {
+                    flex: 1;
+                }
+
                 &:nth-child(2) {
-                    max-width: 250px;
+                    padding: 10px;
+                    color: #000;
+                    font-weight: 800;
+                    font-size: 18px;
                 }
 
                 &:nth-child(3) {
-                    max-width: 150px;
+                    max-width: 100px;
+                    overflow: hidden;
                 }
 
                 input {
@@ -326,7 +346,7 @@ const dropdata = {
     .itemall {
         margin-right: 10px;
         margin-bottom: 10px;
-        font-weight: 500;
+        font-weight: 800;
         font-size: 16px;
         display: flex;
         align-items: center;

@@ -3,129 +3,178 @@ import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { ref } from "vue";
 import { TBanner } from "@/types/cate";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-import Listcar from "./acc-body-listcar.vue";
-import { type } from "@/utils/banner";
-let mqList = ref(3);
+let mqList = ref();
 const getWindowInfo = () => {
-    mqList.value = window.matchMedia("(max-width: 1280px)").matches ? 3 : 4;
-    if (mqList.value == 3) {
-        mqList.value = window.matchMedia("(max-width: 845px)").matches ? 2 : 3;
+    mqList.value = window.matchMedia("(max-width: 1280px)").matches ? '5' : '4';
+    if (mqList.value == '5') {
+        mqList.value = window.matchMedia("(max-width: 845px)").matches ? '6' : '5';
     }
 };
 window.addEventListener("resize", getWindowInfo);
 getWindowInfo();
+
+// https://pic4.zhimg.com/80/v2-80d6ebd2e2f5f6c980b3a22aeca06a9b_720w.webp
+// https://pic3.zhimg.com/80/v2-6d0c77e8cc42048d73f6f7f0b4c23426_720w.webp
+// https://pic2.zhimg.com/80/v2-8debb400ce45c6e81a8b2bd1e5a53625_720w.webp
+// https://pic3.zhimg.com/80/v2-c1d657aaa7842e8d99e5b7403d8912f6_720w.webp
+window.addEventListener("resize", getWindowInfo);
+getWindowInfo();
 const data: TBanner[] = [
     {
-        id: 34434,
+        id: 23,
         collect: 1,
         name: "Crypto Citizens",
         lowest_price: "1W",
         countdown: 12323,
         img: [
-            "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+            "https://pic4.zhimg.com/80/v2-9d30314c4e59d98a183f9b80247fbae3_720w.webp",
         ],
     },
     {
-        id: 34434,
+        id: 343,
         collect: 1,
         name: "Crypto Citizens",
         lowest_price: "1W",
         countdown: 12323,
         img: [
-            "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+            "https://pic1.zhimg.com/80/v2-6861bbbf235b9410cf18f2a8744b9988_720w.webp",
         ],
     },
     {
-        id: 34434,
+        id: 656,
         collect: 0,
         name: "Crypto Citizens",
         lowest_price: "2W",
         countdown: 12323,
         img: [
-            "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+            "https://pic1.zhimg.com/80/v2-9592edbf76d825ccbc97b410a0029e04_720w.webp",
         ],
     },
     {
-        id: 34434,
+        id: 74,
         collect: 1,
         name: "Crypto Citizens",
         lowest_price: "3W",
         countdown: 12323,
         img: [
-            "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+            "https://pic3.zhimg.com/80/v2-db1ce32f3362ab9ed48b93cf999a8bba_720w.webp",
         ],
     },
     {
-        id: 34434,
+        id: 256,
         collect: 1,
         name: "Crypto Citizens",
         lowest_price: "4W",
         countdown: 12323,
         img: [
-            "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+            "https://pic4.zhimg.com/80/v2-11afbf42542c5bb7b3f3c98eeac8c5d3_720w.webp",
         ],
     },
     {
-        id: 34434,
+        id: 7543,
         collect: 1,
         name: "Crypto Citizens",
         lowest_price: "3W",
         countdown: 12323,
         img: [
-            "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+            "https://pic2.zhimg.com/80/v2-52075cb4d04817fc904c4dfc67b90f25_720w.webp",
         ],
     },
     {
-        id: 34434,
+        id: 34985,
         collect: 1,
         name: "Crypto Citizens",
         lowest_price: "4W",
         countdown: 12323,
         img: [
-            "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+            "https://pic2.zhimg.com/80/v2-ea5e9a1029ab8091fe8b48efa9dbcdf9_720w.webp",
         ],
     },
 ];
 </script>
 <template>
-    <div class="home-banner">
+    <div class="listcar">
         <!-- 轮播图 -->
-        <div style="padding-bottom: 10px;">
-            <Listcar v-for="i in data.length" :num="i" :type="mqList" :data="data"></Listcar>
+        <div class="body-listcar-item" v-for="item in data">
+            <RouterLink style="height: 100%;"
+                :to="{ path: `/collection/${item.name.replaceAll(' ', '')}`, query: { id: `${item.id}` } }">
+                <LockDiv>
+                    <div class="item-top" :style="{ 'background-image': 'url(' + item.img[0] + ')' }"></div>
+                    <div class="item-bom">
+                        <div class="u">
+                            <a-typography-title :heading="+mqList">
+                                名字</a-typography-title>
+                            <!-- <icon-check-circle-fill style="color:blue" :size="20" /> -->
+                        </div>
+                        <div class="d">
+                            <a-typography-title>
+                                <p>当前价格</p>
+                                <p>¥500</p>
+                            </a-typography-title>
+                        </div>
+                    </div>
+                </LockDiv>
+            </RouterLink>
         </div>
     </div>
 </template>
 <style scoped lang='less'>
-.home-banner {
-    // width: 100%;
-    padding: 53px 0px 64px;
-
-    .banner {
-        width: 100%;
-    }
+p {
+    font-size: 12px;
+    text-align: center;
 }
 
-::v-deep .splide__pagination {
-    display: none;
-}
+.listcar {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px 10px 64px;
+    gap: 4%;
 
-::v-deep .splide__arrow--prev {
-    left: -10px;
-}
+    .body-listcar-item {
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        position: relative;
+        width: 19.14%;
+        background: var(--color-bg-1);
+        box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 35px;
+        transition: all 0.3s;
+        color: white;
+        display: flex;
+        overflow: hidden;
+        flex-direction: column;
+        justify-content: space-between;
 
-::v-deep .splide__arrow--next {
-    right: -10px;
-}
+        &:hover {
+            transform: translateY(-8px);
+        }
 
-::v-deep .splide__arrow {
-    background-color: #fff;
-    height: 47px;
-    width: 47px;
+        .item-top {
+            height: 60%;
+            background-size: cover;
+            background-position: center;
+        }
 
-    svg {
-        fill: rgba(28, 90, 184, 1);
-        height: 25px;
-        width: 25px;
+        .item-bom {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            box-sizing: border-box;
+            height: 40%;
+            padding: 15px 20px;
+
+            .u {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .d {
+                // padding-top: 10px;
+                display: flex;
+                justify-content: space-between;
+            }
+        }
     }
 }
 </style>

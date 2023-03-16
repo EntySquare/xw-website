@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from 'vue'
 
 const imgurl =
-    "https://i.seadn.io/gcs/files/266274c8643e1c9d0659cb60bf06f740.png?auto=format&w=384";
-let mqList = ref();
+    'https://i.seadn.io/gcs/files/266274c8643e1c9d0659cb60bf06f740.png?auto=format&w=384'
+let mqList = ref()
 //监听窗口宽度
 const getWindowInfo = () => {
-    mqList.value = window.matchMedia("(max-width: 1200px)").matches ? false : true;
-};
-window.addEventListener("resize", getWindowInfo);
-getWindowInfo();
+    mqList.value = window.matchMedia('(max-width: 1200px)').matches ? false : true
+}
+window.addEventListener('resize', getWindowInfo)
+getWindowInfo()
 </script>
 <template>
     <div>
         <a-tabs default-active-key="1" size="large">
             <template #extra>
-                <div style="display: flex;gap: 10px;">
+                <div style="display: flex; gap: 10px">
                     <RouterLink to="/rankings/trending"><a-button type="outline">查看全部</a-button></RouterLink>
                     <RouterLink to=""><a-button type="primary">24小时 <icon-caret-down /> </a-button></RouterLink>
                 </div>
@@ -30,51 +30,90 @@ getWindowInfo();
                             <div class="body-item">
                                 <div class="item">
                                     <div></div>
-                                    <div><a-typography-title :heading="6"> 专辑 </a-typography-title></div>
-                                    <div><a-typography-title :heading="6"> 涨幅 </a-typography-title></div>
-                                    <div><a-typography-title :heading="6"> 地板价 </a-typography-title></div>
-                                    <div><a-typography-title :heading="6"> 总交易量 </a-typography-title></div>
-                                </div>
-                                <div class="item" v-for="(item, index) in mqList ? 5 : 10">
                                     <div>
-                                        <a-typography-title type="secondary" :heading="6">
+                                        <div> 专辑 </div>
+                                    </div>
+                                    <div>
+                                        <div> 涨幅 </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            地板价
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            总交易量
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item" v-for="(item, index) in 5">
+                                    <div>
+                                        <div type="secondary">
                                             {{ index + 1 }}
-                                        </a-typography-title>
+                                        </div>
                                     </div>
                                     <div class="imgcar">
-                                        <a-avatar :size="mqList ? 50 : 36" shape="square"><img :src="imgurl" /></a-avatar>
-                                        <a-typography-title :heading="5">
-                                            醒目猴</a-typography-title>
-                                        <icon-check-circle-fill style="color:blue" :size="mqList ? 20 : 14" />
+                                        <a-avatar :size="mqList ? 50 : 40" shape="square"><img :src="imgurl" /></a-avatar>
+                                        <div> 醒目猴</div>
+                                        <icon-check-circle-fill style="color: blue" :size="mqList ? 20 : 14" />
                                     </div>
-                                    <div><a-typography-title :heading="6"> +7% </a-typography-title></div>
-                                    <div><a-typography-title :heading="6"> ¥500 </a-typography-title></div>
-                                    <div><a-typography-title :heading="6"> 80000 </a-typography-title></div>
+                                    <div>
+                                        <div> +7% </div>
+                                    </div>
+                                    <div>
+                                        <div> ¥500 </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            80000
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div v-if="mqList" class="body-item">
                                 <div class="item">
                                     <div></div>
-                                    <div><a-typography-title :heading="6"> 专辑 </a-typography-title></div>
-                                    <div><a-typography-title :heading="6"> 涨幅 </a-typography-title></div>
-                                    <div><a-typography-title :heading="6"> 地板价 </a-typography-title></div>
-                                    <div><a-typography-title :heading="6"> 总交易量 </a-typography-title></div>
+                                    <div>
+                                        <div> 专辑 </div>
+                                    </div>
+                                    <div>
+                                        <div> 涨幅 </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            地板价
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            总交易量
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="item" v-for="(item, index) in 5">
                                     <div>
-                                        <a-typography-title type="secondary" :heading="6">
+                                        <div type="secondary">
                                             {{ index + 6 }}
-                                        </a-typography-title>
+                                        </div>
                                     </div>
                                     <div class="imgcar">
-                                        <a-avatar :size="mqList ? 50 : 36" shape="square"><img :src="imgurl" /></a-avatar>
-                                        <a-typography-title :heading="5">
-                                            醒目猴</a-typography-title>
-                                        <icon-check-circle-fill style="color:blue" :size="mqList ? 20 : 14" />
+                                        <a-avatar :size="mqList ? 50 : 40" shape="square"><img :src="imgurl" /></a-avatar>
+                                        <div>
+                                            醒目猴</div>
+                                        <icon-check-circle-fill style="color: blue" :size="mqList ? 20 : 14" />
                                     </div>
-                                    <div><a-typography-title :heading="6"> +7% </a-typography-title></div>
-                                    <div><a-typography-title :heading="6"> ¥500 </a-typography-title></div>
-                                    <div><a-typography-title :heading="6"> 80000 </a-typography-title></div>
+                                    <div>
+                                        <div> +7% </div>
+                                    </div>
+                                    <div>
+                                        <div> ¥500 </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            80000
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -132,7 +171,7 @@ getWindowInfo();
                         flex: 25%;
                     }
 
-                    &:nth-child(n+3) {
+                    &:nth-child(n + 3) {
                         text-align: center;
                         flex: 5%;
                     }

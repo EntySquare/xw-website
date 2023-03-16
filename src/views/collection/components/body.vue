@@ -9,11 +9,11 @@ for (let i = 0; i < 50; i++) {
     data.push({
         id: i,
         collect: 1,
-        name: "Crypto Citizens",
-        lowest_price: "1W",
-        countdown: 12323,
+        name: "出征图",
+        lowest_price: "500",
+        countdown: 450,
         img: [
-            "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
+            "https://pica.zhimg.com/80/v2-0389f732eef260ae15d43ac82b932345_720w.webp?source=1940ef5c",
         ],
     })
 }
@@ -22,12 +22,31 @@ for (let i = 0; i < 50; i++) {
     <div class="collect-banner">
         <slot></slot>
         <div class="collectionbody" id="collectionbody">
-            <LockDiv xyb="143%" class="item" :style="{ background: +getThemenum() ? 'white' : '#363840' }"
+            <LockDiv xyb="143%" class="item" :style="{ background: +getThemenum() ? 'white' : '#353840' }"
                 v-for="item in data">
                 <RouterLink :to="`/assets/ethereum/${item.id}`">
-                    <LockDiv class="top" :style="{ 'background-image': 'url(' + item.img[0] + ')' }"></LockDiv>
+                    <LockDiv class="top">
+                        <div class="img" :style="{ 'background-image': 'url(' + item.img[0] + ')' }"></div>
+                    </LockDiv>
                     <div class="bom">
-                        {{ item.name }}
+                        <a-typography-title :heading="5">
+                            <div class="left">
+
+                                <p class="titleone">
+                                    {{ item.name }}#100
+                                </p>
+                                <p class="titleone" style="padding-top: 5px;">
+                                    ￥{{ item.lowest_price }}
+                                </p>
+
+                                <p> 最后销售:￥{{ item.countdown }}</p>
+                            </div>
+                            <div class="right">
+                                <div width="72px" class="bolticon">
+                                    <icon-thunderbolt />
+                                </div>
+                            </div>
+                        </a-typography-title>
                     </div>
                 </RouterLink>
             </LockDiv>
@@ -36,7 +55,7 @@ for (let i = 0; i < 50; i++) {
 </template>
 <style scoped lang='less'>
 .collect-banner {
-    padding: 20px 0px 64px;
+    padding: 0px 0px 64px;
 }
 
 .collectionbody {
@@ -52,14 +71,82 @@ for (let i = 0; i < 50; i++) {
         overflow: hidden;
 
         .top {
-            background-position: center;
-            background-size: cover;
-            border-bottom-right-radius: 20px;
-            border-bottom-left-radius: 20px;
+            overflow: hidden;
+
+            .img {
+                height: 100%;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+                border-bottom-right-radius: 20px;
+                border-bottom-left-radius: 20px;
+                transition: all .3s;
+            }
         }
 
         .bom {
-            height: 100px;
+            height: 30%;
+            padding: 10px 20px;
+
+            h5 {
+                height: 100%;
+                display: flex;
+                margin: 0;
+                padding: 0;
+
+                .right {
+                    display: flex;
+                    align-items: center;
+                    justify-content: end;
+                    flex: 1;
+
+                    .bolticon {
+                        color: #fff;
+                        width: 58px;
+                        height: 58px;
+                        background: #1C5AB8;
+                        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                        border-radius: 8px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 28px;
+
+                        &:hover {
+                            background: linear-gradient(162.55deg, #3FFFF3 3.18%, #E127FF 82.44%);
+                        }
+                    }
+                }
+            }
+
+
+            .left {
+
+                .titleone {
+                    font-size: 17px;
+                }
+
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                font-weight: 600;
+
+                >p {
+                    margin: 0;
+
+                    &:last-child {
+                        opacity: .8;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+        :hover {
+            .img {
+                height: 110%;
+            }
         }
     }
 }

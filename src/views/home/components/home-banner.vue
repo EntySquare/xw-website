@@ -99,17 +99,17 @@ getWindowInfo();
 }
 
 ::v-deep .splide__arrow--prev {
-  left: -10px;
+  left: -12px;
 }
 
 ::v-deep .splide__arrow--next {
-  right: -10px;
+  right: -12px;
 }
 
 ::v-deep .splide__arrow {
   background-color: #fff;
-  height: 47px;
-  width: 47px;
+  height: 42px;
+  width: 42px;
 
   svg {
     fill: rgba(28, 90, 184, 1);

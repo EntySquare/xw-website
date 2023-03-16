@@ -3,35 +3,35 @@ import {
   getTheme_value,
   isTheme_value,
   setTheme,
-  setTheme_value,
-} from "@/utils/storage";
-import { ref } from "vue";
-const value = ref("");
+  setTheme_value
+} from '@/utils/storage'
+import { ref } from 'vue'
+const value = ref('')
 // 本地存储主题信息
 if (!getTheme_value()) {
-  console.log("value.value:", value.value);
-  setTheme_value("1");
-  value.value = isTheme_value();
+  console.log('value.value:', value.value)
+  setTheme_value('1')
+  value.value = isTheme_value()
 } else {
-  value.value = `${getTheme_value()}`;
-  setTheme(value.value);
+  value.value = `${getTheme_value()}`
+  setTheme(value.value)
 }
 
-let mqList = ref();
+let mqList = ref()
 //监听窗口宽度
 const getWindowInfo = () => {
-  mqList.value = window.matchMedia("(max-width: 845px)").matches ? true : false;
-};
-window.addEventListener("resize", getWindowInfo);
-getWindowInfo();
+  mqList.value = window.matchMedia('(max-width: 845px)').matches ? true : false
+}
+window.addEventListener('resize', getWindowInfo)
+getWindowInfo()
 
 //选择器选中
 const handleSelect = (v: any) => {
-  console.log(v);
-};
+  console.log(v)
+}
 </script>
 <script lang="ts">
-export default { name: "AppTopnav" };
+export default { name: 'AppTopnav' }
 </script>
 <template>
   <nav class="app-topnav">
@@ -59,13 +59,15 @@ export default { name: "AppTopnav" };
             <a-doption>更多</a-doption>
           </template>
         </a-dropdown>
-        <RouterLink to="/rankings/trending"> <a-typography-title :heading="6"> 排行 </a-typography-title> </RouterLink>
+        <RouterLink to="/rankings/trending">
+          <a-typography-title :heading="6"> 排行 </a-typography-title>
+        </RouterLink>
         <!-- <a-dropdown trigger="hover" style="border-radius: 15px; overflow: hidden">
-                <template #content>
-                  <a-doption>你好</a-doption>
-                  <a-doption>你好</a-doption>
-                </template>
-              </a-dropdown> -->
+                                    <template #content>
+                                      <a-doption>你好</a-doption>
+                                      <a-doption>你好</a-doption>
+                                    </template>
+                                  </a-dropdown> -->
         <div class="themer">
           <a-switch :size="mqList ? 'small' : 'medium'" checked-color="#F0EBF2" unchecked-color="#000" v-model="value"
             checked-value="0" unchecked-value="1" @change="setTheme(value)">
@@ -119,11 +121,11 @@ export default { name: "AppTopnav" };
       </div>
       <div class="blacktitle">
         <a-dropdown @select="handleSelect" trigger="hover" class="dropdown" style="
-                                                  position: fixed;
-                                                  top: 60px;
-                                                  border-radius: 15px;
-                                                  overflow: hidden;
-                                                ">
+                          position: fixed;
+                          top: 60px;
+                          border-radius: 15px;
+                          overflow: hidden;
+                        ">
           <icon-menu size="20px" />
           <template #content>
             <a-doption>
@@ -190,12 +192,12 @@ export default { name: "AppTopnav" };
       display: flex;
       height: 85px;
       align-items: center;
-      gap: 40px;
+      gap: 20px;
 
       .title {
         margin: 0;
-        font-size: "24px";
-        font-family: "Poppins";
+        font-size: '24px';
+        font-family: 'Poppins';
         font-style: normal;
         font-weight: 600;
         font-size: 24px;
@@ -217,7 +219,7 @@ export default { name: "AppTopnav" };
       input {
         width: 100%;
         height: 24px;
-        font-family: "Poppins";
+        font-family: 'Poppins';
         font-style: normal;
         font-weight: 400;
         font-size: 15px;
@@ -228,6 +230,8 @@ export default { name: "AppTopnav" };
         &::placeholder {
           color: white;
           font-size: 15px;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }
@@ -270,6 +274,8 @@ export default { name: "AppTopnav" };
 }
 
 .blacktitle {
+  // background-color: #fff;
+  height: 20px;
   display: none;
 }
 

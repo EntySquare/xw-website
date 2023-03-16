@@ -114,30 +114,30 @@ const data: TBanner[] = [
                 </SplideSlide>
             </Splide>
         </div>
-        <!-- <div style="padding-bottom: 10px;">
-                <a-typography-title :heading="3" style="padding:20px 20px 10px;"> 类别1</a-typography-title>
-                <Splide class="banner" :options="{ rewind: false }">
-                    <SplideSlide class="bannerstree" v-for="i in type(mqList, data.length)">
-                        <Listcar :num="i" :type="mqList" :data="data"></Listcar>
-                    </SplideSlide>
-                </Splide>
-            </div>
-            <div style="padding-bottom: 10px;">
-                <a-typography-title :heading="3" style="padding:20px 20px 10px;"> 类别2</a-typography-title>
-                <Splide class="banner" :options="{ rewind: false }">
-                    <SplideSlide class="bannerstree" v-for="i in type(mqList, data.length)">
-                        <Listcar :num="i" :type="mqList" :data="data"></Listcar>
-                    </SplideSlide>
-                </Splide>
-            </div>
-            <div style="padding-bottom: 10px;">
-                <a-typography-title :heading="3" style="padding:20px 20px 10px;"> 类别3</a-typography-title>
-                <Splide class="banner" :options="{ rewind: false }">
-                    <SplideSlide class="bannerstree" v-for="i in type(mqList, data.length)">
-                        <Listcar :num="i" :type="mqList" :data="data"></Listcar>
-                    </SplideSlide>
-                </Splide>
-            </div> -->
+        <div style="padding-bottom: 10px;">
+            <a-typography-title :heading="3" style="padding:20px 20px 10px;"> 类别1</a-typography-title>
+            <Splide class="banner" :options="{ rewind: false }">
+                <SplideSlide class="bannerstree" v-for="i in type(mqList, data.length)">
+                    <Listcar :num="i" :type="mqList" :data="data"></Listcar>
+                </SplideSlide>
+            </Splide>
+        </div>
+        <div style="padding-bottom: 10px;">
+            <a-typography-title :heading="3" style="padding:20px 20px 10px;"> 类别2</a-typography-title>
+            <Splide class="banner" :options="{ rewind: false }">
+                <SplideSlide class="bannerstree" v-for="i in type(mqList, data.length)">
+                    <Listcar :num="i" :type="mqList" :data="data"></Listcar>
+                </SplideSlide>
+            </Splide>
+        </div>
+        <div style="padding-bottom: 10px;">
+            <a-typography-title :heading="3" style="padding:20px 20px 10px;"> 类别3</a-typography-title>
+            <Splide class="banner" :options="{ rewind: false }">
+                <SplideSlide class="bannerstree" v-for="i in type(mqList, data.length)">
+                    <Listcar :num="i" :type="mqList" :data="data"></Listcar>
+                </SplideSlide>
+            </Splide>
+        </div>
     </div>
 </template>
 <style scoped lang='less'>
@@ -155,22 +155,22 @@ const data: TBanner[] = [
 }
 
 ::v-deep .splide__arrow--prev {
-    left: -10px;
+    left: -12px;
 }
 
 ::v-deep .splide__arrow--next {
-    right: -10px;
+    right: -12px;
 }
 
 ::v-deep .splide__arrow {
     background-color: #fff;
-    height: 47px;
-    width: 47px;
+    height: 38px;
+    width: 38px;
 
     svg {
         fill: rgba(28, 90, 184, 1);
-        height: 25px;
-        width: 25px;
+        height: 20px;
+        width: 20px;
     }
 }
 </style>

@@ -63,7 +63,7 @@ defineProps<{
 </template>
 <style scoped lang="less">
 p {
-  font-size: 13px;
+  font-size: 12px;
   text-align: center;
 }
 
@@ -113,7 +113,7 @@ p {
       justify-content: space-around;
       box-sizing: border-box;
       height: 40%;
-      padding: 10px 20px;
+      padding: 15px 20px;
 
       .u {
         display: flex;

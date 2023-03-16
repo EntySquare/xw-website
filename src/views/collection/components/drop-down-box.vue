@@ -36,6 +36,7 @@ const itemnum = () => {
     })
     return item
 }
+const text = ref()
 const emit = defineEmits(['update:modelValue'])
 const update = (item: any) => {
     const data = JSON.parse(JSON.stringify(props.modelValue))
@@ -43,7 +44,10 @@ const update = (item: any) => {
     const i = data.findIndex((i: { title: string; }) => i.title == '')
     const show = data.findIndex((i: { title: string; }) => i.title == props.title)
     if (props.state) {
-        if (!Min!.value || !Max!.value) {
+        if (!Min!.value || !Max!.value || +Min!.value > +Max!.value) {
+            if (+Min!.value > +Max!.value) {
+                text.value = '排名最低的筛选必须少于排名最高的筛选'
+            }
             return
         }
         if (show != -1) {
@@ -79,14 +83,15 @@ let show = ref(false)
         <p @click="show = !show" class="title">{{ title }} <icon-caret-down v-if="!show" /><icon-caret-up v-else /></p>
         <div class="show" v-show="show">
             <div v-if="state" class="interval">
-                从 <div><input :id="`${title}min`" type="number"></div>
-                到 <div><input :id="`${title}max`" type="number"> </div>
+                从 <div><input :id="`${title}min`" type="number" @focus="text = ''"></div>
+                到 <div><input :id="`${title}max`" type="number" @focus="text = ''"> </div>
                 <icon-check @click="update('')" />
             </div>
             <div v-else class="listitem" v-for="(item, index) in data">
                 <p>{{ item }}</p>
                 <div :class="[{ checkboxactive: itemnum() == item }, 'checkbox']" @click="update(item)"></div>
             </div>
+            <div style="font-size: 14px;color: red;text-align: center;" v-if="text"><icon-info-circle />{{ text }}</div>
         </div>
     </div>
 </template>
