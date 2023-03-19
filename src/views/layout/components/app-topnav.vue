@@ -63,11 +63,11 @@ export default { name: 'AppTopnav' }
           <a-typography-title :heading="6"> 排行 </a-typography-title>
         </RouterLink>
         <!-- <a-dropdown trigger="hover" style="border-radius: 15px; overflow: hidden">
-                                    <template #content>
-                                      <a-doption>你好</a-doption>
-                                      <a-doption>你好</a-doption>
-                                    </template>
-                                  </a-dropdown> -->
+                                                                                                                                          <template #content>
+                                                                                                                                            <a-doption>你好</a-doption>
+                                                                                                                                            <a-doption>你好</a-doption>
+                                                                                                                                          </template>
+                                                                                                                                        </a-dropdown> -->
         <div class="themer">
           <a-switch :size="mqList ? 'small' : 'medium'" checked-color="#F0EBF2" unchecked-color="#000" v-model="value"
             checked-value="0" unchecked-value="1" @change="setTheme(value)">
@@ -121,11 +121,11 @@ export default { name: 'AppTopnav' }
       </div>
       <div class="blacktitle">
         <a-dropdown @select="handleSelect" trigger="hover" class="dropdown" style="
-                          position: fixed;
-                          top: 60px;
-                          border-radius: 15px;
-                          overflow: hidden;
-                        ">
+                                                      position: fixed;
+                                                      top: 60px;
+                                                      border-radius: 15px;
+                                                      overflow: hidden;
+                                                    ">
           <icon-menu size="20px" />
           <template #content>
             <a-doption>
@@ -216,22 +216,24 @@ export default { name: 'AppTopnav' }
       background: rgba(28, 90, 184, 0.3);
       color: white;
 
+      &:hover {
+        background: rgba(28, 90, 184, 0.6);
+      }
+
       input {
         width: 100%;
-        height: 24px;
+        height: 22px;
         font-family: 'Poppins';
         font-style: normal;
         font-weight: 400;
         font-size: 15px;
-        line-height: 22px;
         color: white;
         background: rgba(0, 0, 0, 0);
+        overflow: hidden;
 
         &::placeholder {
           color: white;
           font-size: 15px;
-          overflow: hidden;
-          text-overflow: ellipsis;
         }
       }
     }

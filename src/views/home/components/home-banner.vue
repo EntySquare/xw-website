@@ -15,7 +15,7 @@ data.value = [
     lowest_price: "1W",
     countdown: 12323,
     img: [
-      "https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1023%2F1090b092j00r1fj3n0004d2009c009cg009c009c.jpg&thumbnail=660x2147483647&quality=80&type=jpg",
+      "https://img2.wallspic.com/previews/9/6/1/8/5/158169/158169-pang_ke2077-pang_ke-cai_tan_hui_ye_wu-mian_bu_biao_qing-zi_se_de-x750.jpg",
     ],
   },
   {
@@ -25,7 +25,7 @@ data.value = [
     lowest_price: "1W",
     countdown: 12323,
     img: [
-      "https://img.zcool.cn/community/01c2ff62145f9c11013e8cd0962dd3.jpg@1280w_1l_2o_100sh.jpg",
+      "https://img2.wallspic.com/previews/0/0/4/4/6/164400/164400-garena_free_fire-shou_tao-zhu_bao-dian_lan_se_de-yin_le_yi_shu_jia-x750.jpg",
     ],
   },
   {
@@ -35,7 +35,7 @@ data.value = [
     lowest_price: "1W",
     countdown: 12323,
     img: [
-      "https://img.zcool.cn/community/0100c362145f9b11013e8cd055e8c1.jpg@1280w_1l_2o_100sh.jpg",
+      "https://img3.wallspic.com/previews/6/9/1/4/6/164196/164196-yin_le_yi_shu_jia-xia_ren_de-dian_zi_wu_qu_yin_le-shi_jue_yi_shu-nocopyrightsounds-x750.jpg",
     ],
   },
   {
@@ -45,7 +45,7 @@ data.value = [
     lowest_price: "1W",
     countdown: 12323,
     img: [
-      "https://pic3.zhimg.com/v2-2c6a2bd598dd9a88b59f866be68e431e_r.jpg",
+      "https://img3.wallspic.com/previews/9/5/9/6/6/166959/166959-xian_jing_de_yin_le-dian_zi_wu_qu_yin_le-xia_ren_de-shou_ge-yin_le_fang_zi-x750.jpg",
     ],
   },
   {
@@ -55,7 +55,17 @@ data.value = [
     lowest_price: "1W",
     countdown: 12323,
     img: [
-      "https://pic3.zhimg.com/v2-85e13cd852d0dcd19997b4ad92015516_r.jpg",
+      "https://img3.wallspic.com/previews/0/7/1/8/5/158170/158170-pang_ke2077-pang_ke-zi_se_de-hong_se_de-kong_jian-x750.jpg",
+    ],
+  },
+  {
+    id: 454,
+    collect: 1,
+    name: "Crypto Citizens",
+    lowest_price: "1W",
+    countdown: 12323,
+    img: [
+      "https://img3.wallspic.com/previews/8/6/1/8/5/158168/158168-sai_bo_peng_ke2077nu_hai-pang_ke2077-xbox_xi_liex_he_xi_lies-you_xi-jiao_se_ban_yan_you_xi-x750.jpg",
     ],
   },
 ]
@@ -73,7 +83,7 @@ getWindowInfo();
 <template>
   <div class="home-banner">
     <!-- 轮播图 -->
-    <Splide class="banner" :options="{ rewind: false }">
+    <Splide class="banner" :options="{ rewind: true, rewindByDrag: true, type: 'loop', autoplay: true }">
       <SplideSlide class="bannerstree" v-if="!data">
         <Listcar :num="0" :type="mqList" :data="[]"></Listcar>
       </SplideSlide>
@@ -91,7 +101,17 @@ getWindowInfo();
 
   .banner {
     width: 100%;
+
+    &:hover {
+      ::v-deep .splide__arrow {
+        background-color: #fff;
+        opacity: 1;
+      }
+
+    }
   }
+
+
 }
 
 ::v-deep .splide__pagination {
@@ -99,17 +119,19 @@ getWindowInfo();
 }
 
 ::v-deep .splide__arrow--prev {
-  left: -12px;
+  left: -15px;
 }
 
 ::v-deep .splide__arrow--next {
-  right: -12px;
+  right: -15px;
 }
 
 ::v-deep .splide__arrow {
-  background-color: #fff;
+  transition: all .3s;
+  opacity: 0;
   height: 42px;
   width: 42px;
+  background-color: #fff;
 
   svg {
     fill: rgba(28, 90, 184, 1);

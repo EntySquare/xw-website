@@ -79,14 +79,14 @@ const setCollect = (i: number) => {
       width: 100%;
       height: 100%;
       transition: all 1s;
-      background: linear-gradient(rgba(255, 255, 255, 0) 20%, #326abf 100%);
+      background: linear-gradient(rgba(255, 255, 255, 0) 50%, #326abf 100%);
     }
 
     &:hover {
       background-size: 108%;
 
       &::before {
-        background: linear-gradient(rgba(255, 255, 255, 0) 20%, #c460c6 100%);
+        background: linear-gradient(rgba(255, 255, 255, 0) 50%, #c460c6 100%);
       }
     }
 

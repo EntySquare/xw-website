@@ -107,7 +107,7 @@ const data: TBanner[] = [
     <div class="home-banner">
         <!-- 轮播图 -->
         <div style="padding-bottom: 10px;">
-            <a-typography-title :heading="3" style="padding:20px 20px 10px;"> 值得一看</a-typography-title>
+            <a-typography-title :heading="3" style="padding:20px 20px 10px;font-weight: 800;">值得一看</a-typography-title>
             <Splide class="banner" :options="{ rewind: false }">
                 <SplideSlide class="bannerstree" v-for="i in type(mqList, data.length)">
                     <Listcar :num="i" :type="mqList" :data="data"></Listcar>
@@ -115,7 +115,7 @@ const data: TBanner[] = [
             </Splide>
         </div>
         <div style="padding-bottom: 10px;">
-            <a-typography-title :heading="3" style="padding:20px 20px 10px;"> 类别1</a-typography-title>
+            <a-typography-title :heading="3" style="padding:20px 20px 10px;font-weight: 800;">类别1</a-typography-title>
             <Splide class="banner" :options="{ rewind: false }">
                 <SplideSlide class="bannerstree" v-for="i in type(mqList, data.length)">
                     <Listcar :num="i" :type="mqList" :data="data"></Listcar>
@@ -123,7 +123,7 @@ const data: TBanner[] = [
             </Splide>
         </div>
         <div style="padding-bottom: 10px;">
-            <a-typography-title :heading="3" style="padding:20px 20px 10px;"> 类别2</a-typography-title>
+            <a-typography-title :heading="3" style="padding:20px 20px 10px;font-weight: 800;">类别2</a-typography-title>
             <Splide class="banner" :options="{ rewind: false }">
                 <SplideSlide class="bannerstree" v-for="i in type(mqList, data.length)">
                     <Listcar :num="i" :type="mqList" :data="data"></Listcar>
@@ -131,7 +131,7 @@ const data: TBanner[] = [
             </Splide>
         </div>
         <div style="padding-bottom: 10px;">
-            <a-typography-title :heading="3" style="padding:20px 20px 10px;"> 类别3</a-typography-title>
+            <a-typography-title :heading="3" style="padding:20px 20px 10px;font-weight: 800;">类别3</a-typography-title>
             <Splide class="banner" :options="{ rewind: false }">
                 <SplideSlide class="bannerstree" v-for="i in type(mqList, data.length)">
                     <Listcar :num="i" :type="mqList" :data="data"></Listcar>
@@ -147,6 +147,15 @@ const data: TBanner[] = [
 
     .banner {
         width: 100%;
+
+
+        &:hover {
+            ::v-deep .splide__arrow {
+                background-color: #fff;
+                opacity: 1;
+            }
+
+        }
     }
 }
 
@@ -163,6 +172,8 @@ const data: TBanner[] = [
 }
 
 ::v-deep .splide__arrow {
+    transition: all .3s;
+    opacity: 0;
     background-color: #fff;
     height: 38px;
     width: 38px;

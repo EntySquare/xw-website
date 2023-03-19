@@ -63,6 +63,7 @@ defineProps<{
 </template>
 <style scoped lang="less">
 p {
+  font-weight: 800;
   font-size: 12px;
   text-align: center;
 }

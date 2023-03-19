@@ -91,7 +91,7 @@ let { getThemenum } = cate
 }
 
 .footer {
-    width: 100%;
+    width: 100vw;
     // height: 720px;
     background: #1C5AB8;
     color: white !important;

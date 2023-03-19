@@ -95,7 +95,7 @@
       background-size: 100% !important;
 
       &::before {
-      background: linear-gradient(rgba(255, 255, 255, 0) 20%, #326abf 100%);
+      background: linear-gradient(rgba(255, 255, 255, 0) 20%, #326abf 100%) !important;
       }
     }
   }
@@ -122,7 +122,7 @@
 /* <=800px时 */
 @media (max-width: 845px) {
     .container {
-        padding: 0 20px !important;
+        padding: 0 10px !important;
       }
     .nonetitle{
         display: none !important;
@@ -135,6 +135,15 @@
     }
     .home-banner{
         padding: 20px 0px 20px !important;
+        .banner { 
+  
+          &:hover {
+              ::v-deep .splide__arrow {
+                  opacity: 0 !important;
+              }
+  
+          }
+      }
     }
    }
 
