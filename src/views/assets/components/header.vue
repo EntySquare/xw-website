@@ -1,10 +1,18 @@
 <script setup lang='ts'>
 import useStore from '@/store/index'
-import { ref, nextTick } from 'vue';
+import { ref, nextTick, onBeforeUnmount } from 'vue';
+import Ordinary from './ordinary.vue';
 let { cate } = useStore()
 let { getThemenum } = cate
 // background: linear - gradient(162.55deg, #3FFFF3 3.18 %, #E127FF 82.44 %);
-
+let mqList = ref(false);
+const getWindowInfo = () => {
+    mqList.value = window.matchMedia("(max-width:1024px)").matches ? true : false;
+};
+window.addEventListener("resize", getWindowInfo);
+onBeforeUnmount(() => {
+    document.removeEventListener('resize', getWindowInfo);
+})
 </script>
 <template>
     <div class="header">
@@ -55,6 +63,20 @@ let { getThemenum } = cate
                         立即购买
                     </div>
                 </div>
+                <Ordinary title="链上信息">
+                    <div class="ordinaritem">
+                        <span>合约地址</span>
+                        <div><span>657421545</span><icon-copy /></div>
+                    </div>
+                    <div class="ordinaritem">
+                        <span>链上ID</span>
+                        <div><span>54643453</span><icon-copy /></div>
+                    </div>
+                    <div class="ordinaritem">
+                        <span>持有者</span>
+                        <div><span>34354345345</span><icon-copy /></div>
+                    </div>
+                </Ordinary>
             </div>
         </div>
     </div>
@@ -74,11 +96,13 @@ let { getThemenum } = cate
         display: flex;
         width: 100%;
         padding-top: 20px;
+        flex-wrap: wrap;
         // gap: 40px;
 
         .left {
             box-sizing: border-box;
             flex: 5.5;
+            min-width: 407.88px;
 
             .top {
                 border-radius: 24px;
@@ -113,6 +137,8 @@ let { getThemenum } = cate
             // background-color: #fff;
 
             .top {
+                min-width: 519.13px;
+
                 .u {
                     display: flex;
                     justify-content: space-between;
@@ -143,6 +169,7 @@ let { getThemenum } = cate
 
                 .d {
                     display: flex;
+                    flex-wrap: wrap;
                     padding-top: 50px;
                     gap: 40px;
                     font-size: 20px;
@@ -162,11 +189,12 @@ let { getThemenum } = cate
 
         .price {
             margin-top: 20px;
-            height: 130px;
+            min-height: 130px;
             // background: #FFFFFF;
             border-radius: 12px;
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
             padding: 0 20px;
             box-sizing: border-box;
 
@@ -186,6 +214,7 @@ let { getThemenum } = cate
                     font-weight: 600;
                     font-size: 20px;
                     line-height: 30px;
+                    display: flex;
 
                     i {
                         color: #1C5AB8;
@@ -237,6 +266,13 @@ let { getThemenum } = cate
                     }
                 }
             }
+        }
+
+        .ordinaritem {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
     }
 

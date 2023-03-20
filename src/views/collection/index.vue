@@ -3,7 +3,7 @@ import { useRoute } from "vue-router";
 import AccHeader from './components/header.vue';
 import Accbody from './components/body.vue';
 import useStore from '@/store/index'
-import { ref, nextTick } from 'vue';
+import { ref, nextTick, onBeforeUnmount } from 'vue';
 import DropDownBox from "./components/drop-down-box.vue";
 let { cate } = useStore()
 let { getThemenum } = cate
@@ -99,6 +99,10 @@ const dropdata = {
 
 
 
+onBeforeUnmount(() => {
+    document.removeEventListener('scroll', myscroll);
+    window.removeEventListener('resize', getWindowInfo);
+})
 </script>
 <template>
     <div class="page-account">

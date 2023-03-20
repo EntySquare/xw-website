@@ -4,7 +4,7 @@ import AccHeader from './components/header.vue';
 import Accbody from './components/body.vue';
 import Accfooter from './components/footer.vue';
 import useStore from '@/store/index'
-import { ref, nextTick } from 'vue';
+import { ref, nextTick, onBeforeUnmount } from 'vue';
 let { cate } = useStore()
 let { getThemenum } = cate
 const getWindowInfo = () => {
@@ -28,7 +28,9 @@ function myscroll() {
     }
     y > tabnum ? show.value = true : show.value = false
     y > tabnum ? show1.value = true : show1.value = false
-    document.getElementById('screening')!.style.width = document.getElementById('collectionbody')!.offsetWidth + 'px'
+    // nextTick(() => {
+    //     document.getElementById('screening')!.style.width = document.getElementById('collectionbody')!.offsetWidth + 'px'
+    // })
 }
 // 页面加载之后挂载事件
 document.addEventListener('scroll', myscroll)
@@ -47,6 +49,9 @@ const data = {
         "https://pbs.twimg.com/profile_images/1581797177801773058/_ZizVWFW_400x400.jpg",
     ],
 }
+onBeforeUnmount(() => {
+    document.removeEventListener('scroll', myscroll)
+})
 </script>
 <template>
     <div class="page-account">
