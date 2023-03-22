@@ -22,6 +22,12 @@ defineProps<{
 <template>
   <div>
     <div class="listcar">
+      <div v-for="item in type" class="body-listcar-item" v-if="!data[0]">
+        <LockDiv>
+          <XtxSkeleton widthB="100%" heightB="100%" :fade="true" :animated="true">
+          </XtxSkeleton>
+        </LockDiv>
+      </div>
       <div v-for="(item, i) in data" :class="[
         {
           none:
@@ -91,12 +97,13 @@ p {
     background: var(--color-bg-1);
     box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 35px;
-    transition: all 0.3s;
+    transition: all .5s;
     color: white;
     display: flex;
     overflow: hidden;
     flex-direction: column;
     justify-content: space-between;
+    border: 1px solid transparent;
 
     &:hover {
       transform: translateY(-8px);

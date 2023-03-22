@@ -34,7 +34,7 @@ const handleSelect = (v: any) => {
 export default { name: 'AppTopnav' }
 </script>
 <template>
-  <nav class="app-topnav">
+  <nav class="app-topnav" id="app-topnav">
     <div class="container containergrap">
       <RouterLink to="/zh-CN">
         <div class="logo">
@@ -63,11 +63,11 @@ export default { name: 'AppTopnav' }
           <a-typography-title :heading="6"> 排行 </a-typography-title>
         </RouterLink>
         <!-- <a-dropdown trigger="hover" style="border-radius: 15px; overflow: hidden">
-                                                                                                                                          <template #content>
-                                                                                                                                            <a-doption>你好</a-doption>
-                                                                                                                                            <a-doption>你好</a-doption>
-                                                                                                                                          </template>
-                                                                                                                                        </a-dropdown> -->
+                                                                                                                                            <template #content>
+                                                                                                                                              <a-doption>你好</a-doption>
+                                                                                                                                              <a-doption>你好</a-doption>
+                                                                                                                                            </template>
+                                                                                                                                          </a-dropdown> -->
         <div class="themer">
           <a-switch :size="mqList ? 'small' : 'medium'" checked-color="#F0EBF2" unchecked-color="#000" v-model="value"
             checked-value="0" unchecked-value="1" @change="setTheme(value)">
@@ -121,11 +121,11 @@ export default { name: 'AppTopnav' }
       </div>
       <div class="blacktitle">
         <a-dropdown @select="handleSelect" trigger="hover" class="dropdown" style="
-                                                      position: fixed;
-                                                      top: 60px;
-                                                      border-radius: 15px;
-                                                      overflow: hidden;
-                                                    ">
+                                                        position: fixed;
+                                                        top: 60px;
+                                                        border-radius: 15px;
+                                                        overflow: hidden;
+                                                      ">
           <icon-menu size="20px" />
           <template #content>
             <a-doption>

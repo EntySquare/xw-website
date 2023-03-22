@@ -12,13 +12,7 @@ const getWindowInfo = () => {
 };
 window.addEventListener("resize", getWindowInfo);
 getWindowInfo();
-
-// https://pic4.zhimg.com/80/v2-80d6ebd2e2f5f6c980b3a22aeca06a9b_720w.webp
-// https://pic3.zhimg.com/80/v2-6d0c77e8cc42048d73f6f7f0b4c23426_720w.webp
-// https://pic2.zhimg.com/80/v2-8debb400ce45c6e81a8b2bd1e5a53625_720w.webp
-// https://pic3.zhimg.com/80/v2-c1d657aaa7842e8d99e5b7403d8912f6_720w.webp
 window.addEventListener("resize", getWindowInfo);
-getWindowInfo();
 const data: TBanner[] = [
     {
         id: 23,
@@ -131,6 +125,7 @@ p {
     gap: 4%;
 
     .body-listcar-item {
+        border: 1px solid transparent;
         margin-bottom: 20px;
         box-sizing: border-box;
         position: relative;

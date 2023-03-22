@@ -111,7 +111,8 @@ onBeforeUnmount(() => {
         <div class="tabtop" id="tabtop">
             <div :class="[show ? 'fixed' : '']"
                 style="overflow: hidden;width: 100%;border-bottom: 1px solid rgb(var(--arcoblue-6));display: flex;justify-content: center;">
-                <ul class="container" :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000' }">
+                <ul class="container"
+                    :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', transition: `all .5s` }">
                     <li class="liactive">项目</li>
                     <li>分析</li>
                     <li>活动</li>
@@ -125,7 +126,7 @@ onBeforeUnmount(() => {
                 <!-- 左侧筛选begin -->
                 <div :style="{ width: mqList ? '360px' : '0px' }" id="lefttt">
                     <div :class="[show1 ? 'fixedtwo' : '']" id="fixedtwo"
-                        :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', height: dropDownBoxH, 'overflow-y': 'scroll' }">
+                        :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', height: dropDownBoxH, 'overflow-y': 'scroll', transition: `all .5s` }">
                         <div v-if="mqList">
                             <DropDownBox v-model:modelValue="mbdata" title="状态" :data="dropdata.state" />
                             <DropDownBox v-model:modelValue="mbdata" title="所有者" :data="dropdata.owner" />
@@ -141,7 +142,7 @@ onBeforeUnmount(() => {
                     <div :style="{ height: show1 ? '50px' : '' }"></div>
                     <!-- 右侧 搜索筛选 展示切换begin -->
                     <div id="screening" :class="['screening', show1 ? 'fixedtwo' : '']"
-                        :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', padding: `${show1 ? '15px 0px' : '20px 0px'}` }">
+                        :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', padding: `${show1 ? '15px 0px' : '20px 0px'}`, transition: `all .5s` }">
                         <div class="search">
                             <icon-search size="30" style="color:#3159b4;margin-left: 18px;min-width: 20px;" />
                             <input type="text" placeholder="按名称或属性搜索" />

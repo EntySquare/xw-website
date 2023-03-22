@@ -84,6 +84,7 @@ p {
   }
 
   .body-listcar-item {
+    border: 1px solid transparent;
     box-sizing: border-box;
     position: relative;
     width: 19.14%;

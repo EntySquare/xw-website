@@ -4,7 +4,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 // 导入 layout
-import layout from "@/views/layout/index.vue";
+// import layout from "@/views/layout/index.vue";
 let router = createRouter({
   // 设置路由模式
   history: createWebHashHistory(),
@@ -13,7 +13,8 @@ let router = createRouter({
     { path: "/", redirect: "/zh-CN" },
     {
       path: "/zh-CN",
-      component: layout,
+      component: () => import("@/views/layout/index.vue"),
+      // meta: { isKeepAlive: true },//缓存组件
       children: [
         // 首页
         { path: "/zh-CN", component: () => import("@/views/home/index.vue") },

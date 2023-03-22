@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const imgurl =
-    'https://i.seadn.io/gcs/files/266274c8643e1c9d0659cb60bf06f740.png?auto=format&w=384'
+const imgurl = ref('')
+setTimeout(() => {
+    imgurl.value = 'https://i.seadn.io/gcs/files/266274c8643e1c9d0659cb60bf06f740.png?auto=format&w=384'
+}, 1000);
 let mqList = ref()
 //监听窗口宽度
 const getWindowInfo = () => {
@@ -54,20 +56,39 @@ getWindowInfo()
                                         </div>
                                     </div>
                                     <div class="imgcar">
-                                        <a-avatar :size="mqList ? 50 : 40" shape="square"><img :src="imgurl" /></a-avatar>
-                                        <div> 醒目猴</div>
-                                        <icon-check-circle-fill style="color: blue" :size="mqList ? 20 : 14" />
+                                        <XtxSkeleton v-if="!imgurl" :width="mqList ? 50 : 40" :height="mqList ? 50 : 40"
+                                            :fade="true" :animated="true">
+                                        </XtxSkeleton>
+                                        <a-avatar v-else :size="mqList ? 50 : 40" shape="square"><img
+                                                :src="imgurl" /></a-avatar>
+                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
+                                            :animated="true">
+                                        </XtxSkeleton>
+                                        <div v-else> 醒目猴</div>
+                                        <XtxSkeleton v-if="!imgurl" :width="mqList ? 20 : 14" :height="mqList ? 20 : 14"
+                                            :fade="true" :animated="true">
+                                        </XtxSkeleton>
+                                        <icon-check-circle-fill v-else style="color: blue" :size="mqList ? 20 : 14" />
                                     </div>
                                     <div>
-                                        <div> +7% </div>
-                                    </div>
-                                    <div>
-                                        <div> ¥500 </div>
-                                    </div>
-                                    <div>
-                                        <div>
-                                            80000
+                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
+                                            :animated="true">
+                                        </XtxSkeleton>
+                                        <div v-else>
+                                            +7%
                                         </div>
+                                    </div>
+                                    <div>
+                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
+                                            :animated="true">
+                                        </XtxSkeleton>
+                                        <div v-else> ¥500 </div>
+                                    </div>
+                                    <div>
+                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
+                                            :animated="true">
+                                        </XtxSkeleton>
+                                        <div v-else> 80000 </div>
                                     </div>
                                 </div>
                             </div>
@@ -98,21 +119,39 @@ getWindowInfo()
                                         </div>
                                     </div>
                                     <div class="imgcar">
-                                        <a-avatar :size="mqList ? 50 : 40" shape="square"><img :src="imgurl" /></a-avatar>
-                                        <div>
-                                            醒目猴</div>
-                                        <icon-check-circle-fill style="color: blue" :size="mqList ? 20 : 14" />
+                                        <XtxSkeleton v-if="!imgurl" :width="mqList ? 50 : 40" :height="mqList ? 50 : 40"
+                                            :fade="true" :animated="true">
+                                        </XtxSkeleton>
+                                        <a-avatar v-else :size="mqList ? 50 : 40" shape="square"><img
+                                                :src="imgurl" /></a-avatar>
+                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
+                                            :animated="true">
+                                        </XtxSkeleton>
+                                        <div v-else> 醒目猴</div>
+                                        <XtxSkeleton v-if="!imgurl" :width="mqList ? 20 : 14" :height="mqList ? 20 : 14"
+                                            :fade="true" :animated="true">
+                                        </XtxSkeleton>
+                                        <icon-check-circle-fill v-else style="color: blue" :size="mqList ? 20 : 14" />
                                     </div>
                                     <div>
-                                        <div> +7% </div>
-                                    </div>
-                                    <div>
-                                        <div> ¥500 </div>
-                                    </div>
-                                    <div>
-                                        <div>
-                                            80000
+                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
+                                            :animated="true">
+                                        </XtxSkeleton>
+                                        <div v-else>
+                                            +7%
                                         </div>
+                                    </div>
+                                    <div>
+                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
+                                            :animated="true">
+                                        </XtxSkeleton>
+                                        <div v-else> ¥500 </div>
+                                    </div>
+                                    <div>
+                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
+                                            :animated="true">
+                                        </XtxSkeleton>
+                                        <div v-else> 80000 </div>
                                     </div>
                                 </div>
                             </div>

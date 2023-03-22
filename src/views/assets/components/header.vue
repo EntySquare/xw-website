@@ -17,7 +17,7 @@ onBeforeUnmount(() => {
 <template>
     <div class="header">
         <div class="body">
-            <div class="left">
+            <div class="left assetsleft">
                 <div class="top">
                     <div style="color: #000;">
                         <p>专辑</p>
@@ -29,7 +29,7 @@ onBeforeUnmount(() => {
                 </div>
             </div>
             <div class="right">
-                <div class="top">
+                <div class="top assetsright">
                     <div class="u">
                         <div class="title">醒目猴子 #100</div>
                         <div class="likeconst">已有100人收藏</div>

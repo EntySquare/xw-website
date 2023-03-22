@@ -25,20 +25,28 @@ const clearTheme_value = () => {
 };
 
 const setTheme = (value: string) => {
+  document.getElementById("app")!.style.transition = `all .5s`;
+  nextTick(() => {
+    document.getElementById("app-topnav")!.style.transition = `all .5s`;
+  });
   setThemenum(value);
   if (+value) {
-    // color = "blue";
+    // color = "blue";var(--bgc-top)
     setTheme_value(value);
     document.body.removeAttribute("arco-theme");
-    document.body.querySelector(".app-topnav")?.classList.remove("dark");
-    document.body.classList.remove("dark");
+    document.getElementById("app")!.style.background = "#F0EBF2";
+    nextTick(() => {
+      document.getElementById("app-topnav")!.style.background = "#F0EBF2";
+    });
+    // document.body.classList.remove("dark");
   } else {
     // color = "white";
     setTheme_value(value);
+    document.getElementById("app")!.style.background = "#000";
     document.body.setAttribute("arco-theme", "dark");
-    document.body.classList.add("dark");
+    // document.body.classList.add("dark");
     nextTick(() => {
-      document.body.querySelector(".app-topnav")?.classList.add("dark");
+      document.getElementById("app-topnav")!.style.background = "#000";
     });
   }
 };

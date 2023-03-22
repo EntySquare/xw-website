@@ -7,3 +7,7 @@ export type TBanner = {
   countdown: number;
   img: string[];
 };
+// 定义类型
+export type TRes<T> = {
+  result: T;
+};
