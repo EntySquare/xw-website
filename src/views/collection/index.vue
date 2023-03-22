@@ -43,8 +43,9 @@ const getWindowInfo = () => {
         }
     })
 };
-window.addEventListener("resize", getWindowInfo);
+myscroll()
 getWindowInfo()
+window.addEventListener("resize", getWindowInfo);
 // 页面加载之后挂载事件
 document.addEventListener('scroll', myscroll)
 let state = ref(true)
@@ -112,7 +113,7 @@ onBeforeUnmount(() => {
             <div :class="[show ? 'fixed' : '']"
                 style="overflow: hidden;width: 100%;border-bottom: 1px solid rgb(var(--arcoblue-6));display: flex;justify-content: center;">
                 <ul class="container"
-                    :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', transition: `all .5s` }">
+                    :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', transition: `all .3s` }">
                     <li class="liactive">项目</li>
                     <li>分析</li>
                     <li>活动</li>
@@ -124,9 +125,9 @@ onBeforeUnmount(() => {
         <div class="container" id="container">
             <div :style="{ gap: mqList ? '20px' : '0px' }" style="width: 100%; display: flex;padding-top: 10px;">
                 <!-- 左侧筛选begin -->
-                <div :style="{ width: mqList ? '360px' : '0px' }" id="lefttt">
+                <div :style="{ width: mqList ? '360px' : '0px', transition: `all .3s` }" id="lefttt">
                     <div :class="[show1 ? 'fixedtwo' : '']" id="fixedtwo"
-                        :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', height: dropDownBoxH, 'overflow-y': 'scroll', transition: `all .5s` }">
+                        :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', height: dropDownBoxH, 'overflow-y': 'scroll', 'padding-top': '10px', transition: `all .3s` }">
                         <div v-if="mqList">
                             <DropDownBox v-model:modelValue="mbdata" title="状态" :data="dropdata.state" />
                             <DropDownBox v-model:modelValue="mbdata" title="所有者" :data="dropdata.owner" />
@@ -141,23 +142,25 @@ onBeforeUnmount(() => {
                 <div style="flex: 5;">
                     <div :style="{ height: show1 ? '50px' : '' }"></div>
                     <!-- 右侧 搜索筛选 展示切换begin -->
-                    <div id="screening" :class="['screening', show1 ? 'fixedtwo' : '']"
-                        :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', padding: `${show1 ? '15px 0px' : '20px 0px'}`, transition: `all .5s` }">
-                        <div class="search">
-                            <icon-search size="30" style="color:#3159b4;margin-left: 18px;min-width: 20px;" />
-                            <input type="text" placeholder="按名称或属性搜索" />
-                        </div>
-                        <div class="search">
-                            <span>价格从高到底</span><icon-caret-down />
-                        </div>
-                        <div class="search" style="min-width: 100px;">
-                            <div class="bom">
-                                <p>网格</p>
-                                <p>列表</p>
+                    <div :style="{ transition: `all .3s`, 'background-color': +getThemenum() ? '#F0EBF2' : '#000', padding: `${show1 ? '15px 0px' : '20px 0px'}` }"
+                        :class="[show1 ? 'fixedtwo' : '']">
+                        <div id="screening" :class="['screening']" :style="{}">
+                            <div class="search">
+                                <icon-search size="30" style="color:#3159b4;margin-left: 18px;min-width: 20px;" />
+                                <input type="text" placeholder="按名称或属性搜索" />
                             </div>
-                            <div :class="['switch', state ? 'jcs' : 'jce']" @click="state = !state">
-                                <div class="item">
-                                    <p>{{ state ? '网格' : '列表' }}</p>
+                            <div class="search">
+                                <span>价格从高到底</span><icon-caret-down />
+                            </div>
+                            <div class="search" style="min-width: 100px;">
+                                <div class="bom">
+                                    <p>网格</p>
+                                    <p>列表</p>
+                                </div>
+                                <div :class="['switch', state ? 'jcs' : 'jce']" @click="state = !state">
+                                    <div class="item">
+                                        <p>{{ state ? '网格' : '列表' }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -201,7 +204,7 @@ onBeforeUnmount(() => {
         top: 136px;
         padding: 10px 0px;
         z-index: 100;
-        background-color: var(--bgc-top-dark);
+        // background-color: var(--bgc-top-dark);
     }
 
     .tabtop {
@@ -247,7 +250,7 @@ onBeforeUnmount(() => {
         gap: 20px;
 
         .screening {
-            width: 100%;
+            // width: 100%;
             box-sizing: border-box;
             display: flex;
             gap: 10px;

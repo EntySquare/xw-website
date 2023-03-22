@@ -26,7 +26,7 @@ getWindowInfo()
                         <div class="left" :style="{ padding: `${mqList / 2 + 20}px 0px 0px` }">
                             <a-typography-title>
                                 <div class="text">
-                                    <p>醒目猴</p>
+                                    <p>醒目猴 </p>
                                     <p>创作者<span>XXX</span></p>
                                     <div class="one">
                                         总量<span>666</span> 创建日期<span>Nov 2022</span>

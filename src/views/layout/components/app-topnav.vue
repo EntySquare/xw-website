@@ -52,22 +52,19 @@ export default { name: 'AppTopnav' }
         <input type="text" placeholder="Search items, collections, and accounts" />
       </div>
       <div class="tab-bar containergrap">
-        <a-dropdown trigger="hover" style="border-radius: 15px; overflow: hidden">
-          <a-typography-title :heading="6"> 发现 </a-typography-title>
-          <template #content>
-            <a-doption>日历</a-doption>
-            <a-doption>更多</a-doption>
-          </template>
-        </a-dropdown>
-        <RouterLink to="/rankings/trending">
-          <a-typography-title :heading="6"> 排行 </a-typography-title>
-        </RouterLink>
-        <!-- <a-dropdown trigger="hover" style="border-radius: 15px; overflow: hidden">
-                                                                                                                                            <template #content>
-                                                                                                                                              <a-doption>你好</a-doption>
-                                                                                                                                              <a-doption>你好</a-doption>
-                                                                                                                                            </template>
-                                                                                                                                          </a-dropdown> -->
+        <DropDown title="发现">
+          <DropItem>
+            <template #icon> <icon-heart-fill /> </template>
+            你好
+            <template #subtitle> <icon-heart-fill /> </template>
+          </DropItem>
+          <DropItem>
+            <template #icon> <icon-heart-fill /> </template>
+            你好
+            <template #subtitle> <icon-heart-fill /> </template>
+          </DropItem>
+        </DropDown>
+        <DropDown title="排行"> </DropDown>
         <div class="themer">
           <a-switch :size="mqList ? 'small' : 'medium'" checked-color="#F0EBF2" unchecked-color="#000" v-model="value"
             checked-value="0" unchecked-value="1" @change="setTheme(value)">
@@ -121,11 +118,11 @@ export default { name: 'AppTopnav' }
       </div>
       <div class="blacktitle">
         <a-dropdown @select="handleSelect" trigger="hover" class="dropdown" style="
-                                                        position: fixed;
-                                                        top: 60px;
-                                                        border-radius: 15px;
-                                                        overflow: hidden;
-                                                      ">
+                                                                                  position: fixed;
+                                                                                  top: 60px;
+                                                                                  border-radius: 15px;
+                                                                                  overflow: hidden;
+                                                                                ">
           <icon-menu size="20px" />
           <template #content>
             <a-doption>
@@ -181,6 +178,7 @@ export default { name: 'AppTopnav' }
   border-bottom: 1px solid rgb(var(--arcoblue-3));
 
   .container {
+    height: 100%;
     display: flex;
     align-items: center;
     width: 100%;
@@ -239,6 +237,7 @@ export default { name: 'AppTopnav' }
     }
 
     .tab-bar {
+      height: 100%;
       display: flex;
       align-items: center;
       gap: 40px;

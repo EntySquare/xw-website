@@ -25,9 +25,9 @@ const clearTheme_value = () => {
 };
 
 const setTheme = (value: string) => {
-  document.getElementById("app")!.style.transition = `all .5s`;
+  document.getElementById("app")!.style.transition = `all .3s`;
   nextTick(() => {
-    document.getElementById("app-topnav")!.style.transition = `all .5s`;
+    document.getElementById("app-topnav")!.style.transition = `all .3s`;
   });
   setThemenum(value);
   if (+value) {
