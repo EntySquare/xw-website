@@ -10,16 +10,50 @@ const props = defineProps({
     type: {
         type: String,
         default: 'hover'
+    },
+    left: {
+        type: Number,
+        default: -20
+    },
+    pop_up: {
+        type: Boolean,
+        defaule: false
     }
 })
 let show = ref(false)
+let show2 = ref(false)
+let timer: string | number | NodeJS.Timeout | undefined
 const setType = (key: string, i: Number = 1) => {
     switch (key) {
-        case 'click': i == 3 ? show.value = !show.value : ''
+        case 'click':
+            if (i == 3) {
+                if (show.value) {
+                    setTimeout(() => {
+                        show2.value = true
+                        setTimeout(() => {
+                            show.value = false
+                        }, 200);
+                    }, 200);
+                    break;
+                }
+                show2.value = false
+                show.value = true
+            }
             break;
-        case 'hover': i ? show.value = true : show.value = false
+        case 'hover':
+            if (i) {
+                clearTimeout(timer)
+                show.value = true
+                show2.value = false
+            } else {
+                timer = setTimeout(() => {
+                    show2.value = true
+                    setTimeout(() => {
+                        show.value = false
+                    }, 200);
+                }, 300);
+            }
             break;
-
         default:
             break;
     }
@@ -27,41 +61,81 @@ const setType = (key: string, i: Number = 1) => {
 
 </script>
 <template>
-    <div :class="['dropdownbox', show ? 'hover' : '']" @click="setType(type, 3)" @mousemove="setType(type)"
-        @mouseleave="setType(type, 0)">
-        <div class="title"> {{ title }} </div>
-        <div v-if="show" class="dropboxbody" :style="{ background: +getThemenum() ? '#FFF' : '#303339' }">
+    <div :class="['dropdownbox', show ? 'hover' : '', show2 ? 'hoverone' : '']" @click="setType(type, 3)"
+        @mouseenter="setType(type)" @mouseleave="setType(type, 0)">
+        <div class="mask" v-if="show && type == 'click'" :style="{ background: pop_up ? `#0000007a` : '' }"></div>
+        <div class="title">
+            <slot name="title">
+            </slot>
+            {{ title }}
+        </div>
+        <div @click.stop="" v-if="show && !pop_up" class="dropboxbody"
+            :style="{ '--left': left + 'px', background: +getThemenum() ? '#1C5AB8' : 'linear-gradient(180deg, #1C5AB8 0%, #000 100%)' }">
             <slot>
+            </slot>
+        </div>
+        <div @click.stop="" v-if="show && pop_up" class="dropboxbodytwo"
+            :style="{ '--left': left + 'px', background: +getThemenum() ? '#1C5AB8' : 'linear-gradient(180deg, #1C5AB8 0%, #000 100%)' }">
+            <slot name="body">
             </slot>
         </div>
     </div>
 </template>
 <style scoped lang='less'>
+.mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+    width: 100vw;
+    height: 100vh;
+}
+
 @keyframes one {
-    from {
-        display: none;
-        opacity: 0;
+    0% {
+        opacity: 0.5;
         transform: translateY(0%);
     }
 
-    to {
-        display: block;
+    100% {
         opacity: 1;
-        transform: translateY(10%);
+        transform: translateY(6%);
     }
 }
 
 @keyframes two {
-    from {
-        display: none;
+    0% {
         opacity: 1;
-        transform: translateY(10%);
+        transform: translateY(6%);
     }
 
-    to {
-        display: block;
-        opacity: 0;
+    100% {
+        opacity: 0.5;
         transform: translateY(0%);
+    }
+}
+
+@keyframes oneone {
+    0% {
+        opacity: 0.5;
+        right: -100%;
+    }
+
+    100% {
+        opacity: 1;
+        right: 10px;
+    }
+}
+
+@keyframes twotwo {
+    0% {
+        opacity: 1;
+        right: 10px;
+    }
+
+    100% {
+        opacity: 0.5;
+        right: -100%;
     }
 }
 
@@ -71,28 +145,61 @@ const setType = (key: string, i: Number = 1) => {
     display: flex;
     align-items: center;
 
+
     .title {
         font-size: 16px;
+        height: 26px;
         // font-weight: 600;
     }
 
     .dropboxbody {
+        color: white;
         position: absolute;
         overflow: hidden;
-        left: -20px;
-        top: 65%;
+        left: var(--left);
+        top: 60%;
         z-index: 9999;
-        width: 220px;
+        width: 240px;
         border-radius: 10px;
         display: flex;
         flex-direction: column;
-        animation: .3s ease-in forwards two;
+        box-shadow: 0px 0px 5px 3px #00000010;
+    }
+
+    .dropboxbodytwo {
+        color: white;
+        position: fixed;
+        overflow: hidden;
+        top: 50%;
+        right: -100%;
+        transform: translateY(-50%);
+        height: 96vh;
+        z-index: 9999;
+        width: 240px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0px 0px 5px 3px #00000010;
     }
 }
 
 .hover {
     .dropboxbody {
-        animation: .3s ease-in forwards one;
+        animation: .2s ease-in forwards one;
+    }
+
+    .dropboxbodytwo {
+        animation: .4s ease-in forwards oneone;
+    }
+}
+
+.hoverone {
+    .dropboxbody {
+        animation: .2s ease-in forwards two;
+    }
+
+    .dropboxbodytwo {
+        animation: .4s ease-in forwards twotwo;
     }
 }
 </style>

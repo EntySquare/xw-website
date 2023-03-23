@@ -37,6 +37,7 @@ const props = defineProps({
     }
 
     .content {
+        padding-left: 30px;
         flex: 1;
     }
 }
