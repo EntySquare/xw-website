@@ -37,6 +37,7 @@ const setType = (key: string, i: Number = 1) => {
                     break;
                 }
                 show2.value = false
+                document.body.style.height = '100vh'
                 show.value = true
             }
             break;
@@ -99,14 +100,14 @@ const setType = (key: string, i: Number = 1) => {
 
     100% {
         opacity: 1;
-        transform: translateY(6%);
+        transform: translateY(10px);
     }
 }
 
 @keyframes two {
     0% {
         opacity: 1;
-        transform: translateY(6%);
+        transform: translateY(10px);
     }
 
     100% {
@@ -147,9 +148,11 @@ const setType = (key: string, i: Number = 1) => {
 
 
     .title {
+        height: 100%;
         font-size: 16px;
-        height: 26px;
-        // font-weight: 600;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
     }
 
     .dropboxbody {
@@ -157,7 +160,7 @@ const setType = (key: string, i: Number = 1) => {
         position: absolute;
         overflow: hidden;
         left: var(--left);
-        top: 60%;
+        top: 80%;
         z-index: 9999;
         width: 240px;
         border-radius: 10px;

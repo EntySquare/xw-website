@@ -19,7 +19,8 @@ getWindowInfo()
         <div class="body">
             <div class="container">
                 <div :style="{ padding: `0px 20px ${show1 ? '10px' : '24px'}` }">
-                    <a-avatar shape="square" class="avatatimg" :size="mqList" style="transform: translateY(-50%)">
+                    <a-avatar shape="square" class="avatatimg" :size="mqList"
+                        style="transform: translateY(-50%);background: transparent ;">
                         <img alt="avatar" src="https://pic4.zhimg.com/80/v2-80d6ebd2e2f5f6c980b3a22aeca06a9b_720w.webp" />
                     </a-avatar>
                     <div class="title">

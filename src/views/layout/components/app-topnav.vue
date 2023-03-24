@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import router from '@/router';
 import {
   getTheme_value,
   isTheme_value,
@@ -29,6 +30,15 @@ getWindowInfo()
 const handleSelect = (v: any) => {
   console.log(v)
 }
+
+const to = (path: string, id: any = 0) => {
+  if (id) {
+    router.push({ path: `${path}`, query: { id: `${id}` } })
+  } else {
+    router.push({ path: `${path}` })
+  }
+}
+let imgurl = 'https://img2.wallspic.com/previews/6/7/1/8/5/158176/158176-shu_ma_yi_shu-yi_shu-hui_hua-shu_zi_hui_hua-yi_shu_jia-500x.jpg'
 </script>
 <script lang="ts">
 export default { name: 'AppTopnav' }
@@ -50,32 +60,34 @@ export default { name: 'AppTopnav' }
       </div>
       <div class="tab-bar containergrap">
         <DropDown title="发现">
-          <DropItem>
+          <DropItem @click="to('/')">
             <template #icon> <icon-heart-fill :size="28" /> </template>
             主页
           </DropItem>
-          <DropItem>
+          <DropItem @click="to('/')">
             <template #icon> <icon-star-fill :size="28" /> </template>
             收藏
           </DropItem>
-          <DropItem>
+          <DropItem @click="to('/')">
             <template #icon> <icon-file-image :size="28" /> </template>
             我的专辑
           </DropItem>
-          <DropItem>
+          <DropItem @click="to('/')">
             <template #icon> <icon-edit :size="28" /> </template>
             我的发布
           </DropItem>
-          <DropItem>
+          <DropItem @click="to('/')">
             <template #icon> <icon-settings :size="28" /> </template>
             设置
           </DropItem>
-          <DropItem>
+          <DropItem @click="to('/')">
             <template #icon><icon-import :size="28" style="transform: rotate(180deg);" /> </template>
             登出
           </DropItem>
         </DropDown>
-        <DropDown title="排行"> </DropDown>
+        <div style="font-size: 16px;font-weight: 600;" @click="to('/rankings/trending')">
+          排行
+        </div>
         <div class="themer">
           <a-switch :size="mqList ? 'small' : 'medium'" checked-color="#F0EBF2" unchecked-color="#000" v-model="value"
             checked-value="0" unchecked-value="1" @change="setTheme(value)">
@@ -132,16 +144,39 @@ export default { name: 'AppTopnav' }
             </svg>
           </template>
           <template #body>
+            <div class="cart">
+              <div class="cartitem">
+                <div v-for="item in 8" class="item">
+                  <LockDiv width="110px" xyb="110px">
+                    <div class="img" :style="{ 'background-image': 'url(' + `${imgurl}` + ')' }">
+                    </div>
+                  </LockDiv>
+                  <div class="information">
+                    <div class="t">
+                      <span>醒目猴</span>
+                      <span>版本号1/200</span>
+                    </div>
+                    <div class="b">
+                      <span><i>¥</i>500</span>
+                      <span><i>x</i>1</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="btn">
+                <div class="top">
+                  <span>¥</span><span>1000</span>
+                </div>
+                <div class="btn">
+                  <div class="pay">立即支付</div>
+                </div>
+              </div>
+            </div>
           </template>
         </DropDown>
       </div>
       <div class="blacktitle">
-        <a-dropdown @select="handleSelect" trigger="hover" class="dropdown" style="
-                                                    position: fixed;
-                                                    top: 60px;
-                                                    border-radius: 15px;
-                                                    overflow: hidden;
-                                                  ">
+        <a-dropdown @select="handleSelect" trigger="hover" class="dropdown" style="position: fixed;overflow: hidden;">
           <icon-menu size="20px" />
           <template #content>
             <a-doption>
@@ -186,6 +221,124 @@ export default { name: 'AppTopnav' }
 </template>
 
 <style scoped lang="less">
+.cart {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding: 15px;
+
+  .cartitem {
+    overflow-y: auto;
+    flex: 1;
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+      margin-bottom: 20px;
+      height: 110px;
+
+      .img {
+        height: 100%;
+        width: 110px;
+        background-size: cover;
+        background-position: center;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+
+      .information {
+        color: white;
+        font-weight: 600;
+        padding: 10px;
+        flex: 1;
+
+        .t {
+          height: 50%;
+          display: flex;
+          flex-direction: column;
+
+          span {
+            &:nth-child(1) {
+              font-size: 15px;
+            }
+
+            &:nth-child(2) {
+              margin-top: 5px;
+              font-size: 12px;
+            }
+          }
+        }
+
+        .b {
+          height: 50%;
+          display: flex;
+          flex-direction: column;
+          justify-content: end;
+          align-items: end;
+
+          span {
+            &:nth-child(1) {
+              font-size: 16px;
+            }
+
+            &:nth-child(2) {
+              background: linear-gradient(162.55deg, #3FFFF3 3.18%, #E127FF 82.44%);
+              -webkit-background-clip: text;
+              -moz-background-clip: text;
+              background-clip: text;
+              color: transparent;
+              margin-top: 5px;
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .btn {
+    height: 150px;
+
+    .top {
+      height: 36px;
+      border-bottom: 1px solid white;
+      display: flex;
+      justify-content: end;
+      align-items: center;
+
+      span {
+        font-weight: 400;
+
+        &:nth-child(1) {
+          font-size: 15px;
+        }
+
+        &:nth-child(2) {
+          font-size: 24px;
+        }
+      }
+    }
+
+    .btn {
+      padding-top: 20px;
+
+      .pay {
+        background: linear-gradient(162.55deg, #3FFFF3aa 3.18%, #E127FFaa 82.44%);
+        height: 40px;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 40px;
+        text-align: center;
+        border-radius: 39px;
+      }
+    }
+  }
+}
+
 .app-topnav {
   position: fixed;
   top: 0;
@@ -263,6 +416,7 @@ export default { name: 'AppTopnav' }
     }
 
     .my-setting {
+      height: 100%;
       display: flex;
       align-items: center;
       gap: 25px;
