@@ -1,32 +1,31 @@
 <script setup lang='ts'>
+import { dropdata } from "./static/drop";//导入下拉框数据
 import { useRoute } from "vue-router";
-import AccHeader from './components/header.vue';
-import Accbody from './components/body.vue';
+import AccHeader from './components/coll-header.vue';
+import Accbody from './components/coll-body.vue';
 import useStore from '@/store/index'
-import { ref, nextTick, onBeforeUnmount } from 'vue';
 import DropDownBox from "./components/drop-down-box.vue";
+import { ref, nextTick, onBeforeUnmount } from 'vue';
 let { cate } = useStore()
-let { getThemenum } = cate
+let { getThemenum } = cate //获取动态样式数据用来设置个别元素样式
+
 let show = ref(false)//搜索框样式的动态值
 let show1 = ref(false)//筛选栏样式的动态值
+
 let dropDownBoxH = ref('')//动态计算 筛选栏可上下滑动的固定高度
 let y: number// 记录滚动的距离
 let tabnum: number//定义一个值，动态计算 tab栏距离顶部的高度
 // 设置一个滚动的事件 用于滚动条滚动时触发的函数
 function myscroll() {
     tabnum = document.getElementById('tabtop')?.offsetTop || 0
-    tabnum = tabnum + 1
     y = document.documentElement.scrollTop //页面滚动距离
     if (y > tabnum) {
-        dropDownBoxH.value = window.innerHeight - 190 + 'px'
-        // document.getElementById('collectionscrollbar')!.style.height = window.innerHeight - 260 + 'px'
+        dropDownBoxH.value = window.innerHeight - 190 + 'px' //动态计算左侧下拉框整体高度
+        // 动态计算右侧搜索框整体款第
         document.getElementById('screening')!.style.width = document.getElementById('collectionbody')!.offsetWidth + 'px'
-        // document.getElementById('down-box')!.style.width = document.getElementById('lefttt')!.offsetWidth + 'px'
     }
     y > tabnum ? show.value = true : show.value = false //滚动距离大于tab栏距离顶部的高度时候 修改样式值
     y > tabnum ? show1.value = true : show1.value = false //滚动距离大于tab栏距离顶部的高度时候 修改样式值
-    // 动态计算右侧搜索栏总体宽度 ， 把内容的宽度给到它
-    // 动态计算左侧筛选栏总体宽度 ， div占用宽度给到它
 }
 // 设置一个窗口事件 用于窗口大小发生变化时候出发
 let mqList = ref(1);
@@ -66,40 +65,8 @@ let mbdata = ref([] as TUserInfo[])
 for (let i = 0; i < 30; i++) {
     mbdata.value.push({ title: '', item: '' })
 }
-//下拉框数据
-const dropdata = {
-    state: [
-        '立即购买',
-        '拍卖中',
-        '新增',
-        '有优惠',
-    ],
-    owner: [
-        '全部',
-        '我'
-    ],
-    quantity: [
-        '所有项目',
-        '单个项目',
-        '套餐',
-    ],
-    attribute: [
-        '1',
-        '2',
-        '3',
-        '4',
-        '5',
-        '6',
-        '7',
-    ],
-    price: [
-        '从',
-        '到',
-    ]
-}
 
-
-
+// 离开页面销毁监听
 onBeforeUnmount(() => {
     document.removeEventListener('scroll', myscroll);
     window.removeEventListener('resize', getWindowInfo);

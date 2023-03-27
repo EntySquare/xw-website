@@ -1,8 +1,8 @@
 <script setup lang='ts'>
 import { useRoute } from "vue-router";
-import AccHeader from './components/header.vue';
-import Accbody from './components/body.vue';
-import Accfooter from './components/footer.vue';
+import AccHeader from './components/ass-header.vue';
+import Accbody from './components/ass-body.vue';
+import Accfooter from './components/ass-footer.vue';
 import useStore from '@/store/index'
 import { ref, nextTick, onBeforeUnmount } from 'vue';
 let { cate } = useStore()

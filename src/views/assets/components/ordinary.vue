@@ -1,3 +1,4 @@
+<!-- 单个商品详情页的盒子 -->
 <script setup lang='ts'>
 import useStore from '@/store/index'
 import { onMounted, reactive, ref, watch, defineEmits, defineProps, nextTick } from 'vue'

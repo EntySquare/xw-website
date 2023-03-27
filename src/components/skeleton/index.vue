@@ -2,7 +2,7 @@
 defineProps({
   bg: {
     type: String,
-    default: '#ddd',
+    default: '#a0a0a0',
   },
   width: {
     type: Number,

@@ -12,7 +12,9 @@ import Ranking from "./components/home-ranking.vue";
     <div class="container">
       <!-- banner轮播图 -->
       <homeBannerVue />
+      <!-- 排行列表 -->
       <Ranking />
+      <!-- 主体部分 -->
       <HomeBody />
     </div>
     <HomeFooter />

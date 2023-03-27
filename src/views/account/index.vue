@@ -16,7 +16,8 @@ let state = ref(true)
         <div class="tabtop" id="tabtop">
             <div
                 style="overflow: hidden;width: 100%;border-bottom: 1px solid rgb(var(--arcoblue-6));display: flex;justify-content: center;">
-                <ul class="container" :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000' }">
+                <ul class="container"
+                    :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', transition: `all .3s` }">
                     <li class="liactive">我的收藏</li>
                     <li>我的发布</li>
                 </ul>

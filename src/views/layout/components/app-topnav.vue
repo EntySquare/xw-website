@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import router from '@/router';
+import router from '@/router'
 import {
   getTheme_value,
   isTheme_value,
@@ -7,12 +7,13 @@ import {
   setTheme_value
 } from '@/utils/storage'
 import { ref } from 'vue'
+// 黑夜主题切换按钮绑定数据
 const value = ref('')
 // 本地存储主题信息
 if (!getTheme_value()) {
-  console.log('value.value:', value.value)
-  setTheme_value('1')
-  value.value = isTheme_value()
+  //获取本地缓存取反
+  setTheme_value('1') //默认白色主题为1
+  value.value = isTheme_value() //赋值
 } else {
   value.value = `${getTheme_value()}`
   setTheme(value.value)
@@ -30,7 +31,7 @@ getWindowInfo()
 const handleSelect = (v: any) => {
   console.log(v)
 }
-
+//页面挑战
 const to = (path: string, id: any = 0) => {
   if (id) {
     router.push({ path: `${path}`, query: { id: `${id}` } })
@@ -38,7 +39,8 @@ const to = (path: string, id: any = 0) => {
     router.push({ path: `${path}` })
   }
 }
-let imgurl = 'https://img2.wallspic.com/previews/6/7/1/8/5/158176/158176-shu_ma_yi_shu-yi_shu-hui_hua-shu_zi_hui_hua-yi_shu_jia-500x.jpg'
+let imgurl =
+  'https://img2.wallspic.com/previews/6/7/1/8/5/158176/158176-shu_ma_yi_shu-yi_shu-hui_hua-shu_zi_hui_hua-yi_shu_jia-500x.jpg'
 </script>
 <script lang="ts">
 export default { name: 'AppTopnav' }
@@ -46,6 +48,7 @@ export default { name: 'AppTopnav' }
 <template>
   <nav class="app-topnav" id="app-topnav">
     <div class="container containergrap">
+      <!-- logo标题begin -->
       <RouterLink to="/zh-CN">
         <div class="logo">
           <img style="width: 55px" alt="avatar" src="@/assets/app.png" />
@@ -54,11 +57,14 @@ export default { name: 'AppTopnav' }
           </a-typography-title>
         </div>
       </RouterLink>
+      <!-- logo标题end -->
       <div class="search">
+        <!-- 搜索框 -->
         <icon-search size="23" />
         <input type="text" placeholder="Search items, collections, and accounts" />
       </div>
       <div class="tab-bar containergrap">
+        <!-- 发现管理begin -->
         <DropDown title="发现">
           <DropItem @click="to('/')">
             <template #icon> <icon-heart-fill :size="28" /> </template>
@@ -72,7 +78,7 @@ export default { name: 'AppTopnav' }
             <template #icon> <icon-file-image :size="28" /> </template>
             我的专辑
           </DropItem>
-          <DropItem @click="to('/')">
+          <DropItem @click="to(`/account/${'1'}`)">
             <template #icon> <icon-edit :size="28" /> </template>
             我的发布
           </DropItem>
@@ -81,13 +87,16 @@ export default { name: 'AppTopnav' }
             设置
           </DropItem>
           <DropItem @click="to('/')">
-            <template #icon><icon-import :size="28" style="transform: rotate(180deg);" /> </template>
+            <template #icon><icon-import :size="28" style="transform: rotate(180deg)" />
+            </template>
             登出
           </DropItem>
         </DropDown>
-        <div style="font-size: 16px;font-weight: 600;" @click="to('/rankings/trending')">
+        <!-- 发现管理end -->
+        <div style="font-size: 16px; font-weight: 600" @click="to('/rankings/trending')">
           排行
         </div>
+        <!-- 切换主题begin -->
         <div class="themer">
           <a-switch :size="mqList ? 'small' : 'medium'" checked-color="#F0EBF2" unchecked-color="#000" v-model="value"
             checked-value="0" unchecked-value="1" @change="setTheme(value)">
@@ -99,8 +108,10 @@ export default { name: 'AppTopnav' }
             </template>
           </a-switch>
         </div>
+        <!-- 切换主题end -->
       </div>
       <div class="my-setting nonetitle">
+        <!-- 个人中心begin -->
         <DropDown :left="-100" type="click">
           <template #title>
             <svg t="1677739311126" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -115,6 +126,8 @@ export default { name: 'AppTopnav' }
             <img src="@/assets/images/hellosxs.png" alt="" />
           </div>
         </DropDown>
+        <!-- 个人中心end -->
+        <!-- 扫码登陆begin -->
         <DropDown :left="-100" type="click" :pop_up="true">
           <template #title>
             <svg t="1677739423959" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -131,9 +144,10 @@ export default { name: 'AppTopnav' }
                 fill="#2c2c2c" p-id="1520"></path>
             </svg>
           </template>
-          <template #body>
-          </template>
+          <template #body> </template>
         </DropDown>
+        <!-- 扫码登陆end -->
+        <!-- 购物车begin -->
         <DropDown :left="-100" type="click" :pop_up="true">
           <template #title>
             <svg t="1677739355444" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -145,11 +159,13 @@ export default { name: 'AppTopnav' }
           </template>
           <template #body>
             <div class="cart">
+              <!-- 购物车数据循环体begin -->
               <div class="cartitem">
                 <div v-for="item in 8" class="item">
                   <LockDiv width="110px" xyb="110px">
-                    <div class="img" :style="{ 'background-image': 'url(' + `${imgurl}` + ')' }">
-                    </div>
+                    <div class="img" :style="{
+                      'background-image': 'url(' + `${imgurl}` + ')'
+                    }"></div>
                   </LockDiv>
                   <div class="information">
                     <div class="t">
@@ -163,10 +179,9 @@ export default { name: 'AppTopnav' }
                   </div>
                 </div>
               </div>
+              <!-- 购物车数据循环体end -->
               <div class="btn">
-                <div class="top">
-                  <span>¥</span><span>1000</span>
-                </div>
+                <div class="top"><span>¥</span><span>1000</span></div>
                 <div class="btn">
                   <div class="pay">立即支付</div>
                 </div>
@@ -174,9 +189,11 @@ export default { name: 'AppTopnav' }
             </div>
           </template>
         </DropDown>
+        <!-- 购物车数据循环体end -->
       </div>
+      <!-- 移动设备显示begin -->
       <div class="blacktitle">
-        <a-dropdown @select="handleSelect" trigger="hover" class="dropdown" style="position: fixed;overflow: hidden;">
+        <a-dropdown @select="handleSelect" trigger="hover" class="dropdown" style="position: fixed; overflow: hidden">
           <icon-menu size="20px" />
           <template #content>
             <a-doption>
@@ -216,6 +233,7 @@ export default { name: 'AppTopnav' }
           </template>
         </a-dropdown>
       </div>
+      <!-- 移动设备显示end -->
     </div>
   </nav>
 </template>
@@ -286,7 +304,9 @@ export default { name: 'AppTopnav' }
             }
 
             &:nth-child(2) {
-              background: linear-gradient(162.55deg, #3FFFF3 3.18%, #E127FF 82.44%);
+              background: linear-gradient(162.55deg,
+                  #3ffff3 3.18%,
+                  #e127ff 82.44%);
               -webkit-background-clip: text;
               -moz-background-clip: text;
               background-clip: text;
@@ -327,7 +347,9 @@ export default { name: 'AppTopnav' }
       padding-top: 20px;
 
       .pay {
-        background: linear-gradient(162.55deg, #3FFFF3aa 3.18%, #E127FFaa 82.44%);
+        background: linear-gradient(162.55deg,
+            #3ffff3aa 3.18%,
+            #e127ffaa 82.44%);
         height: 40px;
         font-weight: 400;
         font-size: 20px;

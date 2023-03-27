@@ -3,7 +3,7 @@ import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { ref, nextTick, onBeforeUnmount } from "vue";
 import { TBanner } from "@/types/cate";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-import Listcar from "./listcar.vue";
+import Listcar from "./banner-listcar.vue";
 import { type } from "@/utils/banner";
 import useStore from '@/store/index'
 import { storeToRefs } from 'pinia'

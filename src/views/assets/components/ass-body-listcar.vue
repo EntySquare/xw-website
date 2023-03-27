@@ -22,6 +22,12 @@ defineProps<{
 <template>
   <div>
     <div class="listcar">
+      <div v-for="item in type" class="body-listcar-item" v-if="!data[0]">
+        <LockDiv>
+          <XtxSkeleton widthB="100%" heightB="100%" :fade="true" :animated="true">
+          </XtxSkeleton>
+        </LockDiv>
+      </div>
       <div v-for="(item, i) in data" :class="[
         {
           none:
@@ -34,38 +40,43 @@ defineProps<{
         },
         'body-listcar-item',
       ]">
-        <div class="item-top" :style="{ 'background-image': 'url(' + item.img[0] + ')' }"></div>
-        <div class="item-bom">
-          <div class="u">
-            <a-typography-title :heading="+mqList">
-              醒目猴</a-typography-title>
-            <icon-check-circle-fill style="color:blue" :size="20" />
-          </div>
-          <div class="d">
-            <a-typography-title>
-              <p>地板价</p>
-              <p>¥500</p>
-            </a-typography-title>
-            <a-typography-title>
-              <p>总交易量</p>
-              <p>27901832</p>
-            </a-typography-title>
-          </div>
-        </div>
+        <RouterLink style="height: 100%;"
+          :to="{ path: `/collection/${item.name.replaceAll(' ', '')}`, query: { id: `${item.id}` } }">
+          <LockDiv>
+            <div class="item-top" :style="{ 'background-image': 'url(' + item.img[0] + ')' }"></div>
+            <div class="item-bom">
+              <div class="u">
+                <a-typography-title :heading="+mqList">
+                  醒目猴</a-typography-title>
+                <icon-check-circle-fill style="color:blue" :size="20" />
+              </div>
+              <div class="d">
+                <a-typography-title>
+                  <p>地板价</p>
+                  <p>¥500</p>
+                </a-typography-title>
+                <a-typography-title>
+                  <p>总交易量</p>
+                  <p>27901832</p>
+                </a-typography-title>
+              </div>
+            </div>
+          </LockDiv>
+        </RouterLink>
       </div>
     </div>
   </div>
 </template>
 <style scoped lang="less">
 p {
-  font-size: 13px;
+  font-size: 12px;
   text-align: center;
 }
 
 .listcar {
   display: flex;
   padding: 10px 1% 10px;
-  gap: 1.2%;
+  gap: 4%;
 
   .none {
     display: none !important;
@@ -79,9 +90,10 @@ p {
   }
 
   .body-listcar-item {
+    border: 1px solid transparent;
+    box-sizing: border-box;
     position: relative;
-    width: 24.1%;
-    height: 12.8vw;
+    width: 19.14%;
     background: var(--color-bg-1);
     box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 35px;
@@ -108,7 +120,7 @@ p {
       justify-content: space-around;
       box-sizing: border-box;
       height: 40%;
-      padding: 10px 20px;
+      padding: 15px 20px;
 
       .u {
         display: flex;
