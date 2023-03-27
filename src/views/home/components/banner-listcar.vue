@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { TBanner } from "@/types/cate";
-import { ref } from "vue";
+import { ref, nextTick, onUnmounted } from "vue";
+import { CountDown } from "@/utils/settime";
 const prop = defineProps<{
   data: TBanner[];
   type: number;
@@ -11,6 +12,37 @@ datas.value = prop.data
 const setCollect = (i: number) => {
   datas.value[i].collect = datas.value[i].collect ? 0 : 1
 }
+
+// 倒计时模块
+const countDown = new CountDown()
+let timer: number | NodeJS.Timer
+const timing = (item: any, i: number) => {
+  const time = +item.opening_time + (+item.locking_time * 86400)
+  if ((time - Math.round(new Date().getTime() / 1000)) < 0) {
+    return
+  }
+  timer = setInterval(() => {
+    countDown.getTime(time)
+    // document.getElementById(`${'fdfd' + item.id + 1}`)!.innerHTML = `<i>${countDown.hour}</i>:<i>${countDown.min}</i>:<i>${countDown.second}</i>`
+    // console.log('1:', 1)
+    nextTick(() => {
+      datas.value[i].h = countDown.hour
+      datas.value[i].m = countDown.min
+      datas.value[i].s = countDown.second
+    })
+    // console.log('countDown.day:', countDown.day)
+    // console.log('countDown.hour:', countDown.hour)
+    // console.log('countDown.min:', countDown.min)
+    // console.log('countDown.second:', countDown.second)
+  }, 1000)
+}
+
+onUnmounted(() => {
+  // 清除setInterval创建的定时器
+  for (let i = 0; i <= timer; i++) {
+    clearInterval(i)
+  }
+})
 </script>
 <template>
   <div>
@@ -41,8 +73,11 @@ const setCollect = (i: number) => {
                 <div class="d">地板价：{{ item.lowest_price }}</div>
               </div>
               <div class="right">
+                {{ timing(item, i) }}
                 <div class="u">倒计时</div>
-                <div class="d"><i>05</i>:<i>05</i>:<i>05</i></div>
+                <div class="d" :id="`${'fdfd' + item.id + 1}`"><i>{{ item.h ? item.h : '00' }}</i>:<i>{{ item.m ? item.m : '00'
+                }}</i>:<i>{{ item.s ? item.s : '00' }}</i>
+                </div>
               </div>
             </div>
           </div>

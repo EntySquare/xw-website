@@ -4,8 +4,9 @@ export type TBanner = {
   collect: number;
   name: string;
   lowest_price: string;
-  countdown: number;
   img: string[];
+  locking_time: number;
+  opening_time: number;
 };
 // 定义类型
 export type TRes<T> = {
