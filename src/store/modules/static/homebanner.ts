@@ -2,7 +2,7 @@ export const banner = [
   {
     id: 34,
     collect: 1,
-    name: "Crypto Citizens",
+    name: "Otherdeed for Otherside",
     lowest_price: "1W",
     locking_time: 10,
     opening_time: 1679908975,
@@ -13,7 +13,7 @@ export const banner = [
   {
     id: 653,
     collect: 1,
-    name: "Crypto Citizens",
+    name: "Otherdeed for Otherside",
     lowest_price: "1W",
     locking_time: 11,
     opening_time: 1679908975,
@@ -24,7 +24,7 @@ export const banner = [
   {
     id: 463,
     collect: 1,
-    name: "Crypto Citizens",
+    name: "Otherdeed for Otherside",
     lowest_price: "1W",
     locking_time: 12,
     opening_time: 1679908975,
@@ -35,7 +35,7 @@ export const banner = [
   {
     id: 686,
     collect: 1,
-    name: "Crypto Citizens",
+    name: "Otherdeed for Otherside",
     lowest_price: "1W",
     locking_time: 13,
     opening_time: 1679908975,
@@ -46,7 +46,7 @@ export const banner = [
   {
     id: 885,
     collect: 1,
-    name: "Crypto Citizens",
+    name: "Otherdeed for Otherside",
     lowest_price: "1W",
     locking_time: 14,
     opening_time: 1679908975,
@@ -57,7 +57,7 @@ export const banner = [
   {
     id: 3476,
     collect: 1,
-    name: "Crypto Citizens",
+    name: "Otherdeed for Otherside",
     lowest_price: "1W",
     locking_time: 15,
     opening_time: 1679908975,
@@ -70,7 +70,7 @@ export const bodyList = [
   {
     id: 23,
     collect: 1,
-    name: "Crypto Citizens",
+    name: "Otherdeed for Otherside",
     lowest_price: "1W",
     locking_time: 100,
     opening_time: 1679908975,
@@ -81,7 +81,7 @@ export const bodyList = [
   {
     id: 343,
     collect: 1,
-    name: "Crypto Citizens",
+    name: "Otherdeed for Otherside",
     lowest_price: "1W",
     locking_time: 100,
     opening_time: 1679908975,
@@ -92,7 +92,7 @@ export const bodyList = [
   {
     id: 656,
     collect: 0,
-    name: "Crypto Citizens",
+    name: "Otherdeed for Otherside",
     lowest_price: "2W",
     locking_time: 100,
     opening_time: 1679908975,
@@ -103,7 +103,7 @@ export const bodyList = [
   {
     id: 74,
     collect: 1,
-    name: "Crypto Citizens",
+    name: "Otherdeed for Otherside",
     lowest_price: "3W",
     locking_time: 100,
     opening_time: 1679908975,
@@ -114,7 +114,7 @@ export const bodyList = [
   {
     id: 256,
     collect: 1,
-    name: "Crypto Citizens",
+    name: "Otherdeed for Otherside",
     lowest_price: "4W",
     locking_time: 100,
     opening_time: 1679908975,
@@ -125,7 +125,7 @@ export const bodyList = [
   {
     id: 7543,
     collect: 1,
-    name: "Crypto Citizens",
+    name: "Otherdeed for Otherside",
     lowest_price: "3W",
     locking_time: 100,
     opening_time: 1679908975,
@@ -136,7 +136,7 @@ export const bodyList = [
   {
     id: 34985,
     collect: 1,
-    name: "Crypto Citizens",
+    name: "Otherdeed for Otherside",
     lowest_price: "4W",
     locking_time: 100,
     opening_time: 1679908975,

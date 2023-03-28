@@ -6,7 +6,10 @@ import {
   setTheme,
   setTheme_value
 } from '@/utils/storage'
-import { ref } from 'vue'
+import { onBeforeUnmount, ref } from 'vue'
+import useStore from '@/store/index'
+let { cate } = useStore()
+let { getThemenum } = cate
 // 黑夜主题切换按钮绑定数据
 const value = ref('')
 // 本地存储主题信息
@@ -41,6 +44,11 @@ const to = (path: string, id: any = 0) => {
 }
 let imgurl =
   'https://img2.wallspic.com/previews/6/7/1/8/5/158176/158176-shu_ma_yi_shu-yi_shu-hui_hua-shu_zi_hui_hua-yi_shu_jia-500x.jpg'
+
+
+onBeforeUnmount(() => {
+  // document.removeEventListener('scroll', myscroll);
+})
 </script>
 <script lang="ts">
 export default { name: 'AppTopnav' }
@@ -368,8 +376,7 @@ export default { name: 'AppTopnav' }
   z-index: 1000;
   width: 100%;
   height: 85px;
-  background: var(--bgc-top);
-  border-bottom: 1px solid rgb(var(--arcoblue-3));
+  // border-bottom: 1px solid rgb(var(--arcoblue-3));
 
   .container {
     height: 100%;

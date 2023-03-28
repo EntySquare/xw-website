@@ -23,11 +23,20 @@ getWindowInfo();
 onBeforeUnmount(() => {
   window.removeEventListener('resize', getWindowInfo);
 })
+
+let splidId = ref(0)
+// console.log('bannerList:', bannerList)
+function onMove(newIndex: any, prevIndex: any) {
+  splidId.value = prevIndex * mqList.value
+  // console.log('splidId.value:', splidId.value)
+}
 </script>
 <template>
   <div class="home-banner">
+    <div class="selector" :style="{ 'background-image': 'url(' + `${bannerList[splidId]?.img[0]}` + ')' }"></div>
     <!-- 轮播图 -->
-    <Splide class="banner" :options="{ rewind: true, rewindByDrag: true, type: 'loop', autoplay: true }">
+    <Splide @splide:move="onMove" class="banner"
+      :options="{ rewind: true, rewindByDrag: true, type: 'loop', autoplay: true }">
       <SplideSlide class="bannerstree" v-if="!bannerList[0]">
         <Listcar :num="0" :type="mqList" :data="[]"></Listcar>
       </SplideSlide>
@@ -40,6 +49,28 @@ onBeforeUnmount(() => {
 
 <style scoped lang="less">
 .home-banner {
+  width: 98vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+
+  .selector {
+    position: absolute;
+    top: -85px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    // z-index: 49589789;
+    height: 24vw;
+    /* 添加毛玻璃效果 */
+    filter: blur(100px);
+    /* 可选：添加透明度效果 */
+    opacity: 0.8;
+    background-size: cover;
+    background-position: center;
+  }
+
+
   // width: 100%;
   padding: 53px 0px 64px;
 

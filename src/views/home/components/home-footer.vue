@@ -1,7 +1,36 @@
 <script setup lang='ts'>
 import useStore from '@/store/index'
+import { nextTick, onBeforeUnmount, ref } from 'vue';
 let { cate } = useStore()
 let { getThemenum } = cate
+function one() {
+    if (+getThemenum() == 1) {
+        document.getElementById("app-topnav")!.style.background = "#F0EBF2";
+    } else {
+        document.getElementById("app-topnav")!.style.background = "#000";
+    }
+}
+function myscroll() {
+    let y: number// 记录滚动的距离
+    document.getElementById("app-topnav")!.style.background = "transparent";
+    y = document.documentElement.scrollTop //页面滚动距离
+    // console.log('y:', y)
+    if (y > 35) {
+        one()
+    } else {
+        nextTick(() => {
+            document.getElementById("app-topnav")!.style.background = "transparent";
+        });
+    }
+
+}
+myscroll()
+// 页面加载之后挂载事件
+document.addEventListener('scroll', myscroll)
+onBeforeUnmount(() => {
+    one()
+    document.removeEventListener('scroll', myscroll);
+})
 </script>
 <template>
     <div :class="['footer', { footerbgc: !+getThemenum() }]">

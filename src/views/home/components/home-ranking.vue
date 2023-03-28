@@ -192,6 +192,7 @@ getWindowInfo()
                 align-items: center;
                 // justify-content: space-between;
                 padding: 10px 0px;
+                font-size: 16px;
 
                 .imgcar {
                     display: flex;

@@ -48,11 +48,11 @@ NProgress.configure({ showSpinner: false }); // 显示右上角螺旋加载提�
 router.beforeEach((to, from, next) => {
   NProgress.start(); //开启进度条
   //中间写其他的项目中所需要的一些代码，例如有些网页只有登录了才能进，在这里可以做出判断，判断完了满足要求后就可以放行 next()
+  document.documentElement.scrollTop = 0;
   next();
 });
 
 router.afterEach(() => {
-  document.documentElement.scrollTop = 0;
   NProgress.done(); //完成进度条
 });
 // 暴露路由对象

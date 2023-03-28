@@ -11,7 +11,8 @@ for (let i = 0; i < 30; i++) {
         collect: 1,
         name: "出征图",
         lowest_price: "500",
-        countdown: 450,
+        locking_time: 450,
+        opening_time: 1,
         img: [
             "https://pica.zhimg.com/80/v2-0389f732eef260ae15d43ac82b932345_720w.webp?source=1940ef5c",
             "https://img2.wallspic.com/crops/2/1/8/3/6/163812/163812-zhi_zhu_xia-du_ye-man_hua_shu-chao_ji_ying_xiong-jing_qi_man_hua-1920x1080.jpg",
@@ -49,7 +50,7 @@ for (let i = 0; i < 30; i++) {
                                     ￥{{ item.lowest_price }}
                                 </p>
 
-                                <p> 最后销售:￥{{ item.countdown }}</p>
+                                <p> 最后销售:￥{{ item.locking_time }}</p>
                             </div>
                             <div class="right">
                                 <div width="72px" class="bolticon">
