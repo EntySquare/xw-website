@@ -1,6 +1,6 @@
 <!-- 专辑详情 下拉框 -->
 <script setup lang='ts'>
-import { onMounted, reactive, ref, watch, defineEmits, defineProps, nextTick } from 'vue'
+import { onMounted, reactive, ref, watch, nextTick } from 'vue'
 const props = defineProps({
     title: {
         type: String,

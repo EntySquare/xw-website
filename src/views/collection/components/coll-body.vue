@@ -164,19 +164,19 @@ for (let i = 0; i < 30; i++) {
     }
 }
 
-::v-deep .splide__pagination {
+:deep(.splide__pagination) {
     display: none;
 }
 
-::v-deep .splide__arrow--prev {
+:deep(.splide__arrow--prev) {
     left: -10px;
 }
 
-::v-deep .splide__arrow--next {
+:deep(.splide__arrow--next) {
     right: -10px;
 }
 
-::v-deep .splide__arrow {
+:deep(.splide__arrow) {
     background-color: #fff;
     height: 47px;
     width: 47px;

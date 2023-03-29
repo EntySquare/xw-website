@@ -482,7 +482,7 @@ export default { name: 'AppTopnav' }
   display: none;
 }
 
-::v-deep.arco-dropdown-option {
+:deep(.arco-dropdown-option) {
   border-bottom: 1px solid var(--color-neutral-4);
   padding: 6px 25px;
   width: 220px;

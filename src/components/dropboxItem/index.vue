@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { onMounted, reactive, ref, watch, defineEmits, defineProps, nextTick } from 'vue'
+import { onMounted, reactive, ref, watch, nextTick } from 'vue'
 import useStore from '@/store/index'
 let { cate } = useStore()
 let { getThemenum } = cate

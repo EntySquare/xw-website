@@ -78,7 +78,7 @@ function onMove(newIndex: any, prevIndex: any) {
     width: 100%;
 
     &:hover {
-      ::v-deep .splide__arrow {
+      :deep(.splide__arrow) {
         background-color: #fff;
         opacity: 1;
       }
@@ -89,19 +89,19 @@ function onMove(newIndex: any, prevIndex: any) {
 
 }
 
-::v-deep .splide__pagination {
+:deep(.splide__pagination) {
   display: none;
 }
 
-::v-deep .splide__arrow--prev {
-  left: -15px;
+:deep(.splide__arrow--prev) {
+  left: -0px;
 }
 
-::v-deep .splide__arrow--next {
-  right: -15px;
+:deep(.splide__arrow--next) {
+  right: -0px;
 }
 
-::v-deep .splide__arrow {
+:deep(.splide__arrow) {
   transition: all .3s;
   opacity: 0;
   height: 42px;

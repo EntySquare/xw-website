@@ -55,7 +55,7 @@ window.addEventListener("resize", getWindowInfo);
 
 
         &:hover {
-            ::v-deep .splide__arrow {
+            :deep(.splide__arrow) {
                 background-color: #fff;
                 opacity: 1;
             }
@@ -64,19 +64,19 @@ window.addEventListener("resize", getWindowInfo);
     }
 }
 
-::v-deep .splide__pagination {
+:deep(.splide__pagination) {
     display: none;
 }
 
-::v-deep .splide__arrow--prev {
+:deep(.splide__arrow--prev) {
     left: -12px;
 }
 
-::v-deep .splide__arrow--next {
+:deep(.splide__arrow--next) {
     right: -12px;
 }
 
-::v-deep .splide__arrow {
+:deep(.splide__arrow) {
     transition: all .3s;
     opacity: 0;
     background-color: #fff;

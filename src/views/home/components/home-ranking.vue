@@ -221,11 +221,11 @@ getWindowInfo()
     }
 }
 
-::v-deep .arco-tabs-tab-active {
+:deep(.arco-tabs-tab-active) {
     color: var(--color-neutral-10);
 }
 
-::v-deep .arco-tabs-nav-ink {
+:deep(.arco-tabs-nav-ink) {
     background-color: var(--color-neutral-10);
 }
 </style>
