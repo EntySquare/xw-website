@@ -46,7 +46,10 @@ export class CountDown {
       tempMin * 60;
     // 为了倒计时 个数和双数不影响宽度变化 做数据处理
     this.day = String(tempDay).length === 1 ? "0" + tempDay : tempDay;
-    this.hour = String(tempHour).length === 1 ? "0" + tempHour : tempHour;
+    this.hour =
+      String(tempHour + tempDay * 24).length === 1
+        ? tempHour + tempDay * 24
+        : tempHour + tempDay * 24;
     this.min = String(tempMin).length === 1 ? "0" + tempMin : tempMin;
     this.second =
       String(tempSecond).length === 1 ? "0" + tempSecond : tempSecond;

@@ -6,6 +6,7 @@ import Accbody from './components/coll-body.vue';
 import useStore from '@/store/index'
 import DropDownBox from "./components/drop-down-box.vue";
 import { ref, nextTick, onBeforeUnmount } from 'vue';
+import CollFooter from "./components/coll-footer.vue";
 let { cate } = useStore()
 let { getThemenum } = cate //获取动态样式数据用来设置个别元素样式
 
@@ -20,7 +21,12 @@ function myscroll() {
     tabnum = document.getElementById('tabtop')?.offsetTop || 0
     y = document.documentElement.scrollTop //页面滚动距离
     if (y > tabnum) {
-        dropDownBoxH.value = window.innerHeight - 190 + 'px' //动态计算左侧下拉框整体高度
+        if (y > (document.body.clientHeight - document.getElementById('CollFooter')!.clientHeight - window.innerHeight)) {
+            console.log('1:', 1)
+            dropDownBoxH.value = window.innerHeight - 150 - (y - (document.body.clientHeight - document.getElementById('CollFooter')!.clientHeight - window.innerHeight)) + 'px' //动态计算左侧下拉框整体高度            
+        } else {
+            dropDownBoxH.value = window.innerHeight - 150 + 'px' //动态计算左侧下拉框整体高度            
+        }
         // 动态计算右侧搜索框整体款第
         document.getElementById('screening')!.style.width = document.getElementById('collectionbody')!.offsetWidth + 'px'
     }
@@ -34,6 +40,12 @@ const getWindowInfo = () => {
 
     nextTick(() => {//页面元素加载完毕后再执行，避免报错
         if (y > tabnum) {
+            if (y > (document.body.clientHeight - document.getElementById('CollFooter')!.clientHeight - window.innerHeight)) {
+                console.log('1:', 1)
+                dropDownBoxH.value = window.innerHeight - 150 - (y - (document.body.clientHeight - document.getElementById('CollFooter')!.clientHeight - window.innerHeight)) + 'px' //动态计算左侧下拉框整体高度            
+            } else {
+                dropDownBoxH.value = window.innerHeight - 150 + 'px' //动态计算左侧下拉框整体高度            
+            }
             document.getElementById('screening')!.style.width = document.getElementById('collectionbody')!.offsetWidth + 'px'
             // document.getElementById('down-box')!.style.width = document.getElementById('lefttt')!.offsetWidth + 'px'
         } else {
@@ -79,8 +91,7 @@ onBeforeUnmount(() => {
         <div class="tabtop" id="tabtop">
             <div :class="[show ? 'fixed' : '']"
                 style="overflow: hidden;width: 100%;border-bottom: 1px solid rgb(var(--arcoblue-6));display: flex;justify-content: center;">
-                <ul class="container"
-                    :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', transition: `all .3s` }">
+                <ul class="container" :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', }">
                     <li class="liactive">项目</li>
                     <li>分析</li>
                     <li>活动</li>
@@ -92,9 +103,9 @@ onBeforeUnmount(() => {
         <div class="container" id="container">
             <div :style="{ gap: mqList ? '20px' : '0px' }" style="width: 100%; display: flex;padding-top: 10px;">
                 <!-- 左侧筛选begin -->
-                <div :style="{ width: mqList ? '360px' : '0px', transition: `all .3s` }" id="lefttt">
+                <div :style="{ width: mqList ? '360px' : '0px', }" id="lefttt">
                     <div :class="[show1 ? 'fixedtwo' : '']" id="fixedtwo"
-                        :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', height: dropDownBoxH, 'overflow-y': 'scroll', 'padding-top': '10px', transition: `all .3s` }">
+                        :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', height: dropDownBoxH, 'overflow-y': 'scroll', 'padding-top': '10px', }">
                         <div v-if="mqList">
                             <DropDownBox v-model:modelValue="mbdata" title="状态" :data="dropdata.state" />
                             <DropDownBox v-model:modelValue="mbdata" title="所有者" :data="dropdata.owner" />
@@ -109,7 +120,7 @@ onBeforeUnmount(() => {
                 <div style="flex: 5;">
                     <div :style="{ height: show1 ? '50px' : '' }"></div>
                     <!-- 右侧 搜索筛选 展示切换begin -->
-                    <div :style="{ transition: `all .3s`, 'background-color': +getThemenum() ? '#F0EBF2' : '#000', padding: `${show1 ? '15px 0px' : '20px 0px'}` }"
+                    <div :style="{ 'background-color': +getThemenum() ? '#F0EBF2' : '#000', padding: `${show1 ? '15px 0px' : '20px 0px'}` }"
                         :class="[show1 ? 'fixedtwo' : '']">
                         <div id="screening" :class="['screening']" :style="{}">
                             <div class="search">
@@ -133,7 +144,7 @@ onBeforeUnmount(() => {
                         </div>
                     </div>
                     <!-- 右侧 搜索筛选 展示切换 end -->
-                    <Accbody :style="{ padding: `${show1 ? '15px 0px 0px' : '0px 0px 0px'}` }">
+                    <Accbody id="Accbody" :style="{ padding: `${show1 ? '15px 0px 0px' : '0px 0px 0px'}` }">
                         <div class="mbxue">
                             <div v-for="(item, index) in mbdata">
                                 <div class="item" v-if="item.title">
@@ -150,6 +161,7 @@ onBeforeUnmount(() => {
                 </div>
             </div>
         </div>
+        <CollFooter id="CollFooter"></CollFooter>
     </div>
 </template>
 <style scoped lang='less'>

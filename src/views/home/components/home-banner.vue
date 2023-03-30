@@ -59,11 +59,11 @@ function onMove(newIndex: any, prevIndex: any) {
     top: -85px;
     left: 50%;
     transform: translateX(-50%);
-    width: 100vw;
+    width: 110vw;
     // z-index: 49589789;
     height: 24vw;
     /* 添加毛玻璃效果 */
-    filter: blur(100px);
+    filter: blur(30px);
     /* 可选：添加透明度效果 */
     opacity: 0.8;
     background-size: cover;

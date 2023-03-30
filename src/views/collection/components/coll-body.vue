@@ -72,6 +72,7 @@ for (let i = 0; i < 30; i++) {
 .collectionbody {
     // width: 100%;
     padding: 0px 8px;
+    padding-bottom: 64px;
     display: grid;
     gap: 20px;
     grid-template-columns: repeat(7, 1fr);
