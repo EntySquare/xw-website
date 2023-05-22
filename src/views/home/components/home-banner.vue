@@ -1,9 +1,9 @@
-<script lang="ts" setup>
+<script  lang="ts" setup  name="homeBannerVue">
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { ref, nextTick, onBeforeUnmount } from "vue";
 import { TBanner } from "@/types/cate";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-import Listcar from "./banner-listcar.vue";
+import  Listcar from "./banner-listcar.vue";
 import { type } from "@/utils/banner";
 import useStore from '@/store/index'
 import { storeToRefs } from 'pinia'
@@ -31,6 +31,11 @@ function onMove(newIndex: any, prevIndex: any) {
   // console.log('splidId.value:', splidId.value)
 }
 </script>
+
+<script lang="ts">
+export default { name: "homeBannerVue" }
+</script>
+
 <template>
   <div class="home-banner">
     <div class="selector" :style="{ 'background-image': 'url(' + `${bannerList[splidId]?.img[0]}` + ')' }"></div>
@@ -40,7 +45,7 @@ function onMove(newIndex: any, prevIndex: any) {
       <SplideSlide class="bannerstree" v-if="!bannerList[0]">
         <Listcar :num="0" :type="mqList" :data="[]"></Listcar>
       </SplideSlide>
-      <SplideSlide class="bannerstree" v-for="i in type(mqList, bannerList?.length)">
+      <SplideSlide class="bannerstree" v-for="(i, index) in type(mqList, bannerList?.length)" :key="index">
         <Listcar :num="i" :type="mqList" :data="bannerList"></Listcar>
       </SplideSlide>
     </Splide>

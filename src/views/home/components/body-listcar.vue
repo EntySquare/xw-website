@@ -22,11 +22,13 @@ defineProps<{
 <template>
   <div>
     <div class="listcar">
-      <div v-for="item in type" class="body-listcar-item" v-if="!data[0]">
-        <LockDiv>
-          <XtxSkeleton widthB="100%" heightB="100%" :fade="true" :animated="true">
-          </XtxSkeleton>
-        </LockDiv>
+      <div v-if="!data[0]">
+        <div v-for="(item, index) in type" class="body-listcar-item" :key="index">
+          <LockDiv>
+            <XtxSkeleton widthB="100%" heightB="100%" :fade="true" :animated="true">
+            </XtxSkeleton>
+          </LockDiv>
+        </div>
       </div>
       <div v-for="(item, i) in data" :class="[
         {
@@ -39,7 +41,7 @@ defineProps<{
           boxshow: !+getThemenum(),
         },
         'body-listcar-item',
-      ]">
+      ]" :key="i">
         <RouterLink style="height: 100%;"
           :to="{ path: `/collection/${item.name.replaceAll(' ', '')}`, query: { id: `${item.id}` } }">
           <LockDiv>

@@ -65,7 +65,7 @@ export default defineConfig({
   },
   server: {
     https: false, // 是否开启 https
-    open: true, // 是否自动在浏览器打开
+    open: false, // 是否自动在浏览器打开
     cors: true, // 允许跨域  8月更新
     port: 3000, // 端口号
     host: "0.0.0.0",

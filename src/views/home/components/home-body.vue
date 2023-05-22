@@ -1,9 +1,9 @@
-<script setup lang='ts'>
+<script setup lang='ts' name="HomeBody">
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { ref } from "vue";
 import { TBanner } from "@/types/cate";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-import Listcar from "./body-listcar.vue";
+import Listcar from "./banner-listcar.vue";
 import { type } from "@/utils/banner";
 import useStore from '@/store/index'
 import { storeToRefs } from 'pinia'
@@ -38,7 +38,7 @@ window.addEventListener("resize", getWindowInfo);
                 <SplideSlide class="bannerstree" v-if="!homebodyList[0]">
                     <Listcar :num="0" :type="mqList" :data="[]"></Listcar>
                 </SplideSlide>
-                <SplideSlide class="bannerstree" v-for="i in type(mqList, homebodyList.length)">
+                <SplideSlide class="bannerstree" v-for="(i, index) in type(mqList, homebodyList.length)" :key="index">
                     <Listcar :num="i" :type="mqList" :data="homebodyList"></Listcar>
                 </SplideSlide>
             </Splide>

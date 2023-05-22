@@ -1,15 +1,15 @@
-<script setup lang="ts">
+<script  lang="ts" setup name="Listcar">
 import { TBanner } from "@/types/cate";
 import { ref, nextTick, onUnmounted, onMounted } from "vue";
 import { CountDown } from "@/utils/settime";
 const prop = defineProps<{
-  data: TBanner[];
-  type: number;
-  num: number;
-}>();
+  data: TBanner[],
+  type: number,
+  num: number,
+}>()
 const datas = ref()
 datas.value = prop.data
-const setCollect = (i: number) => {
+const setCollect = (i: string | number) => {
   datas.value[i].collect = datas.value[i].collect ? 0 : 1
 }
 // 倒计时模块
@@ -17,7 +17,7 @@ const setCollect = (i: number) => {
 
 const countDown = new CountDown()//初始化
 
-let timer: number | NodeJS.Timer
+let timer: number 
 const timing = (item: any, i: number) => {
   const time = +item.opening_time + (+item.locking_time * 86400)
   if ((time - Math.round(new Date().getTime() / 1000)) < 0) {
@@ -44,21 +44,28 @@ onMounted(() => {
 
 onUnmounted(() => {
   // 清除setInterval创建的定时器
-  for (let i = 0; i <= timer; i++) {
+  for (let i = 0; i <= +timer; i++) {
     clearInterval(i)
   }
 })
 </script>
+
+<script lang="ts">
+export default { name: 'Listcar' }
+</script>
+
 <template>
   <div>
     <div class="listcar">
-      <div v-for="item in type" class="listcar-item" v-if="!datas[0]">
-        <LockDiv xyb="56%">
-          <XtxSkeleton widthB="100%" heightB="100%" :fade="true" :animated="true">
-          </XtxSkeleton>
-        </LockDiv>
+      <div v-if="!datas[0]">
+        <div v-for="(item, index) in type" class="listcar-item" :key="index">
+          <LockDiv xyb="56%">
+            <XtxSkeleton widthB="100%" heightB="100%" :fade="true" :animated="true">
+            </XtxSkeleton>
+          </LockDiv>
+        </div>
       </div>
-      <div v-for="(item, i) in datas" :style="{ 'background-image': 'url(' + `${item.img[0]}` + ')' }" :class="[
+      <div v-for="(item, i) in datas" :style="{ 'background-image': 'url(' + `${item.img[0]}` + ')' }" :key="i" :class="[
         {
           none:
             (i > num * (type - 1) && num == 1) || //

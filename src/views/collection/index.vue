@@ -22,7 +22,6 @@ function myscroll() {
     y = document.documentElement.scrollTop //页面滚动距离
     if (y > tabnum) {
         if (y > (document.body.clientHeight - document.getElementById('CollFooter')!.clientHeight - window.innerHeight)) {
-            console.log('1:', 1)
             dropDownBoxH.value = window.innerHeight - 150 - (y - (document.body.clientHeight - document.getElementById('CollFooter')!.clientHeight - window.innerHeight)) + 'px' //动态计算左侧下拉框整体高度            
         } else {
             dropDownBoxH.value = window.innerHeight - 150 + 'px' //动态计算左侧下拉框整体高度            
@@ -41,7 +40,6 @@ const getWindowInfo = () => {
     nextTick(() => {//页面元素加载完毕后再执行，避免报错
         if (y > tabnum) {
             if (y > (document.body.clientHeight - document.getElementById('CollFooter')!.clientHeight - window.innerHeight)) {
-                console.log('1:', 1)
                 dropDownBoxH.value = window.innerHeight - 150 - (y - (document.body.clientHeight - document.getElementById('CollFooter')!.clientHeight - window.innerHeight)) + 'px' //动态计算左侧下拉框整体高度            
             } else {
                 dropDownBoxH.value = window.innerHeight - 150 + 'px' //动态计算左侧下拉框整体高度            

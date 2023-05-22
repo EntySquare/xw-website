@@ -5,7 +5,7 @@ import useStore from '@/store/index'
 let { cate } = useStore()
 let { getThemenum } = cate
 const data: TBanner[] = []
-for (let i = 0; i < 30; i++) {
+for (let i = 0; i < 20; i++) {
     data.push({
         id: i,
         collect: 1,
