@@ -32,6 +32,11 @@ onBeforeUnmount(() => {
     document.removeEventListener('scroll', myscroll);
 })
 </script>
+<script lang="ts">
+export default {
+    name: "coll-footer",
+}
+</script>
 <template>
     <div :class="['footer', { footerbgc: !+getThemenum() }]">
         <div class="footerup">

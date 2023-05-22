@@ -7,6 +7,7 @@ import Listcar from "./acc-listcar.vue";
 import { type } from "@/utils/banner";
 let mqList = ref(3);
 let data = ref();
+
 data.value = [
   {
     id: 454,
@@ -70,6 +71,11 @@ window.addEventListener("resize", getWindowInfo);
 getWindowInfo();
 
 </script>
+<script lang="ts">
+export default {
+  name: "AccBanner",
+}
+</script>
 <template>
   <div class="home-banner">
     <!-- 轮播图 -->
@@ -77,7 +83,7 @@ getWindowInfo();
       <SplideSlide class="bannerstree" v-if="!data">
         <Listcar :num="0" :type="mqList" :data="[]"></Listcar>
       </SplideSlide>
-      <SplideSlide class="bannerstree" v-for="i in type(mqList, data.length)">
+      <SplideSlide class="bannerstree" v-for="(i,index) in type(mqList, data.length)" :key="index">
         <Listcar :num="i" :type="mqList" :data="data"></Listcar>
       </SplideSlide>
     </Splide>

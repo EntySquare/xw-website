@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="ts" name="Ranking" >
 import { ref } from 'vue'
 
 const imgurl = ref('')
@@ -12,6 +12,11 @@ const getWindowInfo = () => {
 }
 window.addEventListener('resize', getWindowInfo)
 getWindowInfo()
+</script>
+<script lang="ts">
+export default {
+    name: 'Ranking',
+}
 </script>
 <template>
     <div>
@@ -49,7 +54,7 @@ getWindowInfo()
                                         </div>
                                     </div>
                                 </div>
-                                <div class="item" v-for="(item, index) in 5">
+                                <div class="item" v-for="(item, index) in 5" :key="index"> 
                                     <div>
                                         <div type="secondary">
                                             {{ index + 1 }}
@@ -112,7 +117,7 @@ getWindowInfo()
                                         </div>
                                     </div>
                                 </div>
-                                <div class="item" v-for="(item, index) in 5">
+                                <div class="item" v-for="(item, index) in 5" :key="index">
                                     <div>
                                         <div type="secondary">
                                             {{ index + 6 }}

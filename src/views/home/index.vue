@@ -23,7 +23,7 @@ import Ranking from "./components/home-ranking.vue";
 <style scoped lang="less">
 .page-home {
   .container {
-    position: static;
+    // position: static;
     width: 100%;
     max-width: 2560px;
     padding: 0 70px;

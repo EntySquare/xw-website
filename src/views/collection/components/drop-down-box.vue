@@ -79,6 +79,11 @@ const update = (item: any) => {
 
 let show = ref(false)
 </script>
+<script lang="ts">
+export default {
+    name: "DropDownBox",
+}
+</script>
 <template>
     <div class="down-box" id="down-box">
         <p @click="show = !show" class="title">{{ title }} <icon-caret-down v-if="!show" /><icon-caret-up v-else /></p>
@@ -88,7 +93,7 @@ let show = ref(false)
                 到 <div><input :id="`${title}max`" type="number" @focus="text = ''"> </div>
                 <icon-check @click="update('')" />
             </div>
-            <div v-else class="listitem" v-for="(item, index) in data">
+            <div v-else class="listitem" v-for="(item, index) in data" :key="index">
                 <p>{{ item }}</p>
                 <div :class="[{ checkboxactive: itemnum() == item }, 'checkbox']" @click="update(item)"></div>
             </div>

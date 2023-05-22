@@ -28,13 +28,18 @@ for (let i = 0; i < 20; i++) {
     })
 }
 </script>
+<script lang="ts">
+export default {
+    name: "CollBody",
+}
+</script>
 <template>
     <div class="collect-banner">
         <slot></slot>
         <div class="collectionbody" id="collectionbody">
             <LockDiv xyb="143%" class="item"
                 :style="{ background: +getThemenum() ? 'white' : '#353840', transition: `all .5s` }"
-                v-for="(item, i) in data">
+                v-for="(item, i) in data" :key="i">
                 <RouterLink :to="`/assets/ethereum/${item.id}`">
                     <LockDiv class="top">
                         <div class="img" :style="{ 'background-image': 'url(' + item.img[i] + ')' }"></div>

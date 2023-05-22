@@ -7,6 +7,11 @@ const getWindowInfo = () => {
 window.addEventListener('resize', getWindowInfo)
 getWindowInfo()
 </script>
+<script lang="ts">
+export default {
+  name: "AccHeader",
+}
+</script>
 <template>
     <div class="header">
         <div class="avater"></div>

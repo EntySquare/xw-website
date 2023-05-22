@@ -1,4 +1,4 @@
-<script setup lang='ts'>
+<script setup lang='ts' name="HomeFooter">
 import useStore from '@/store/index'
 import { nextTick, onBeforeUnmount, ref } from 'vue';
 let { cate } = useStore()
@@ -31,6 +31,11 @@ onBeforeUnmount(() => {
     one()
     document.removeEventListener('scroll', myscroll);
 })
+</script>
+<script lang="ts">
+export default {
+    name: 'HomeFooter'
+}
 </script>
 <template>
     <div :class="['footer', { footerbgc: !+getThemenum() }]">

@@ -144,7 +144,7 @@ onBeforeUnmount(() => {
                     <!-- 右侧 搜索筛选 展示切换 end -->
                     <Accbody id="Accbody" :style="{ padding: `${show1 ? '15px 0px 0px' : '0px 0px 0px'}` }">
                         <div class="mbxue">
-                            <div v-for="(item, index) in mbdata">
+                            <div v-for="(item, index) in mbdata" :key="index">
                                 <div class="item" v-if="item.title">
                                     {{ ((item.title == '价格' || item.title == '稀有度等级') ? '' : item.title + '' + ':') + ' ' +
                                         item.item

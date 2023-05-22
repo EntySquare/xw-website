@@ -14,6 +14,11 @@ onBeforeUnmount(() => {
     document.removeEventListener('resize', getWindowInfo)
 })
 </script>
+<script lang="ts">
+export default {
+    name: "Ranking",
+}
+</script>
 <template>
     <div>
         <a-tabs default-active-key="1" size="large">
@@ -39,7 +44,7 @@ onBeforeUnmount(() => {
                             <div v-if="!mqList"><a-typography-title :heading="6"> 持有者 </a-typography-title></div>
                             <div v-if="!mqList"><a-typography-title :heading="6"> 涨幅 </a-typography-title></div>
                         </div>
-                        <div class="item" v-for="(item, index) in 20">
+                        <div class="item" v-for="(item, index) in 20" :key="index">
                             <div>
                                 <a-typography-title type="secondary" :heading="6">
                                     {{ index + 1 }}

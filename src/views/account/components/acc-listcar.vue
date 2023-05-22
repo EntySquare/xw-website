@@ -12,6 +12,11 @@ const setCollect = (i: number) => {
   datas.value[i].collect = datas.value[i].collect ? 0 : 1
 }
 </script>
+<script lang="ts">
+export default {
+  name: "Listcar",
+}
+</script>
 <template>
   <div>
     <div class="listcar">
@@ -26,7 +31,7 @@ const setCollect = (i: number) => {
             i > num * type - 1,
         },
         'listcar-item',
-      ]">
+      ]" :key="i">
         <LockDiv xyb="56%">
           <div class="bannercontent">
             <div class="item-top">

@@ -29,6 +29,11 @@ getWindowInfo();
 window.addEventListener("resize", getWindowInfo);
 
 </script>
+<script lang='ts'>
+export default {
+    name: "HomeBody",
+}
+</script>
 <template>
     <div class="home-banner">
         <!-- 轮播图 -->
