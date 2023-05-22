@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script  lang="ts" setup name="bodyListcar" >
 import { TBanner } from "@/types/cate";
 import useStore from '@/store/index'
 import { ref } from "vue";
@@ -18,6 +18,11 @@ defineProps<{
   type: number;
   num: number;
 }>();
+</script>
+<script lang="ts">
+export default {
+  name:"bodyListcar"
+}
 </script>
 <template>
   <div>

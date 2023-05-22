@@ -3,7 +3,7 @@ import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { ref } from "vue";
 import { TBanner } from "@/types/cate";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-import Listcar from "./banner-listcar.vue";
+import bodyListcar from "./body-listcar.vue";
 import { type } from "@/utils/banner";
 import useStore from '@/store/index'
 import { storeToRefs } from 'pinia'
@@ -36,10 +36,10 @@ window.addEventListener("resize", getWindowInfo);
             <a-typography-title :heading="3" style="padding:20px 20px 10px;font-weight: 800;">值得一看</a-typography-title>
             <Splide class="banner" :options="{ rewind: false }">
                 <SplideSlide class="bannerstree" v-if="!homebodyList[0]">
-                    <Listcar :num="0" :type="mqList" :data="[]"></Listcar>
+                    <bodyListcar :num="0" :type="mqList" :data="[]"></bodyListcar>
                 </SplideSlide>
                 <SplideSlide class="bannerstree" v-for="(i, index) in type(mqList, homebodyList.length)" :key="index">
-                    <Listcar :num="i" :type="mqList" :data="homebodyList"></Listcar>
+                    <bodyListcar :num="i" :type="mqList" :data="homebodyList"></bodyListcar>
                 </SplideSlide>
             </Splide>
         </div>
