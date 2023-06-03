@@ -17,7 +17,7 @@ let router = createRouter({
       // meta: { isKeepAlive: true },//缓存组件
       children: [
         // 首页
-        { path: "/zh-CN", component: () => import("@/views/home/index.vue") },
+        { path: "", component: () => import("@/views/home/index.vue") },
         // 一级分类
         {
           path: "/category/:id",
@@ -36,12 +36,15 @@ let router = createRouter({
           component: () => import("@/views/collection/index.vue"),
         },
         {
-          path: "/assets/ethereum/:id",
+          path: "/assets/:id",
           component: () => import("@/views/assets/index.vue"),
+        },
+        {
+          path: "/download",
+          component: () => import("@/views/download/index.vue")
         },
       ],
     },
-    // { path: "/login", component: () => import("@/views/login/index.vue") },
   ],
 });
 NProgress.configure({ showSpinner: false }); // 显示右上角螺旋加载提示

@@ -1,16 +1,16 @@
-<script  lang="ts" setup  name="homeBannerVue">
+<script lang="ts" setup name="homeBannerVue">
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { ref, nextTick, onBeforeUnmount } from "vue";
 import { TBanner } from "@/types/cate";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-import  Listcar from "./banner-listcar.vue";
+import Listcar from "./banner-listcar.vue";
 import { type } from "@/utils/banner";
-import useStore from '@/store/index'
-import { storeToRefs } from 'pinia'
-let { home } = useStore()
-let { getBannerList } = home
-getBannerList()
-let { bannerList } = storeToRefs(home)
+import useStore from "@/store/index";
+import { storeToRefs } from "pinia";
+let { home } = useStore();
+let { getBannerList } = home;
+getBannerList();
+let { bannerList } = storeToRefs(home);
 let mqList = ref(3);
 const getWindowInfo = () => {
   mqList.value = window.matchMedia("(max-width: 1600px)").matches ? 2 : 3;
@@ -21,31 +21,48 @@ const getWindowInfo = () => {
 window.addEventListener("resize", getWindowInfo);
 getWindowInfo();
 onBeforeUnmount(() => {
-  window.removeEventListener('resize', getWindowInfo);
-})
+  window.removeEventListener("resize", getWindowInfo);
+});
 
-let splidId = ref(0)
+let splidId = ref(0);
 // console.log('bannerList:', bannerList)
 function onMove(newIndex: any, prevIndex: any) {
-  splidId.value = prevIndex * mqList.value
+  splidId.value = prevIndex * mqList.value;
   // console.log('splidId.value:', splidId.value)
 }
 </script>
 
 <script lang="ts">
-export default { name: "homeBannerVue" }
+export default { name: "homeBannerVue" };
 </script>
 
 <template>
   <div class="home-banner">
-    <div class="selector" :style="{ 'background-image': 'url(' + `${bannerList[splidId]?.img[0]}` + ')' }"></div>
+    <div
+      class="selector"
+      :style="{
+        'background-image': 'url(' + `${bannerList[splidId]?.img[0]}` + ')',
+      }"
+    ></div>
     <!-- 轮播图 -->
-    <Splide @splide:move="onMove" class="banner"
-      :options="{ rewind: true, rewindByDrag: true, type: 'loop', autoplay: true }">
+    <Splide
+      @splide:move="onMove"
+      class="banner"
+      :options="{
+        rewind: true,
+        rewindByDrag: true,
+        type: 'loop',
+        autoplay: true,
+      }"
+    >
       <SplideSlide class="bannerstree" v-if="!bannerList[0]">
         <Listcar :num="0" :type="mqList" :data="[]"></Listcar>
       </SplideSlide>
-      <SplideSlide class="bannerstree" v-for="(i, index) in type(mqList, bannerList?.length)" :key="index">
+      <SplideSlide
+        class="bannerstree"
+        v-for="(i, index) in type(mqList, bannerList?.length)"
+        :key="index"
+      >
         <Listcar :num="i" :type="mqList" :data="bannerList"></Listcar>
       </SplideSlide>
     </Splide>
@@ -68,13 +85,12 @@ export default { name: "homeBannerVue" }
     // z-index: 49589789;
     height: 24vw;
     /* 添加毛玻璃效果 */
-    filter: blur(30px);
+    filter: blur(300px);
     /* 可选：添加透明度效果 */
     opacity: 0.8;
     background-size: cover;
     background-position: center;
   }
-
 
   // width: 100%;
   padding: 53px 0px 64px;
@@ -87,11 +103,8 @@ export default { name: "homeBannerVue" }
         background-color: #fff;
         opacity: 1;
       }
-
     }
   }
-
-
 }
 
 :deep(.splide__pagination) {
@@ -107,7 +120,7 @@ export default { name: "homeBannerVue" }
 }
 
 :deep(.splide__arrow) {
-  transition: all .3s;
+  transition: all 0.3s;
   opacity: 0;
   height: 42px;
   width: 42px;

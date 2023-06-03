@@ -1,11 +1,11 @@
-<script  lang="ts" setup name="Listcar">
-import { TBanner } from "@/types/cate";
-import { ref, nextTick, onUnmounted, onMounted } from "vue";
-import { CountDown } from "@/utils/settime";
+<script lang="ts" setup name="Listcar">
+import { TBanner } from '@/types/cate'
+import { ref, nextTick, onUnmounted, onMounted } from 'vue'
+import { CountDown } from '@/utils/settime'
 const prop = defineProps<{
-  data: TBanner[],
-  type: number,
-  num: number,
+  data: TBanner[]
+  type: number
+  num: number
 }>()
 const datas = ref()
 datas.value = prop.data
@@ -14,13 +14,12 @@ const setCollect = (i: string | number) => {
 }
 // 倒计时模块
 
+const countDown = new CountDown() //初始化
 
-const countDown = new CountDown()//初始化
-
-let timer: number 
+let timer: number
 const timing = (item: any, i: number) => {
-  const time = +item.opening_time + (+item.locking_time * 86400)
-  if ((time - Math.round(new Date().getTime() / 1000)) < 0) {
+  const time = +item.opening_time + +item.locking_time * 86400
+  if (time - Math.round(new Date().getTime() / 1000) < 0) {
     return
   }
   timer = setInterval(() => {
@@ -32,7 +31,7 @@ const timing = (item: any, i: number) => {
 }
 onMounted(() => {
   datas.value.forEach((item: any, i: number) => {
-    const time = +item.opening_time + (+item.locking_time * 86400)
+    const time = +item.opening_time + +item.locking_time * 86400
     countDown.getTime(time)
     datas.value[i].h = countDown.hour
     datas.value[i].m = countDown.min
@@ -40,7 +39,6 @@ onMounted(() => {
     timing(item, i)
   })
 })
-
 
 onUnmounted(() => {
   // 清除setInterval创建的定时器
@@ -57,23 +55,36 @@ export default { name: 'Listcar' }
 <template>
   <div>
     <div class="listcar">
-      <div v-if="!datas[0]">
-        <div v-for="(item, index) in type" class="listcar-item" :key="index">
-          <LockDiv xyb="56%">
-            <XtxSkeleton widthB="100%" heightB="100%" :fade="true" :animated="true">
-            </XtxSkeleton>
-          </LockDiv>
-        </div>
+      <div
+        v-for="(item, index) in type"
+        class="listcar-item"
+        :key="index"
+        :style="{ display: datas[0] ? 'none' : '' }"
+      >
+        <LockDiv xyb="56%">
+          <XtxSkeleton
+            widthB="100%"
+            heightB="100%"
+            :fade="true"
+            :animated="true"
+          >
+          </XtxSkeleton>
+        </LockDiv>
       </div>
-      <div v-for="(item, i) in datas" :style="{ 'background-image': 'url(' + `${item.img[0]}` + ')' }" :key="i" :class="[
-        {
-          none:
-            (i > num * (type - 1) && num == 1) || //
-            i < (num - 1) * type ||
-            i > num * type - 1,
-        },
-        'listcar-item',
-      ]">
+      <div
+        v-for="(item, i) in datas"
+        :style="{ 'background-image': 'url(' + `${item.img[0]}` + ')' }"
+        :key="i"
+        :class="[
+          {
+            none:
+              (i > num * (type - 1) && num == 1) || //
+              i < (num - 1) * type ||
+              i > num * type - 1
+          },
+          'listcar-item'
+        ]"
+      >
         <LockDiv xyb="56%">
           <div class="bannercontent">
             <div class="item-top">
@@ -86,8 +97,10 @@ export default { name: 'Listcar' }
               </div>
               <div class="right">
                 <div class="u">倒计时</div>
-                <div class="d" :id="`${'fdfd' + item.id + 1}`"><i>{{ item.h }}</i>:<i>{{ item.m
-                }}</i>:<i>{{ item.s }}</i>
+                <div class="d" :id="`${'fdfd' + item.id + 1}`">
+                  <i>{{ item.h }}</i
+                  >:<i>{{ item.m }}</i
+                  >:<i>{{ item.s }}</i>
                 </div>
               </div>
             </div>
@@ -101,7 +114,6 @@ export default { name: 'Listcar' }
 .listcar {
   display: flex;
   padding: 0 1%;
-
   .none {
     display: none !important;
   }
@@ -121,7 +133,7 @@ export default { name: 'Listcar' }
     justify-content: space-between;
 
     &::before {
-      content: "";
+      content: '';
       display: block;
       position: absolute;
       z-index: 0;
@@ -148,11 +160,11 @@ export default { name: 'Listcar' }
 
       @keyframes animation1 {
         0% {
-          transform: scale(0.5)
+          transform: scale(0.5);
         }
 
         100% {
-          transform: scale(0.9)
+          transform: scale(0.9);
         }
       }
 
@@ -162,14 +174,13 @@ export default { name: 'Listcar' }
         width: 38px;
         height: 38px;
         background-size: cover;
-        background-image: url("@/assets/icon/xx0.png");
+        background-image: url('@/assets/icon/xx0.png');
       }
 
       .i2 {
-        background-image: url("@/assets/icon/xx1.png");
+        background-image: url('@/assets/icon/xx1.png');
         transform-style: preserve-3d;
-        animation: animation1 .1s linear;
-
+        animation: animation1 0.1s linear;
       }
     }
 

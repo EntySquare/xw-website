@@ -1,10 +1,10 @@
 <script lang="ts"></script>
 <script setup lang="ts">
 // 导入组件
-import homeBannerVue from "./components/home-banner.vue";
-import HomeBody from "./components/home-body.vue";
-import HomeFooter from "./components/home-footer.vue";
-import Ranking from "./components/home-ranking.vue";
+import homeBannerVue from './components/home-banner.vue'
+import HomeBody from './components/home-body.vue'
+import HomeFooter from './components/home-footer.vue'
+import Ranking from './components/home-ranking.vue'
 </script>
 
 <template>
@@ -13,7 +13,7 @@ import Ranking from "./components/home-ranking.vue";
       <!-- banner轮播图 -->
       <homeBannerVue />
       <!-- 排行列表 -->
-      <Ranking />
+      <!-- <Ranking /> -->
       <!-- 主体部分 -->
       <HomeBody />
     </div>

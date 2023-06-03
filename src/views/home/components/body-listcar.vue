@@ -1,61 +1,87 @@
-<script  lang="ts" setup name="bodyListcar" >
-import { TBanner } from "@/types/cate";
+<script lang="ts" setup name="bodyListcar">
+import { TBanner } from '@/types/cate'
 import useStore from '@/store/index'
-import { ref } from "vue";
+import { ref } from 'vue'
 let { cate } = useStore()
 let { getThemenum } = cate
-let mqList = ref();
+let mqList = ref<2 | 1 | 4 | 3 | 5 | 6>()
 const getWindowInfo = () => {
-  mqList.value = window.matchMedia("(max-width: 1280px)").matches ? '5' : '4';
-  if (mqList.value == '5') {
-    mqList.value = window.matchMedia("(max-width: 845px)").matches ? '6' : '5';
+  mqList.value = window.matchMedia('(max-width: 1280px)').matches
+    ? '5'
+    : ('4' as any)
+  if (mqList.value == 5) {
+    mqList.value = window.matchMedia('(max-width: 845px)').matches
+      ? '6'
+      : ('5' as any)
   }
-};
-window.addEventListener("resize", getWindowInfo);
-getWindowInfo();
+}
+window.addEventListener('resize', getWindowInfo)
+getWindowInfo()
 defineProps<{
-  data: TBanner[];
-  type: number;
-  num: number;
-}>();
+  data: TBanner[]
+  type: number
+  num: number
+}>()
 </script>
 <script lang="ts">
 export default {
-  name:"bodyListcar"
+  name: 'bodyListcar'
 }
 </script>
 <template>
   <div>
     <div class="listcar">
-      <div v-if="!data[0]">
-        <div v-for="(item, index) in type" class="body-listcar-item" :key="index">
-          <LockDiv>
-            <XtxSkeleton widthB="100%" heightB="100%" :fade="true" :animated="true">
-            </XtxSkeleton>
-          </LockDiv>
-        </div>
+      <div
+        v-for="(item, index) in type"
+        class="body-listcar-item"
+        :key="index"
+        :style="{ display: data[0] ? 'none' : '' }"
+      >
+        <LockDiv>
+          <XtxSkeleton
+            widthB="100%"
+            heightB="100%"
+            :fade="true"
+            :animated="true"
+          >
+          </XtxSkeleton>
+        </LockDiv>
       </div>
-      <div v-for="(item, i) in data" :class="[
-        {
-          none:
-            (i > num * (type - 1) && num == 1) || //
-            i < (num - 1) * type ||
-            i > num * type - 1,
-        },
-        {
-          boxshow: !+getThemenum(),
-        },
-        'body-listcar-item',
-      ]" :key="i">
-        <RouterLink style="height: 100%;"
-          :to="{ path: `/collection/${item.name.replaceAll(' ', '')}`, query: { id: `${item.id}` } }">
+
+      <div
+        v-for="(item, i) in data"
+        :class="[
+          {
+            none:
+              (i > num * (type - 1) && num == 1) || //
+              i < (num - 1) * type ||
+              i > num * type - 1
+          },
+          {
+            boxshow: !+getThemenum()
+          },
+          'body-listcar-item'
+        ]"
+        :key="i"
+      >
+        <RouterLink
+          style="height: 100%"
+          :to="{
+            path: `/collection/${item.name.replaceAll(' ', '')}`,
+            query: { id: `${item.id}` }
+          }"
+        >
           <LockDiv>
-            <div class="item-top" :style="{ 'background-image': 'url(' + item.img[0] + ')' }"></div>
+            <div
+              class="item-top"
+              :style="{ 'background-image': 'url(' + item.img[0] + ')' }"
+            ></div>
             <div class="item-bom">
               <div class="u">
-                <a-typography-title :heading="+mqList">
-                  醒目猴</a-typography-title>
-                <icon-check-circle-fill style="color:blue" :size="20" />
+                <a-typography-title :heading="mqList">
+                  醒目猴</a-typography-title
+                >
+                <icon-check-circle-fill style="color: blue" :size="20" />
               </div>
               <div class="d">
                 <a-typography-title>
@@ -104,7 +130,7 @@ p {
     background: var(--color-bg-1);
     box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 35px;
-    transition: all .5s;
+    transition: all 0.5s;
     color: white;
     display: flex;
     overflow: hidden;

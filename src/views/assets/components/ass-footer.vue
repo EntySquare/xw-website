@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import useStore from "@/store/index";
-let { cate } = useStore();
-let { getThemenum } = cate;
+import useStore from '@/store/index'
+let { cate } = useStore()
+let { getThemenum } = cate
 </script>
 <script lang="ts">
 export default {
-  name: "Footer",
-};
+  name: 'Footer'
+}
 </script>
 <template>
   <div :class="['footer', { footerbgc: !+getThemenum() }]">
@@ -17,10 +17,10 @@ export default {
           <div>
             你最好是给我一起来玩不然我派出我们公司的最窝囊的职员去干掉你
             <div class="icons joinflex">
-              <div class="icon-item"><icon-twitter /></div>
+              <!-- <div class="icon-item"><icon-twitter /></div> -->
               <div class="icon-item"><icon-wechat /></div>
-              <div class="icon-item"><icon-send /></div>
-              <div class="icon-item"><icon-tiktok-color /></div>
+              <!-- <div class="icon-item"><icon-send /></div> -->
+              <!-- <div class="icon-item"><icon-tiktok-color /></div> -->
               <div class="icon-item"><icon-email /></div>
             </div>
           </div>
@@ -35,10 +35,10 @@ export default {
       <div class="right joinnone">
         <div>加入社区</div>
         <div class="icons">
-          <div class="icon-item"><icon-twitter /></div>
+          <!-- <div class="icon-item"><icon-twitter /></div> -->
           <div class="icon-item"><icon-wechat /></div>
-          <div class="icon-item"><icon-send /></div>
-          <div class="icon-item"><icon-tiktok-color /></div>
+          <!-- <div class="icon-item"><icon-send /></div> -->
+          <!-- <div class="icon-item"><icon-tiktok-color /></div> -->
           <div class="icon-item"><icon-email /></div>
         </div>
       </div>
@@ -58,7 +58,7 @@ export default {
       </div>
       <div class="right">
         <ul>
-          <li>市场</li>
+          <!-- <li>市场</li> -->
           <li>全部作品</li>
           <li>类别1</li>
           <li>类别2</li>
@@ -197,7 +197,7 @@ export default {
           input {
             width: 100%;
             // height: 100%;
-            font-family: "Poppins";
+            font-family: 'Poppins';
             font-style: normal;
             font-weight: 400;
             font-size: 16px;
