@@ -22,7 +22,7 @@ const props = defineProps({
 })
 let show = ref(false)
 let show2 = ref(false)
-let timer: string | number | NodeJS.Timeout | undefined
+let timer: any
 const setType = (key: string, i: Number = 1) => {
     switch (key) {
         case 'click':
