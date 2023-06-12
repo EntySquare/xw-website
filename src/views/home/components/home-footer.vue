@@ -111,7 +111,13 @@ export default {
       </div>
     </div>
     <div class="footerdo">
-      <div class="left"><icon-copyright />2023-2023 EntySquare</div>
+      <div class="left">
+        <icon-copyright />
+        <span>2023-2023 EntySquare </span>
+        <a href="https://beian.miit.gov.cn/" target="_blank">
+          粤ICP备2023061389号-1</a
+        >
+      </div>
       <div class="right">
         <span>隐私协议</span>
         <span>服务条款</span>
@@ -137,7 +143,9 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  a {
+    color: white !important;
+  }
   .footerup {
     // background-color: pink;
     box-sizing: border-box;

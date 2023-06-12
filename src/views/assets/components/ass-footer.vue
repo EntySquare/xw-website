@@ -1,11 +1,39 @@
-<script setup lang="ts">
+<script setup lang="ts" name="HomeFooter">
 import useStore from '@/store/index'
+import { nextTick, onBeforeUnmount, ref } from 'vue'
 let { cate } = useStore()
 let { getThemenum } = cate
+function one() {
+  if (+getThemenum() == 1) {
+    document.getElementById('app-topnav')!.style.background = '#F0EBF2'
+  } else {
+    document.getElementById('app-topnav')!.style.background = '#000'
+  }
+}
+function myscroll() {
+  let y: number // 记录滚动的距离
+  document.getElementById('app-topnav')!.style.background = 'transparent'
+  y = document.documentElement.scrollTop //页面滚动距离
+  // console.log('y:', y)
+  if (y > 35) {
+    one()
+  } else {
+    nextTick(() => {
+      document.getElementById('app-topnav')!.style.background = 'transparent'
+    })
+  }
+}
+myscroll()
+// 页面加载之后挂载事件
+document.addEventListener('scroll', myscroll)
+onBeforeUnmount(() => {
+  one()
+  document.removeEventListener('scroll', myscroll)
+})
 </script>
 <script lang="ts">
 export default {
-  name: 'Footer'
+  name: 'HomeFooter'
 }
 </script>
 <template>
@@ -83,7 +111,13 @@ export default {
       </div>
     </div>
     <div class="footerdo">
-      <div class="left"><icon-copyright />2023-2023 EntySquare</div>
+      <div class="left">
+        <icon-copyright />
+        <span>2023-2023 EntySquare </span>
+        <a href="https://beian.miit.gov.cn/" target="_blank">
+          粤ICP备2023061389号-1</a
+        >
+      </div>
       <div class="right">
         <span>隐私协议</span>
         <span>服务条款</span>
@@ -102,7 +136,6 @@ export default {
 
 .footer {
   width: 100vw;
-  // height: 720px;
   background: #1c5ab8;
   color: white !important;
   box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
@@ -110,7 +143,9 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  a {
+    color: white !important;
+  }
   .footerup {
     // background-color: pink;
     box-sizing: border-box;

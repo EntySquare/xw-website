@@ -10,9 +10,9 @@ let router = createRouter({
   history: createWebHistory(),
   // 设置路由对象
   routes: [
-    { path: "/", redirect: "/zh-CN" },
+    // { path: "/", redirect: "/zh-CN" },
     {
-      path: "/zh-CN",
+      path: "/",
       component: () => import("@/views/layout/index.vue"),
       // meta: { isKeepAlive: true },//缓存组件
       children: [
