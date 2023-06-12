@@ -1,10 +1,18 @@
 <script lang="ts"></script>
 <script setup lang="ts">
 // 导入组件
+import { onMounted } from 'vue'
 import homeBannerVue from './components/home-banner.vue'
 import HomeBody from './components/home-body.vue'
 import HomeFooter from './components/home-footer.vue'
 import Ranking from './components/home-ranking.vue'
+import { indexlist } from '@/apis/home'
+import { ref } from 'vue'
+onMounted(() => {
+  indexlist('').then(res => {
+    console.log(res);
+  });
+})
 </script>
 
 <template>
