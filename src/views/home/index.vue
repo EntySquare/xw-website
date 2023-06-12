@@ -6,11 +6,19 @@ import homeBannerVue from './components/home-banner.vue'
 import HomeBody from './components/home-body.vue'
 import HomeFooter from './components/home-footer.vue'
 import Ranking from './components/home-ranking.vue'
-import { indexlist } from '@/apis/home'
-import { ref } from 'vue'
+import { getHomelist } from '@/apis/home'
+let homeList = {
+  code: Number,
+  json: {
+    head_album: {}
+  }
+}
 onMounted(() => {
-  indexlist('').then(res => {
-    console.log(res);
+  getHomelist({
+    "time_type": 0
+  }).then(res => {
+    homeList = res.data || {};
+    console.log(homeList.json);
   });
 })
 </script>
@@ -19,13 +27,14 @@ onMounted(() => {
   <div class="page-home">
     <div class="container">
       <!-- banner轮播图 -->
-      <homeBannerVue />
+      <homeBannerVue :homeDataList="homeList.json.head_album || {}" />
       <!-- 排行列表 -->
-      <!-- <Ranking /> -->
+      <Ranking />
       <!-- 主体部分 -->
       <HomeBody />
     </div>
     <HomeFooter />
+    <!-- 轮播图 -->
   </div>
 </template>
 <style scoped lang="less">

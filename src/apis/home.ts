@@ -1,6 +1,6 @@
 import { get, post, put, remove } from "@/utils/request";
 
 // 首页数据
-export const indexlist = (params) => {
-  return get("/api/shop/wx/user/getWeChatAppId", { params }, 1);
+export const getHomelist = (data) => {
+  return post("/web/market", data, 1);
 };

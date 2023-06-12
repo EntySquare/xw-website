@@ -7,6 +7,7 @@ import Listcar from "./banner-listcar.vue";
 import { type } from "@/utils/banner";
 import useStore from "@/store/index";
 import { storeToRefs } from "pinia";
+import { getHomelist } from "@/apis/home";
 let { home } = useStore();
 let { getBannerList } = home;
 getBannerList();
@@ -30,43 +31,46 @@ function onMove(newIndex: any, prevIndex: any) {
   splidId.value = prevIndex * mqList.value;
   // console.log('splidId.value:', splidId.value)
 }
+getHomelist({
+  time_type: 0
+}).then(res => {
+  console.log(res);
+});
 </script>
 
 <script lang="ts">
-export default { name: "homeBannerVue" };
+export default {
+  name: "homeBannerVue",
+  props: {
+    homeDataList: {
+      type: Object,
+      required: true
+    }
+  }
+};
 </script>
-
 <template>
   <div class="home-banner">
-    <div
-      class="selector"
-      :style="{
-        'background-image': 'url(' + `${bannerList[splidId]?.img[0]}` + ')',
-      }"
-    ></div>
+
+    <div class="selector" :style="{
+      'background-image': 'url(' + `${bannerList[splidId]?.img[0]}` + ')',
+    }"></div>
     <!-- 轮播图 -->
-    <Splide
-      @splide:move="onMove"
-      class="banner"
-      :options="{
-        rewind: true,
-        rewindByDrag: true,
-        type: 'loop',
-        autoplay: true,
-      }"
-    >
+    <Splide @splide:move="onMove" class="banner" :options="{
+      rewind: true,
+      rewindByDrag: true,
+      type: 'loop',
+      autoplay: true,
+    }">
       <SplideSlide class="bannerstree" v-if="!bannerList[0]">
         <Listcar :num="0" :type="mqList" :data="[]"></Listcar>
       </SplideSlide>
-      <SplideSlide
-        class="bannerstree"
-        v-for="(i, index) in type(mqList, bannerList?.length)"
-        :key="index"
-      >
+      <SplideSlide class="bannerstree" v-for="(i, index) in type(mqList, bannerList?.length)" :key="index">
         <Listcar :num="i" :type="mqList" :data="bannerList"></Listcar>
       </SplideSlide>
     </Splide>
   </div>
+  <!-- <div>{{ homeDataList || '' }}4444444</div> -->
 </template>
 
 <style scoped lang="less">
