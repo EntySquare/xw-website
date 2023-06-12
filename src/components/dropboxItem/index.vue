@@ -45,7 +45,8 @@ const props = defineProps({
 .one {
     &:hover {
         box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.2);
-        background-color: #fff;
+        background-color: rgba(255, 255, 255, 0.5);
+        // color: gray !important;
     }
 }
 
