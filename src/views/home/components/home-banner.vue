@@ -7,7 +7,6 @@ import Listcar from "./banner-listcar.vue";
 import { type } from "@/utils/banner";
 import useStore from "@/store/index";
 import { storeToRefs } from "pinia";
-import { getHomelist } from "@/apis/home";
 let { home } = useStore();
 let { getBannerList } = home;
 getBannerList();
@@ -31,19 +30,14 @@ function onMove(newIndex: any, prevIndex: any) {
   splidId.value = prevIndex * mqList.value;
   // console.log('splidId.value:', splidId.value)
 }
-getHomelist({
-  time_type: 0
-}).then(res => {
-  console.log(res);
-});
 </script>
 
 <script lang="ts">
 export default {
   name: "homeBannerVue",
   props: {
-    homeDataList: {
-      type: Object,
+    bannerDataList: {
+      type: Array as () => any[],
       required: true
     }
   }
@@ -51,7 +45,7 @@ export default {
 </script>
 <template>
   <div class="home-banner">
-
+    {{ bannerDataList[0]?.image || '' }}
     <div class="selector" :style="{
       'background-image': 'url(' + `${bannerList[splidId]?.img[0]}` + ')',
     }"></div>
@@ -70,7 +64,6 @@ export default {
       </SplideSlide>
     </Splide>
   </div>
-  <!-- <div>{{ homeDataList || '' }}4444444</div> -->
 </template>
 
 <style scoped lang="less">
