@@ -37,7 +37,8 @@ export default {
   name: "homeBannerVue",
   props: {
     bannerDataList: {
-      type: Array as () => any[],
+      type: Array,
+      default: () => [],
       required: true
     }
   }
@@ -45,7 +46,6 @@ export default {
 </script>
 <template>
   <div class="home-banner">
-    {{ bannerDataList[0]?.image || '' }}
     <div class="selector" :style="{
       'background-image': 'url(' + `${bannerList[splidId]?.img[0]}` + ')',
     }"></div>
@@ -59,8 +59,8 @@ export default {
       <SplideSlide class="bannerstree" v-if="!bannerList[0]">
         <Listcar :num="0" :type="mqList" :data="[]"></Listcar>
       </SplideSlide>
-      <SplideSlide class="bannerstree" v-for="(i, index) in type(mqList, bannerList?.length)" :key="index">
-        <Listcar :num="i" :type="mqList" :data="bannerList"></Listcar>
+      <SplideSlide class="bannerstree" v-for="(i, index) in type(mqList, bannerDataList?.length)" :key="index">
+        <Listcar :num="i" :type="mqList" :data="bannerDataList"></Listcar>
       </SplideSlide>
     </Splide>
   </div>

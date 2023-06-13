@@ -55,36 +55,21 @@ export default { name: 'Listcar' }
 <template>
   <div>
     <div class="listcar">
-      <div
-        v-for="(item, index) in type"
-        class="listcar-item"
-        :key="index"
-        :style="{ display: datas[0] ? 'none' : '' }"
-      >
+      <div v-for="(item, index) in type" class="listcar-item" :key="index" :style="{ display: datas[0] ? 'none' : '' }">
         <LockDiv xyb="56%">
-          <XtxSkeleton
-            widthB="100%"
-            heightB="100%"
-            :fade="true"
-            :animated="true"
-          >
+          <XtxSkeleton widthB="100%" heightB="100%" :fade="true" :animated="true">
           </XtxSkeleton>
         </LockDiv>
       </div>
-      <div
-        v-for="(item, i) in datas"
-        :style="{ 'background-image': 'url(' + `${item.img[0]}` + ')' }"
-        :key="i"
-        :class="[
-          {
-            none:
-              (i > num * (type - 1) && num == 1) || //
-              i < (num - 1) * type ||
-              i > num * type - 1
-          },
-          'listcar-item'
-        ]"
-      >
+      <div v-for="(item, i) in datas" :style="{ 'background-image': 'url(' + `${item.image}` + ')' }" :key="i" :class="[
+        {
+          none:
+            (i > num * (type - 1) && num == 1) || //
+            i < (num - 1) * type ||
+            i > num * type - 1
+        },
+        'listcar-item'
+      ]">
         <LockDiv xyb="56%">
           <div class="bannercontent">
             <div class="item-top">
@@ -96,12 +81,10 @@ export default { name: 'Listcar' }
                 <div class="d">地板价：{{ item.lowest_price }}</div>
               </div>
               <div class="right">
-                <div class="u">倒计时</div>
+                <!-- <div class="u">倒计时</div>
                 <div class="d" :id="`${'fdfd' + item.id + 1}`">
-                  <i>{{ item.h }}</i
-                  >:<i>{{ item.m }}</i
-                  >:<i>{{ item.s }}</i>
-                </div>
+                  <i>{{ item.h }}</i>:<i>{{ item.m }}</i>:<i>{{ item.s }}</i>
+                </div> -->
               </div>
             </div>
           </div>
@@ -114,6 +97,7 @@ export default { name: 'Listcar' }
 .listcar {
   display: flex;
   padding: 0 1%;
+
   .none {
     display: none !important;
   }
