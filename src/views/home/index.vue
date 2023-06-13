@@ -31,9 +31,9 @@ onMounted(async () => {
       <!-- banner轮播图 -->
       <homeBannerVue :bannerDataList="bannerList" />
       <!-- 排行列表 -->
-      <Ranking />
+      <Ranking :hotList="hotList" :topList="topList" />
       <!-- 主体部分 -->
-      <HomeBody />
+      <HomeBody :typeList="typeList" />
     </div>
     <HomeFooter />
     <!-- 轮播图 -->

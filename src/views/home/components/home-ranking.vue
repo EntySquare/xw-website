@@ -1,6 +1,26 @@
 <script setup lang="ts" name="Ranking" >
 import { ref } from 'vue'
 
+const props = defineProps<{
+    hotList: {
+        album_id: number;
+        float: number;
+        image: string;
+        index: number;
+        name: string;
+        region_price: string;
+        pay_size: number
+    }[],
+    topList: {
+        album_id: number;
+        float: number;
+        image: string;
+        index: number;
+        name: string;
+        region_price: string;
+        pay_size: number
+    }[]
+}>()
 const imgurl = ref('')
 setTimeout(() => {
     imgurl.value = 'https://i.seadn.io/gcs/files/266274c8643e1c9d0659cb60bf06f740.png?auto=format&w=384'
@@ -12,11 +32,6 @@ const getWindowInfo = () => {
 }
 window.addEventListener('resize', getWindowInfo)
 getWindowInfo()
-</script>
-<script lang="ts">
-export default {
-    name: 'Ranking',
-}
 </script>
 <template>
     <div>
@@ -54,7 +69,7 @@ export default {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="item" v-for="(item, index) in 5" :key="index"> 
+                                <div class="item" v-for="(item, index) in hotList" :key="index">
                                     <div>
                                         <div type="secondary">
                                             {{ index + 1 }}
@@ -65,11 +80,11 @@ export default {
                                             :fade="true" :animated="true">
                                         </XtxSkeleton>
                                         <a-avatar v-else :size="mqList ? 50 : 40" shape="square"><img
-                                                :src="imgurl" /></a-avatar>
+                                                :src="item.image" /></a-avatar>
                                         <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
                                             :animated="true">
                                         </XtxSkeleton>
-                                        <div v-else> 醒目猴</div>
+                                        <div v-else>{{ item.name || '' }}</div>
                                         <XtxSkeleton v-if="!imgurl" :width="mqList ? 20 : 14" :height="mqList ? 20 : 14"
                                             :fade="true" :animated="true">
                                         </XtxSkeleton>
@@ -80,24 +95,24 @@ export default {
                                             :animated="true">
                                         </XtxSkeleton>
                                         <div v-else>
-                                            +7%
+                                            {{ item.float >= 0 ? '+' + item.float : item.float }}%
                                         </div>
                                     </div>
                                     <div>
                                         <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
                                             :animated="true">
                                         </XtxSkeleton>
-                                        <div v-else> ¥500 </div>
+                                        <div v-else> ¥{{ item.region_price || 0 }} </div>
                                     </div>
                                     <div>
                                         <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
                                             :animated="true">
                                         </XtxSkeleton>
-                                        <div v-else> 80000 </div>
+                                        <div v-else> {{ item.pay_size || 0 }} </div>
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="mqList" class="body-item">
+                            <div v-if="hotList.length > 5 && mqList" class="body-item">
                                 <div class="item">
                                     <div></div>
                                     <div>
@@ -117,7 +132,7 @@ export default {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="item" v-for="(item, index) in 5" :key="index">
+                                <div class="item" v-for="(item, index) in hotList.splice(5, 10)" :key="index">
                                     <div>
                                         <div type="secondary">
                                             {{ index + 6 }}
@@ -132,7 +147,7 @@ export default {
                                         <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
                                             :animated="true">
                                         </XtxSkeleton>
-                                        <div v-else> 醒目猴</div>
+                                        <div v-else> {{ item.name || '' }}</div>
                                         <XtxSkeleton v-if="!imgurl" :width="mqList ? 20 : 14" :height="mqList ? 20 : 14"
                                             :fade="true" :animated="true">
                                         </XtxSkeleton>
@@ -143,20 +158,20 @@ export default {
                                             :animated="true">
                                         </XtxSkeleton>
                                         <div v-else>
-                                            +7%
+                                            {{ item.float >= 0 ? '+' + item.float : item.float }}%
                                         </div>
                                     </div>
                                     <div>
                                         <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
                                             :animated="true">
                                         </XtxSkeleton>
-                                        <div v-else> ¥500 </div>
+                                        <div v-else> ¥{{ item.region_price || 0 }} </div>
                                     </div>
                                     <div>
                                         <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
                                             :animated="true">
                                         </XtxSkeleton>
-                                        <div v-else> 80000 </div>
+                                        <div v-else> {{ item.pay_size || 0 }} </div>
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +183,138 @@ export default {
                 <template #title>
                     <p class="tap-p">Top</p>
                 </template>
-                Content of Tab Panel 2
+                <div class="tabsbody">
+                    <div class="one">
+                        <div class="body">
+                            <div class="body-item">
+                                <div class="item">
+                                    <div></div>
+                                    <div>
+                                        <div> 专辑 </div>
+                                    </div>
+                                    <div>
+                                        <div> 涨幅 </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            地板价
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            总交易量
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item" v-for="(item, index) in topList" :key="index">
+                                    <div>
+                                        <div type="secondary">
+                                            {{ index + 1 }}
+                                        </div>
+                                    </div>
+                                    <div class="imgcar">
+                                        <XtxSkeleton v-if="!imgurl" :width="mqList ? 50 : 40" :height="mqList ? 50 : 40"
+                                            :fade="true" :animated="true">
+                                        </XtxSkeleton>
+                                        <a-avatar v-else :size="mqList ? 50 : 40" shape="square"><img
+                                                :src="item.image" /></a-avatar>
+                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
+                                            :animated="true">
+                                        </XtxSkeleton>
+                                        <div v-else>{{ item.name || '' }}</div>
+                                        <XtxSkeleton v-if="!imgurl" :width="mqList ? 20 : 14" :height="mqList ? 20 : 14"
+                                            :fade="true" :animated="true">
+                                        </XtxSkeleton>
+                                        <icon-check-circle-fill v-else style="color: blue" :size="mqList ? 20 : 14" />
+                                    </div>
+                                    <div>
+                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
+                                            :animated="true">
+                                        </XtxSkeleton>
+                                        <div v-else>
+                                            {{ item.float >= 0 ? '+' + item.float : item.float }}%
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
+                                            :animated="true">
+                                        </XtxSkeleton>
+                                        <div v-else> ¥{{ item.region_price || 0 }} </div>
+                                    </div>
+                                    <div>
+                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
+                                            :animated="true">
+                                        </XtxSkeleton>
+                                        <div v-else> {{ item.pay_size || 0 }} </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-if="topList.length > 5 && mqList" class="body-item">
+                                <div class="item">
+                                    <div></div>
+                                    <div>
+                                        <div> 专辑 </div>
+                                    </div>
+                                    <div>
+                                        <div> 涨幅 </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            地板价
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            总交易量
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item" v-for="(item, index) in topList.splice(5, 10)" :key="index">
+                                    <div>
+                                        <div type="secondary">
+                                            {{ index + 6 }}
+                                        </div>
+                                    </div>
+                                    <div class="imgcar">
+                                        <XtxSkeleton v-if="!imgurl" :width="mqList ? 50 : 40" :height="mqList ? 50 : 40"
+                                            :fade="true" :animated="true">
+                                        </XtxSkeleton>
+                                        <a-avatar v-else :size="mqList ? 50 : 40" shape="square"><img
+                                                :src="imgurl" /></a-avatar>
+                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
+                                            :animated="true">
+                                        </XtxSkeleton>
+                                        <div v-else> {{ item.name || '' }}</div>
+                                        <XtxSkeleton v-if="!imgurl" :width="mqList ? 20 : 14" :height="mqList ? 20 : 14"
+                                            :fade="true" :animated="true">
+                                        </XtxSkeleton>
+                                        <icon-check-circle-fill v-else style="color: blue" :size="mqList ? 20 : 14" />
+                                    </div>
+                                    <div>
+                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
+                                            :animated="true">
+                                        </XtxSkeleton>
+                                        <div v-else>
+                                            {{ item.float >= 0 ? '+' + item.float : item.float }}%
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
+                                            :animated="true">
+                                        </XtxSkeleton>
+                                        <div v-else> ¥{{ item.region_price || 0 }} </div>
+                                    </div>
+                                    <div>
+                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
+                                            :animated="true">
+                                        </XtxSkeleton>
+                                        <div v-else> {{ item.pay_size || 0 }} </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </a-tab-pane>
         </a-tabs>
     </div>
