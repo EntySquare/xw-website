@@ -7,6 +7,17 @@ import Listcar from "./banner-listcar.vue";
 import { type } from "@/utils/banner";
 import useStore from "@/store/index";
 import { storeToRefs } from "pinia";
+interface HomeBannerList {
+  follow: Boolean,
+  id: number,
+  image: string,
+  lowest_price: string,
+  name: string,
+  pay_size: string
+};
+const props = defineProps<{
+  bannerDataList: HomeBannerList[],
+}>()
 let { home } = useStore();
 let { getBannerList } = home;
 getBannerList();
@@ -31,23 +42,10 @@ function onMove(newIndex: any, prevIndex: any) {
   // console.log('splidId.value:', splidId.value)
 }
 </script>
-
-<script lang="ts">
-export default {
-  name: "homeBannerVue",
-  props: {
-    bannerDataList: {
-      type: Array,
-      default: () => [],
-      required: true
-    }
-  }
-};
-</script>
 <template>
   <div class="home-banner">
     <div class="selector" :style="{
-      'background-image': 'url(' + `${bannerList[splidId]?.img[0]}` + ')',
+      'background-image': 'url(' + `${bannerDataList[splidId]?.image}` + ')',
     }"></div>
     <!-- 轮播图 -->
     <Splide @splide:move="onMove" class="banner" :options="{
@@ -56,7 +54,7 @@ export default {
       type: 'loop',
       autoplay: true,
     }">
-      <SplideSlide class="bannerstree" v-if="!bannerList[0]">
+      <SplideSlide class="bannerstree" v-if="!bannerDataList[0]">
         <Listcar :num="0" :type="mqList" :data="[]"></Listcar>
       </SplideSlide>
       <SplideSlide class="bannerstree" v-for="(i, index) in type(mqList, bannerDataList?.length)" :key="index">

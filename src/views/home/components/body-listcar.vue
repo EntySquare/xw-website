@@ -1,5 +1,5 @@
 <script lang="ts" setup name="bodyListcar">
-import { TBanner } from '@/types/cate'
+import { BodyItemList } from '@/types/cate'
 import useStore from '@/store/index'
 import { ref } from 'vue'
 let { cate } = useStore()
@@ -17,80 +17,56 @@ const getWindowInfo = () => {
 }
 window.addEventListener('resize', getWindowInfo)
 getWindowInfo()
-defineProps<{
-  data: TBanner[]
+const props = defineProps<{
+  typeList: BodyItemList[]
   type: number
   num: number
 }>()
-</script>
-<script lang="ts">
-export default {
-  name: 'bodyListcar'
-}
+const typeList = ref<BodyItemList[]>(props.typeList)
 </script>
 <template>
   <div>
     <div class="listcar">
-      <div
-        v-for="(item, index) in type"
-        class="body-listcar-item"
-        :key="index"
-        :style="{ display: data[0] ? 'none' : '' }"
-      >
+      <div v-for="(item, index) in type" class="body-listcar-item" :key="index"
+        :style="{ display: typeList[0] ? 'none' : '' }">
         <LockDiv>
-          <XtxSkeleton
-            widthB="100%"
-            heightB="100%"
-            :fade="true"
-            :animated="true"
-          >
+          <XtxSkeleton widthB="100%" heightB="100%" :fade="true" :animated="true">
           </XtxSkeleton>
         </LockDiv>
       </div>
 
-      <div
-        v-for="(item, i) in data"
-        :class="[
-          {
-            none:
-              (i > num * (type - 1) && num == 1) || //
-              i < (num - 1) * type ||
-              i > num * type - 1
-          },
-          {
-            boxshow: !+getThemenum()
-          },
-          'body-listcar-item'
-        ]"
-        :key="i"
-      >
-        <RouterLink
-          style="height: 100%"
-          :to="{
-            path: `/collection/${item.name.replaceAll(' ', '')}`,
-            query: { id: `${item.id}` }
-          }"
-        >
+      <div v-for="(item, i) in typeList" :class="[
+        {
+          none:
+            (i > num * (type - 1) && num == 1) || //
+            i < (num - 1) * type ||
+            i > num * type - 1
+        },
+        {
+          boxshow: !+getThemenum()
+        },
+        'body-listcar-item'
+      ]" :key="i">
+        <RouterLink style="height: 100%" :to="{
+          path: `/collection/${item.album_name.replaceAll(' ', '')}`,
+          query: { id: `${item.album_id}` }
+        }">
           <LockDiv>
-            <div
-              class="item-top"
-              :style="{ 'background-image': 'url(' + item.img[0] + ')' }"
-            ></div>
+            <div class="item-top" :style="{ 'background-image': 'url(' + item.album_img + ')' }"></div>
             <div class="item-bom">
               <div class="u">
                 <a-typography-title :heading="mqList">
-                  醒目猴</a-typography-title
-                >
+                  {{ item.album_name }}</a-typography-title>
                 <icon-check-circle-fill style="color: blue" :size="20" />
               </div>
               <div class="d">
                 <a-typography-title>
                   <p>地板价</p>
-                  <p>¥500</p>
+                  <p>¥{{ item.region_price }}</p>
                 </a-typography-title>
                 <a-typography-title>
                   <p>总交易量</p>
-                  <p>27901832</p>
+                  <p>{{ item.pay_size }}</p>
                 </a-typography-title>
               </div>
             </div>

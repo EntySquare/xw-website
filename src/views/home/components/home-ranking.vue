@@ -1,26 +1,33 @@
 <script setup lang="ts" name="Ranking" >
+import { onMounted } from 'vue';
 import { ref } from 'vue'
-
+interface hotDefaultList {
+    album_id: number;
+    float: number;
+    image: string;
+    index: number;
+    name: string;
+    region_price: string;
+    pay_size: number
+}
+interface topDefaultList {
+    album_id: number;
+    float: number;
+    image: string;
+    index: number;
+    name: string;
+    region_price: string;
+    pay_size: number
+}
 const props = defineProps<{
-    hotList: {
-        album_id: number;
-        float: number;
-        image: string;
-        index: number;
-        name: string;
-        region_price: string;
-        pay_size: number
-    }[],
-    topList: {
-        album_id: number;
-        float: number;
-        image: string;
-        index: number;
-        name: string;
-        region_price: string;
-        pay_size: number
-    }[]
+    hotList: hotDefaultList[],
+    topList: topDefaultList[]
 }>()
+onMounted(() => {
+    // 挂载完成之后动态赋值
+    const hotList = ref<hotDefaultList[]>(props.hotList)
+    const topList = ref<topDefaultList[]>(props.topList)
+})
 const imgurl = ref('')
 setTimeout(() => {
     imgurl.value = 'https://i.seadn.io/gcs/files/266274c8643e1c9d0659cb60bf06f740.png?auto=format&w=384'
@@ -69,50 +76,64 @@ getWindowInfo()
                                         </div>
                                     </div>
                                 </div>
-                                <div class="item" v-for="(item, index) in hotList" :key="index">
+                                <!-- Hot左边骨架屏 -->
+                                <div class="item" v-for="(item, index) in 5" :key="index" v-if="!hotList.length">
                                     <div>
                                         <div type="secondary">
                                             {{ index + 1 }}
                                         </div>
                                     </div>
                                     <div class="imgcar">
-                                        <XtxSkeleton v-if="!imgurl" :width="mqList ? 50 : 40" :height="mqList ? 50 : 40"
-                                            :fade="true" :animated="true">
-                                        </XtxSkeleton>
-                                        <a-avatar v-else :size="mqList ? 50 : 40" shape="square"><img
-                                                :src="item.image" /></a-avatar>
-                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
+                                        <XtxSkeleton :width="mqList ? 50 : 40" :height="mqList ? 50 : 40" :fade="true"
                                             :animated="true">
                                         </XtxSkeleton>
-                                        <div v-else>{{ item.name || '' }}</div>
-                                        <XtxSkeleton v-if="!imgurl" :width="mqList ? 20 : 14" :height="mqList ? 20 : 14"
-                                            :fade="true" :animated="true">
+                                        <XtxSkeleton widthB="90%" heightB="20px" :fade="true" :animated="true">
                                         </XtxSkeleton>
-                                        <icon-check-circle-fill v-else style="color: blue" :size="mqList ? 20 : 14" />
+                                        <XtxSkeleton :width="mqList ? 20 : 14" :height="mqList ? 20 : 14" :fade="true"
+                                            :animated="true">
+                                        </XtxSkeleton>
                                     </div>
                                     <div>
-                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
-                                            :animated="true">
+                                        <XtxSkeleton widthB="90%" heightB="20px" :fade="true" :animated="true">
                                         </XtxSkeleton>
-                                        <div v-else>
+                                    </div>
+                                    <div>
+                                        <XtxSkeleton widthB="90%" heightB="20px" :fade="true" :animated="true">
+                                        </XtxSkeleton>
+                                    </div>
+                                    <div>
+                                        <XtxSkeleton widthB="90%" heightB="20px" :fade="true" :animated="true">
+                                        </XtxSkeleton>
+                                    </div>
+                                </div>
+                                <!-- Hot左边内容 -->
+                                <div class="item" v-for="(item, index) in hotList.slice(0, 5)" :key="item.album_id" v-else>
+                                    <div>
+                                        <div type="secondary">
+                                            {{ index + 1 }}
+                                        </div>
+                                    </div>
+                                    <div class="imgcar">
+                                        <a-avatar :size="mqList ? 50 : 40" shape="square"><img
+                                                :src="item.image" /></a-avatar>
+                                        <div>{{ item.name || '' }}</div>
+                                        <icon-check-circle-fill style="color: blue" :size="mqList ? 20 : 14" />
+                                    </div>
+                                    <div>
+                                        <div>
                                             {{ item.float >= 0 ? '+' + item.float : item.float }}%
                                         </div>
                                     </div>
                                     <div>
-                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
-                                            :animated="true">
-                                        </XtxSkeleton>
-                                        <div v-else> ¥{{ item.region_price || 0 }} </div>
+                                        <div> ¥{{ item.region_price || 0 }} </div>
                                     </div>
                                     <div>
-                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
-                                            :animated="true">
-                                        </XtxSkeleton>
-                                        <div v-else> {{ item.pay_size || 0 }} </div>
+                                        <div> {{ item.pay_size || 0 }} </div>
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="hotList.length > 5 && mqList" class="body-item">
+                            <!-- 数据未回来之前或者数据长度大于5条，并且是宽屏时显示 -->
+                            <div v-if="(!hotList.length || hotList.length > 5) && mqList" class="body-item">
                                 <div class="item">
                                     <div></div>
                                     <div>
@@ -132,46 +153,59 @@ getWindowInfo()
                                         </div>
                                     </div>
                                 </div>
-                                <div class="item" v-for="(item, index) in hotList.splice(5, 10)" :key="index">
+                                <!-- Hot右边骨架屏 -->
+                                <div class="item" v-for="(item, index) in 5" :key="index" v-if="!hotList.length">
                                     <div>
                                         <div type="secondary">
                                             {{ index + 6 }}
                                         </div>
                                     </div>
                                     <div class="imgcar">
-                                        <XtxSkeleton v-if="!imgurl" :width="mqList ? 50 : 40" :height="mqList ? 50 : 40"
-                                            :fade="true" :animated="true">
-                                        </XtxSkeleton>
-                                        <a-avatar v-else :size="mqList ? 50 : 40" shape="square"><img
-                                                :src="imgurl" /></a-avatar>
-                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
+                                        <XtxSkeleton :width="mqList ? 50 : 40" :height="mqList ? 50 : 40" :fade="true"
                                             :animated="true">
                                         </XtxSkeleton>
-                                        <div v-else> {{ item.name || '' }}</div>
-                                        <XtxSkeleton v-if="!imgurl" :width="mqList ? 20 : 14" :height="mqList ? 20 : 14"
-                                            :fade="true" :animated="true">
+                                        <XtxSkeleton widthB="90%" heightB="20px" :fade="true" :animated="true">
                                         </XtxSkeleton>
-                                        <icon-check-circle-fill v-else style="color: blue" :size="mqList ? 20 : 14" />
+                                        <XtxSkeleton :width="mqList ? 20 : 14" :height="mqList ? 20 : 14" :fade="true"
+                                            :animated="true">
+                                        </XtxSkeleton>
                                     </div>
                                     <div>
-                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
-                                            :animated="true">
+                                        <XtxSkeleton widthB="90%" heightB="20px" :fade="true" :animated="true">
                                         </XtxSkeleton>
-                                        <div v-else>
+                                    </div>
+                                    <div>
+                                        <XtxSkeleton widthB="90%" heightB="20px" :fade="true" :animated="true">
+                                        </XtxSkeleton>
+                                    </div>
+                                    <div>
+                                        <XtxSkeleton widthB="90%" heightB="20px" :fade="true" :animated="true">
+                                        </XtxSkeleton>
+                                    </div>
+                                </div>
+                                <!-- Hot右边内容 -->
+                                <div class="item" v-for="(item, index) in hotList.slice(5, 10)" :key="item.album_id" v-else>
+                                    <div>
+                                        <div type="secondary">
+                                            {{ index + 6 }}
+                                        </div>
+                                    </div>
+                                    <div class="imgcar">
+                                        <a-avatar :size="mqList ? 50 : 40" shape="square"><img
+                                                :src="item.image" /></a-avatar>
+                                        <div> {{ item.name || '' }}</div>
+                                        <icon-check-circle-fill style="color: blue" :size="mqList ? 20 : 14" />
+                                    </div>
+                                    <div>
+                                        <div>
                                             {{ item.float >= 0 ? '+' + item.float : item.float }}%
                                         </div>
                                     </div>
                                     <div>
-                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
-                                            :animated="true">
-                                        </XtxSkeleton>
-                                        <div v-else> ¥{{ item.region_price || 0 }} </div>
+                                        <div> ¥{{ item.region_price || 0 }} </div>
                                     </div>
                                     <div>
-                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
-                                            :animated="true">
-                                        </XtxSkeleton>
-                                        <div v-else> {{ item.pay_size || 0 }} </div>
+                                        <div> {{ item.pay_size || 0 }} </div>
                                     </div>
                                 </div>
                             </div>
@@ -206,50 +240,64 @@ getWindowInfo()
                                         </div>
                                     </div>
                                 </div>
-                                <div class="item" v-for="(item, index) in topList" :key="index">
+                                <!-- Top左边骨架屏 -->
+                                <div class="item" v-for="(item, index) in 5" :key="index" v-if="!topList.length">
                                     <div>
                                         <div type="secondary">
                                             {{ index + 1 }}
                                         </div>
                                     </div>
                                     <div class="imgcar">
-                                        <XtxSkeleton v-if="!imgurl" :width="mqList ? 50 : 40" :height="mqList ? 50 : 40"
-                                            :fade="true" :animated="true">
-                                        </XtxSkeleton>
-                                        <a-avatar v-else :size="mqList ? 50 : 40" shape="square"><img
-                                                :src="item.image" /></a-avatar>
-                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
+                                        <XtxSkeleton :width="mqList ? 50 : 40" :height="mqList ? 50 : 40" :fade="true"
                                             :animated="true">
                                         </XtxSkeleton>
-                                        <div v-else>{{ item.name || '' }}</div>
-                                        <XtxSkeleton v-if="!imgurl" :width="mqList ? 20 : 14" :height="mqList ? 20 : 14"
-                                            :fade="true" :animated="true">
+                                        <XtxSkeleton widthB="90%" heightB="20px" :fade="true" :animated="true">
                                         </XtxSkeleton>
-                                        <icon-check-circle-fill v-else style="color: blue" :size="mqList ? 20 : 14" />
+                                        <XtxSkeleton :width="mqList ? 20 : 14" :height="mqList ? 20 : 14" :fade="true"
+                                            :animated="true">
+                                        </XtxSkeleton>
                                     </div>
                                     <div>
-                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
-                                            :animated="true">
+                                        <XtxSkeleton widthB="90%" heightB="20px" :fade="true" :animated="true">
                                         </XtxSkeleton>
-                                        <div v-else>
+                                    </div>
+                                    <div>
+                                        <XtxSkeleton widthB="90%" heightB="20px" :fade="true" :animated="true">
+                                        </XtxSkeleton>
+                                    </div>
+                                    <div>
+                                        <XtxSkeleton widthB="90%" heightB="20px" :fade="true" :animated="true">
+                                        </XtxSkeleton>
+                                    </div>
+                                </div>
+                                <!-- Top左边内容 -->
+                                <div class="item" v-for="(item, index) in topList.slice(0, 5)" :key="item.album_id" v-else>
+                                    <div>
+                                        <div type="secondary">
+                                            {{ index + 1 }}
+                                        </div>
+                                    </div>
+                                    <div class="imgcar">
+                                        <a-avatar :size="mqList ? 50 : 40" shape="square"><img
+                                                :src="item.image" /></a-avatar>
+                                        <div>{{ item.name || '' }}</div>
+                                        <icon-check-circle-fill style="color: blue" :size="mqList ? 20 : 14" />
+                                    </div>
+                                    <div>
+                                        <div>
                                             {{ item.float >= 0 ? '+' + item.float : item.float }}%
                                         </div>
                                     </div>
                                     <div>
-                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
-                                            :animated="true">
-                                        </XtxSkeleton>
-                                        <div v-else> ¥{{ item.region_price || 0 }} </div>
+                                        <div> ¥{{ item.region_price || 0 }} </div>
                                     </div>
                                     <div>
-                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
-                                            :animated="true">
-                                        </XtxSkeleton>
-                                        <div v-else> {{ item.pay_size || 0 }} </div>
+                                        <div> {{ item.pay_size || 0 }} </div>
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="topList.length > 5 && mqList" class="body-item">
+                            <!-- 数据未回来之前或者数据长度大于5条，并且是宽屏时显示 -->
+                            <div v-if="(!topList.length || topList.length > 5) && mqList" class="body-item">
                                 <div class="item">
                                     <div></div>
                                     <div>
@@ -269,46 +317,59 @@ getWindowInfo()
                                         </div>
                                     </div>
                                 </div>
-                                <div class="item" v-for="(item, index) in topList.splice(5, 10)" :key="index">
+                                <!-- Top右边骨架屏 -->
+                                <div class="item" v-for="(item, index) in 5" :key="index" v-if="!topList.length">
                                     <div>
                                         <div type="secondary">
                                             {{ index + 6 }}
                                         </div>
                                     </div>
                                     <div class="imgcar">
-                                        <XtxSkeleton v-if="!imgurl" :width="mqList ? 50 : 40" :height="mqList ? 50 : 40"
-                                            :fade="true" :animated="true">
-                                        </XtxSkeleton>
-                                        <a-avatar v-else :size="mqList ? 50 : 40" shape="square"><img
-                                                :src="imgurl" /></a-avatar>
-                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
+                                        <XtxSkeleton :width="mqList ? 50 : 40" :height="mqList ? 50 : 40" :fade="true"
                                             :animated="true">
                                         </XtxSkeleton>
-                                        <div v-else> {{ item.name || '' }}</div>
-                                        <XtxSkeleton v-if="!imgurl" :width="mqList ? 20 : 14" :height="mqList ? 20 : 14"
-                                            :fade="true" :animated="true">
+                                        <XtxSkeleton widthB="90%" heightB="20px" :fade="true" :animated="true">
                                         </XtxSkeleton>
-                                        <icon-check-circle-fill v-else style="color: blue" :size="mqList ? 20 : 14" />
+                                        <XtxSkeleton :width="mqList ? 20 : 14" :height="mqList ? 20 : 14" :fade="true"
+                                            :animated="true">
+                                        </XtxSkeleton>
                                     </div>
                                     <div>
-                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
-                                            :animated="true">
+                                        <XtxSkeleton widthB="90%" heightB="20px" :fade="true" :animated="true">
                                         </XtxSkeleton>
-                                        <div v-else>
+                                    </div>
+                                    <div>
+                                        <XtxSkeleton widthB="90%" heightB="20px" :fade="true" :animated="true">
+                                        </XtxSkeleton>
+                                    </div>
+                                    <div>
+                                        <XtxSkeleton widthB="90%" heightB="20px" :fade="true" :animated="true">
+                                        </XtxSkeleton>
+                                    </div>
+                                </div>
+                                <!-- Top右边内容 -->
+                                <div class="item" v-for="(item, index) in topList.slice(5, 10)" :key="item.album_id" v-else>
+                                    <div>
+                                        <div type="secondary">
+                                            {{ index + 6 }}
+                                        </div>
+                                    </div>
+                                    <div class="imgcar">
+                                        <a-avatar :size="mqList ? 50 : 40" shape="square"><img
+                                                :src="item.image" /></a-avatar>
+                                        <div> {{ item.name || '' }}</div>
+                                        <icon-check-circle-fill style="color: blue" :size="mqList ? 20 : 14" />
+                                    </div>
+                                    <div>
+                                        <div>
                                             {{ item.float >= 0 ? '+' + item.float : item.float }}%
                                         </div>
                                     </div>
                                     <div>
-                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
-                                            :animated="true">
-                                        </XtxSkeleton>
-                                        <div v-else> ¥{{ item.region_price || 0 }} </div>
+                                        <div> ¥{{ item.region_price || 0 }} </div>
                                     </div>
                                     <div>
-                                        <XtxSkeleton v-if="!imgurl" widthB="90%" heightB="20px" :fade="true"
-                                            :animated="true">
-                                        </XtxSkeleton>
-                                        <div v-else> {{ item.pay_size || 0 }} </div>
+                                        <div> {{ item.pay_size || 0 }} </div>
                                     </div>
                                 </div>
                             </div>

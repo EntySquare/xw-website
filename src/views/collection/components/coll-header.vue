@@ -24,22 +24,12 @@ export default {
     <div class="body">
       <div class="container">
         <div :style="{ padding: `0px 20px ${show1 ? '10px' : '24px'}` }">
-          <a-avatar
-            shape="square"
-            class="avatatimg"
-            :size="mqList"
-            style="transform: translateY(-50%); background: transparent"
-          >
-            <img
-              alt="avatar"
-              src="https://pic4.zhimg.com/80/v2-80d6ebd2e2f5f6c980b3a22aeca06a9b_720w.webp"
-            />
+          <a-avatar shape="square" class="avatatimg" :size="mqList"
+            style="transform: translateY(-50%); background: transparent">
+            <img alt="avatar" src="https://pic4.zhimg.com/80/v2-80d6ebd2e2f5f6c980b3a22aeca06a9b_720w.webp" />
           </a-avatar>
           <div class="title">
-            <div
-              class="left"
-              :style="{ padding: `${mqList / 2 + 20}px 0px 0px` }"
-            >
+            <div class="left" :style="{ padding: `${mqList / 2 + 20}px 0px 0px` }">
               <a-typography-title>
                 <div class="text">
                   <p>醒目猴</p>
@@ -52,20 +42,17 @@ export default {
                     这是一个脱离了低级趣味的超牛逼的发生的咖啡机塑料袋咖啡机李会计拉卡拉看
                     <icon-caret-down />
                   </div>
-                  <div
-                    class="two"
-                    :style="{
-                      gridTemplateColumns:
-                        'repeat(' + `${show1 ? 2 : 4}` + ', 1fr)',
-                      fontSize: `${show1 ? '20px' : '24px'}`
-                    }"
-                  >
+                  <div class="two" :style="{
+                    gridTemplateColumns:
+                      'repeat(' + `${show1 ? 2 : 4}` + ', 1fr)',
+                    fontSize: `${show1 ? '20px' : '24px'}`
+                  }">
                     <div class="item">
                       <div class="t">总交易量</div>
                       <div class="b">￥3432122</div>
                     </div>
                     <div class="item">
-                      <div class="t">地板胶</div>
+                      <div class="t">地板价</div>
                       <div class="b">￥500</div>
                     </div>
                     <div class="item">
@@ -142,7 +129,7 @@ export default {
       }
 
       .text {
-        > p {
+        >p {
           &:nth-child(2) {
             padding-top: 20px;
             font-size: 20px;

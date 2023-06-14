@@ -1,12 +1,18 @@
 <script setup lang='ts' name="HomeBody">
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { ref } from "vue";
-import { TBanner } from "@/types/cate";
+import { BodyItemList } from "@/types/cate";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import bodyListcar from "./body-listcar.vue";
 import { type } from "@/utils/banner";
 import useStore from '@/store/index'
 import { storeToRefs } from 'pinia'
+const props = defineProps<{
+    typeList: {
+        type: string;
+        list: BodyItemList[];
+    }[];
+}>();
 let { home } = useStore()
 let { getHomebodyList } = home
 getHomebodyList()
@@ -37,14 +43,15 @@ export default {
 <template>
     <div class="home-banner">
         <!-- 轮播图 -->
-        <div style="padding-bottom: 10px;">
-            <a-typography-title :heading="3" style="padding:20px 20px 10px;font-weight: 800;">值得一看</a-typography-title>
+        <div style="padding-bottom: 10px;" v-for="(item, index) in typeList" :key="index">
+            <a-typography-title :heading="3" style="padding:20px 20px 10px;font-weight: 800;">{{ item.type
+            }}</a-typography-title>
             <Splide class="banner" :options="{ rewind: false }">
-                <SplideSlide class="bannerstree" v-if="!homebodyList[0]">
-                    <bodyListcar :num="0" :type="mqList" :data="[]"></bodyListcar>
+                <SplideSlide class="bannerstree" v-if="!typeList[0]">
+                    <bodyListcar :num="0" :type="mqList" :typeList="[]"></bodyListcar>
                 </SplideSlide>
-                <SplideSlide class="bannerstree" v-for="(i, index) in type(mqList, homebodyList.length)" :key="index">
-                    <bodyListcar :num="i" :type="mqList" :data="homebodyList"></bodyListcar>
+                <SplideSlide class="bannerstree" v-for="(i, cindex) in type(mqList, item.list.length)" :key="cindex">
+                    <bodyListcar :num="i" :type="mqList" :typeList="item.list"></bodyListcar>
                 </SplideSlide>
             </Splide>
         </div>
