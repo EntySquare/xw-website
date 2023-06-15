@@ -1,7 +1,20 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { TBanner } from '@/types/cate'
 import useStore from '@/store/index'
+interface defalutList {
+  album_name: string
+  author_name: string
+  follow: Boolean
+  id: number
+  image: string
+  name: string
+  price: string
+  status: number
+}
+const props = defineProps<{
+  collList: defalutList[]
+}>()
 let { cate } = useStore()
 let { getThemenum } = cate
 const data: TBanner[] = []
@@ -27,6 +40,12 @@ for (let i = 0; i < 3; i++) {
     ]
   })
 }
+onMounted(() => {
+  // 挂载完成之后动态赋值
+  const collList = ref<defalutList[]>(props.collList)
+  console.log(collList.value, 'collList');
+
+})
 </script>
 <script lang="ts">
 export default {
@@ -37,32 +56,23 @@ export default {
   <div class="collect-banner">
     <slot></slot>
     <div class="collectionbody" id="collectionbody">
-      <LockDiv
-        xyb="143%"
-        class="item"
-        :style="{
-          background: +getThemenum() ? 'white' : '#353840',
-          transition: `all .5s`
-        }"
-        v-for="(item, i) in data"
-        :key="i"
-      >
+      <LockDiv xyb="143%" class="item" :style="{
+        background: +getThemenum() ? 'white' : '#353840',
+        transition: `all .5s`
+      }" v-for="(item, i) in collList" :key="i">
         <RouterLink :to="`/assets/${item.id}`">
           <LockDiv class="top">
-            <div
-              class="img"
-              :style="{ 'background-image': 'url(' + item.img[i] + ')' }"
-            ></div>
+            <div class="img" :style="{ 'background-image': 'url(' + item.image + ')' }"></div>
           </LockDiv>
           <div class="bom">
             <a-typography-title :heading="5">
               <div class="left">
-                <p class="titleone">{{ item.name }}#100</p>
+                <p class="titleone">{{ item.name }}</p>
                 <p class="titleone" style="padding-top: 5px">
-                  ￥{{ item.lowest_price }}
+                  ￥{{ item.price || 0.00 }}
                 </p>
 
-                <p>最后销售:￥{{ item.locking_time }}</p>
+                <p>最后销售:￥{{ item.status || 0.00 }}</p>
               </div>
               <div class="right">
                 <div width="72px" class="bolticon">
@@ -138,11 +148,9 @@ export default {
             font-size: 28px;
 
             &:hover {
-              background: linear-gradient(
-                162.55deg,
-                #3ffff3 3.18%,
-                #e127ff 82.44%
-              );
+              background: linear-gradient(162.55deg,
+                  #3ffff3 3.18%,
+                  #e127ff 82.44%);
             }
           }
         }
@@ -150,7 +158,13 @@ export default {
 
       .left {
         .titleone {
+          width: 110px;
           font-size: 17px;
+          overflow: hidden;
+          /* 超出的文本隐藏 */
+          text-overflow: ellipsis;
+          /* 溢出用省略号显示 */
+          white-space: nowrap;
         }
 
         height: 100%;
@@ -159,7 +173,7 @@ export default {
         justify-content: space-between;
         font-weight: 600;
 
-        > p {
+        >p {
           margin: 0;
 
           &:last-child {

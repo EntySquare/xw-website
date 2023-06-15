@@ -53,11 +53,11 @@ const update = (item: any) => {
         }
         if (show != -1) {
             data[show].title = props.title
-            data[show].item = `${props.title == '稀有度等级' ? '稀有度' + Min!.value + '～' + Max!.value : '数量' + Min!.value + '～' + Max!.value}`
+            data[show].item = `${props.title == '稀有度等级' ? '稀有度' + Min!.value + '～' + Max!.value : '' + Min!.value + '～' + Max!.value}`
             emit('update:modelValue', data)
         } else {
             data[i].title = props.title
-            data[i].item = `${props.title == '稀有度等级' ? '稀有度' + Min!.value + '～' + Max!.value : '数量' + Min!.value + '～' + Max!.value}`
+            data[i].item = `${props.title == '稀有度等级' ? '稀有度' + Min!.value + '～' + Max!.value : '' + Min!.value + '～' + Max!.value}`
             emit('update:modelValue', data)
         }
         Min!.value = ''

@@ -1,6 +1,22 @@
-<script setup lang="ts">
+<script setup lang="ts" name="CollHeader">
+import { albumInfo } from '@/apis/details'
 import { onMounted } from 'vue'
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
+const route = useRoute()
+const albumInfoList = ref({
+  id: 0,
+  publish_name: '',
+  name: '',
+  content: '',
+  background: '',
+  created_at: '',
+  hold_user_size: 0,
+  artifact_size: 0,
+  pay_size: 0,
+  price_lowest: 0,
+  price_bast: 0
+})
 let mqList = ref(150)
 let show1 = ref(false)
 const getWindowInfo = () => {
@@ -13,42 +29,45 @@ const getWindowInfo = () => {
 }
 window.addEventListener('resize', getWindowInfo)
 getWindowInfo()
-onMounted(() => {
-  console.log('mounted');
-})
-</script>
-<script lang="ts">
-export default {
-  name: 'CollHeader'
+let blockContent = ref(false);
+const blockAllContent = () => {
+  blockContent.value = true;
 }
-
-
-
-
+onMounted(async () => {
+  try {
+    // 发起接口请求
+    const res = await albumInfo({ id: route.query.id });
+    // 将接口返回的数据赋值给 data 变量
+    albumInfoList.value = res.data.json.album;
+  } catch (error) {
+    console.error(error);
+  }
+});
 </script>
 <template>
   <div class="header">
-    <div class="avater"></div>
+    <div class="avater" :style="`background-image: url('${albumInfoList.background}');`"></div>
     <div class="body">
       <div class="container">
         <div :style="{ padding: `0px 20px ${show1 ? '10px' : '24px'}` }">
           <a-avatar shape="square" class="avatatimg" :size="mqList"
             style="transform: translateY(-50%); background: transparent">
-            <img alt="avatar" src="https://pic4.zhimg.com/80/v2-80d6ebd2e2f5f6c980b3a22aeca06a9b_720w.webp" />
+            <img alt="avatar" :src="albumInfoList.background" />
           </a-avatar>
           <div class="title">
             <div class="left" :style="{ padding: `${mqList / 2 + 20}px 0px 0px` }">
               <a-typography-title>
                 <div class="text">
-                  <p>醒目猴</p>
-                  <p>创作者<span>XXX</span></p>
+                  <p>{{ albumInfoList.name || '' }}</p>
+                  <p>创作者<span>{{ albumInfoList.publish_name || '' }}</span></p>
                   <div class="one">
-                    总量<span>666</span> 创建日期<span>Nov 2022</span>
-                    创作者收益<span>10%</span> 类别<span>Music</span>
+                    总量<span>{{ albumInfoList.artifact_size || '' }}</span> 创建日期<span>{{ albumInfoList.created_at || ''
+                    }}</span>
+                    <!-- 创作者收益<span>10%</span> 类别<span>Music</span> -->
                   </div>
-                  <div class="dise">
-                    这是一个脱离了低级趣味的超牛逼的发生的咖啡机塑料袋咖啡机李会计拉卡拉看
-                    <icon-caret-down />
+                  <div :class="blockContent ? 'dise_all' : 'dise'">
+                    {{ albumInfoList.content || '' }}
+                    <icon-caret-down @click="blockAllContent" v-if="!blockContent" />
                   </div>
                   <div class="two" :style="{
                     gridTemplateColumns:
@@ -57,19 +76,19 @@ export default {
                   }">
                     <div class="item">
                       <div class="t">总交易量</div>
-                      <div class="b">￥3432122</div>
+                      <div class="b">￥{{ albumInfoList.pay_size || 0 }}</div>
                     </div>
                     <div class="item">
                       <div class="t">地板价</div>
-                      <div class="b">￥500</div>
+                      <div class="b">￥{{ albumInfoList.price_lowest || 0 }}</div>
                     </div>
                     <div class="item">
                       <div class="t">最佳报价</div>
-                      <div class="b">￥3100</div>
+                      <div class="b">￥{{ albumInfoList.price_bast || 0 }}</div>
                     </div>
                     <div class="item">
-                      <div class="t">所有者</div>
-                      <div class="b">156564</div>
+                      <div class="t">持有数量</div>
+                      <div class="b">{{ albumInfoList.hold_user_size || 0 }}</div>
                     </div>
                   </div>
                   <div class="right1" v-if="show1">
@@ -102,7 +121,6 @@ export default {
 <style scoped lang="less">
 .header {
   .avater {
-    background-image: url('https://picx.zhimg.com/80/v2-dbc73dfaae9feca60eaf83811227384c_720w.webp?source=1940ef5c');
     background-size: cover;
     background-position: center;
     padding-top: 25vw;
@@ -172,6 +190,19 @@ export default {
           text-overflow: ellipsis;
           /* 溢出用省略号显示 */
           white-space: nowrap;
+          /* 溢出不换行 */
+          position: relative;
+
+          svg {
+            right: 0;
+            position: absolute;
+          }
+        }
+
+        .dise_all {
+          font-size: 12px;
+          padding-top: 10px;
+          opacity: 0.8;
           /* 溢出不换行 */
           position: relative;
 

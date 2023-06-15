@@ -74,10 +74,8 @@ export default {
     <div class="footermi">
       <div class="left">
         <a-avatar :size="55">
-          <img
-            alt="avatar"
-            src="https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp"
-          />
+          <img alt="avatar"
+            src="https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp" />
         </a-avatar>
         <div>玄武数藏</div>
         <div>
@@ -121,11 +119,9 @@ export default {
 </template>
 <style scoped lang="less">
 .footerbgc {
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0) 0%,
-    #3d82db 100%
-  ) !important;
+  background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0) 0%,
+      #3d82db 100%) !important;
 }
 
 .footer {
@@ -152,7 +148,7 @@ export default {
     gap: 50px;
     margin: 50px 100px 0 100px;
 
-    > div {
+    >div {
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -161,7 +157,7 @@ export default {
       // background-color: red;
     }
 
-    > .left {
+    >.left {
       flex: 2;
 
       .icons {
@@ -253,7 +249,7 @@ export default {
       }
     }
 
-    > .right {
+    >.right {
       div {
         &:first-child {
           font-size: 26px;
@@ -297,7 +293,7 @@ export default {
     padding: 50px 8vw;
     margin: 0 100px 0 100px;
 
-    > .left {
+    >.left {
       flex: 2;
 
       div {
