@@ -1,5 +1,9 @@
 // 管理路由
-import { createRouter, createWebHashHistory, createWebHistory } from "vue-router";
+import {
+  createRouter,
+  createWebHashHistory,
+  createWebHistory,
+} from "vue-router";
 // 导入 加载条
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
@@ -41,7 +45,11 @@ let router = createRouter({
         },
         {
           path: "/download",
-          component: () => import("@/views/download/index.vue")
+          component: () => import("@/views/download/index.vue"),
+        },
+        {
+          path: "/login/index",
+          component: () => import("@/views/login/index.vue"),
         },
       ],
     },

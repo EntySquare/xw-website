@@ -1,13 +1,12 @@
 <script setup lang="ts" name="HomeBody">
 import { Splide, SplideSlide } from '@splidejs/vue-splide'
 import { ref } from 'vue'
-import { type } from '@/utils/banner'
-import useStore from '@/store/index'
-import { storeToRefs } from 'pinia'
-let { home } = useStore()
-let { getHomebodyList } = home
-getHomebodyList()
-let { homebodyList } = storeToRefs(home)
+// import useStore from '@/store/index'
+// import { storeToRefs } from 'pinia'
+// let { home } = useStore()
+// let { getHomebodyList } = home
+// getHomebodyList()
+// let { homebodyList } = storeToRefs(home)
 
 let mqList = ref(0)
 const getWindowInfo = () => {
@@ -48,6 +47,9 @@ export default {
     background-image: url('https://utility-01.oss-cn-beijing.aliyuncs.com/xw_bgc_big.png');
     background-size: cover;
     background-position: center;
+    position: relative;
+    top: 0;
+    left: 0;
   }
 
   .small_screen_image {
@@ -56,6 +58,9 @@ export default {
     background-image: url('https://utility-01.oss-cn-beijing.aliyuncs.com/xu_bgc_s.png');
     background-size: cover;
     background-position: center;
+    position: relative;
+    top: 0;
+    left: 0;
   }
 }
 </style>
