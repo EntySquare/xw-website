@@ -80,11 +80,11 @@ onMounted(async () => {
                     </div>
                     <div class="item">
                       <div class="t">地板价</div>
-                      <div class="b">￥{{ albumInfoList.price_lowest || 0 }}</div>
+                      <div class="b">￥{{ albumInfoList.price_lowest || 0.00 }}</div>
                     </div>
                     <div class="item">
                       <div class="t">最佳报价</div>
-                      <div class="b">￥{{ albumInfoList.price_bast || 0 }}</div>
+                      <div class="b">￥{{ albumInfoList.price_bast || 0.00 }}</div>
                     </div>
                     <div class="item">
                       <div class="t">持有数量</div>
