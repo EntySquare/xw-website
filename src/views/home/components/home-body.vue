@@ -1,51 +1,50 @@
-<script setup lang='ts' name="HomeBody">
-import { Splide, SplideSlide } from "@splidejs/vue-splide";
-import { ref } from "vue";
-import { BodyItemList } from "@/types/cate";
-import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-import bodyListcar from "./body-listcar.vue";
-import { type } from "@/utils/banner";
+<script setup lang="ts" name="HomeBody">
+import { Splide, SplideSlide } from '@splidejs/vue-splide'
+import { ref } from 'vue'
+import { BodyItemList } from '@/types/cate'
+import '@splidejs/splide/dist/css/themes/splide-default.min.css'
+import bodyListcar from './body-listcar.vue'
+import { type } from '@/utils/banner'
 import useStore from '@/store/index'
 import { storeToRefs } from 'pinia'
+
 const props = defineProps<{
     typeList: {
-        type: string;
-        list: BodyItemList[];
-    }[];
-}>();
+        type: string
+        list: BodyItemList[]
+    }[]
+}>()
 let { home } = useStore()
 let { getHomebodyList } = home
 getHomebodyList()
 let { homebodyList } = storeToRefs(home)
 
-let mqList = ref(0);
+let mqList = ref(0)
 const getWindowInfo = () => {
-    mqList.value = window.matchMedia("(max-width: 1600px)").matches ? 5 : 6;
+    mqList.value = window.matchMedia('(max-width: 1600px)').matches ? 5 : 6
     if (mqList.value == 5) {
-        mqList.value = window.matchMedia("(max-width: 1280px)").matches ? 4 : 5;
+        mqList.value = window.matchMedia('(max-width: 1280px)').matches ? 4 : 5
         if (mqList.value == 4) {
-            mqList.value = window.matchMedia("(max-width: 1024px)").matches ? 3 : 4;
+            mqList.value = window.matchMedia('(max-width: 1024px)').matches ? 3 : 4
             if (mqList.value == 3) {
-                mqList.value = window.matchMedia("(max-width: 768px)").matches ? 2 : 3;
+                mqList.value = window.matchMedia('(max-width: 768px)').matches ? 2 : 3
             }
         }
     }
-};
-getWindowInfo();
-window.addEventListener("resize", getWindowInfo);
-
+}
+getWindowInfo()
+window.addEventListener('resize', getWindowInfo)
 </script>
-<script lang='ts'>
+<script lang="ts">
 export default {
-    name: "HomeBody",
+    name: 'HomeBody'
 }
 </script>
 <template>
     <div class="home-banner">
         <!-- 轮播图 -->
-        <div style="padding-bottom: 10px;" v-for="(item, index) in typeList" :key="index">
-            <a-typography-title :heading="3" style="padding:20px 20px 10px;font-weight: 800;">{{ item.type
-            }}</a-typography-title>
+        <div style="padding-bottom: 10px" v-for="(item, index) in typeList" :key="index">
+            <a-typography-title :heading="3" style="padding: 20px 20px 10px; font-weight: 800">{{ item.type }}</a-typography-title>
             <Splide class="banner" :options="{ rewind: false }">
                 <SplideSlide class="bannerstree" v-if="!typeList[0]">
                     <bodyListcar :num="0" :type="mqList" :typeList="[]"></bodyListcar>
@@ -57,7 +56,7 @@ export default {
         </div>
     </div>
 </template>
-<style scoped lang='less'>
+<style scoped lang="less">
 .home-banner {
     // width: 100%;
     padding: 53px 0px 64px;
@@ -65,13 +64,11 @@ export default {
     .banner {
         width: 100%;
 
-
         &:hover {
             :deep(.splide__arrow) {
                 background-color: #fff;
                 opacity: 1;
             }
-
         }
     }
 }
@@ -89,7 +86,7 @@ export default {
 }
 
 :deep(.splide__arrow) {
-    transition: all .3s;
+    transition: all 0.3s;
     opacity: 0;
     background-color: #fff;
     height: 38px;
