@@ -21,6 +21,10 @@ onMounted(() => {
 export default {
   name: 'CollHeader'
 }
+
+
+
+
 </script>
 <template>
   <div class="header">
