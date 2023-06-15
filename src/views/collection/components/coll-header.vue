@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { ref } from 'vue'
 let mqList = ref(150)
 let show1 = ref(false)
@@ -12,6 +13,9 @@ const getWindowInfo = () => {
 }
 window.addEventListener('resize', getWindowInfo)
 getWindowInfo()
+onMounted(() => {
+  console.log('mounted');
+})
 </script>
 <script lang="ts">
 export default {
