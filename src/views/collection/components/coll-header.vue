@@ -5,6 +5,7 @@ import { useRoute } from 'vue-router'
 const router = useRoute()
 
 console.log('router:', router.params.id)
+console.log('router:', router.params)
 
 let mqList = ref(150)
 let show1 = ref(false)
