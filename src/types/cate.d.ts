@@ -17,6 +17,7 @@ export type BodyItemList = {
   pay_size: number;
   region_price: string;
 };
+
 // 定义类型
 export type TRes<T> = {
   result: T;
