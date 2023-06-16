@@ -8,6 +8,7 @@ import {
 } from '@/utils/storage'
 import { onBeforeUnmount, ref } from 'vue'
 import useStore from '@/store/index'
+const token = localStorage.getItem('token')
 let { cate } = useStore()
 let { getThemenum } = cate
 // 黑夜主题切换按钮绑定数据
@@ -93,7 +94,7 @@ export default { name: 'AppTopnav' }
             <template #icon> <icon-settings :size="28" /> </template>
             设置
           </DropItem>
-          <DropItem @click="to('/')">
+          <DropItem @click="to('/')" v-if="!token">
             <template #icon><icon-import :size="28" style="transform: rotate(180deg)" />
             </template>
             登出
@@ -132,15 +133,15 @@ export default { name: 'AppTopnav' }
             </svg>
           </template>
         </DropDown> -->
-        <svg @click="to('/login/index')" t="1677739311126" class="icon" viewBox="0 0 1024 1024" version="1.1"
-          xmlns="http://www.w3.org/2000/svg" p-id="1057" width="200" height="200">
+        <svg v-if="!token" @click="to('/login/index')" t="1677739311126" class="icon" viewBox="0 0 1024 1024"
+          version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1057" width="200" height="200">
           <path
             d="M826.9246918 833.1437955L826.9246918 833.1437955C826.9246918 833.1437955 826.9246918 833.1437955 826.9246918 833.1437955 745.73467666 912.75886602 634.6528499 962 512 962 263.48012685 962 62.01574912 760.50348067 62.01574912 511.9836084 62.01574912 263.46373438 263.48012685 61.99935752 512 61.99935752 760.51987315 61.99935752 961.98425088 263.46373438 961.98425088 511.9836084 961.98425088 637.85063076 910.2039207 751.47165459 826.9246918 833.1437955ZM512 897.71653584C603.34680253 897.71653584 687.17244042 865.79979541 753.25584219 812.70165342 718.06064521 712.74086651 624.01393672 640.55053672 512 640.55053672 399.98606328 640.55053672 305.93935479 712.74086651 270.74415781 812.70165342 336.82755958 865.79979541 420.65319747 897.71653584 512 897.71653584ZM512 126.31496328C298.99674072 126.31496328 126.29921328 299.01249072 126.29921328 512.01574912 126.29921328 608.28023779 161.78368555 696.05930761 220.08878896 763.6533708 270.93700918 653.1500955 382.37239443 576.29921328 512 576.29921328 641.59546396 576.29921328 753.06299082 653.1500955 803.91121104 763.6533708 862.21631445 696.09144922 897.70078672 608.28023779 897.70078672 512.01574912 897.70078672 299.01249072 725.00325928 126.31496328 512 126.31496328ZM512 544.15748164C423.22453526 544.15748164 351.29133916 472.19214307 351.29133916 383.4488208 351.29133916 294.67335605 423.22453526 222.74015996 512 222.74015996 600.74332227 222.74015996 672.70866084 294.67335605 672.70866084 383.4488208 672.70866084 472.19214307 600.74332227 544.15748164 512 544.15748164ZM512 287.02362412C458.74115 287.02362412 415.57480332 330.1899708 415.57480332 383.41667832 415.57480332 436.6755292 458.74115 479.84187588 512 479.84187588 565.25885 479.84187588 608.42519668 436.6755292 608.42519668 383.41667832 608.42519668 330.1899708 565.25885 287.02362412 512 287.02362412Z"
             fill="#2c2c2c" p-id="1058"></path>
         </svg>
         <!-- 个人中心end -->
         <!-- 扫码登陆begin -->
-        <DropDown :left="-100" type="click" :pop_up="true">
+        <DropDown :left="- 100" type="click" :pop_up="true">
           <template #title>
             <svg t="1677739423959" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
               p-id="1516" width="200" height="200">
@@ -160,7 +161,7 @@ export default { name: 'AppTopnav' }
         </DropDown>
         <!-- 扫码登陆end -->
         <!-- 购物车begin -->
-        <DropDown :left="-100" type="click" :pop_up="true">
+        <DropDown :left="- 100" type="click" :pop_up="true">
           <template #title>
             <svg t="1677739355444" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
               p-id="1364" width="200" height="200">
@@ -173,7 +174,7 @@ export default { name: 'AppTopnav' }
             <div class="cart">
               <!-- 购物车数据循环体begin -->
               <div class="cartitem">
-                <div v-for="item in 8" class="item">
+                <div v-for=" item  in  8" class="item">
                   <LockDiv width="110px" xyb="110px">
                     <div class="img" :style="{
                       'background-image': 'url(' + `${imgurl}` + ')'
@@ -208,7 +209,7 @@ export default { name: 'AppTopnav' }
         <a-dropdown @select="handleSelect" trigger="hover" class="dropdown" style="position: fixed; overflow: hidden">
           <icon-menu size="20px" />
           <template #content>
-            <a-doption>
+            <a-doption @click="to('/login/index')">
               <svg t="1677739311126" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
                 p-id="1057" width="20" height="20">
                 <path
