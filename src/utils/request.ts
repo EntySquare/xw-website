@@ -8,10 +8,6 @@ let request = axios.create({
   baseURL: baseURL,
   timeout: 5000,
 });
-localStorage.setItem(
-  "token",
-  "jMgd8xyg9ojt8JVKz8olNcHilHyJu8Kwem8kii02OxbWlHDncilXt6acJl6tC47p"
-);
 // 默认请求格式
 const config = {
   baseURL: "",
@@ -50,7 +46,7 @@ export const requestType = async (url, method, data, headers = {}) => {
     });
     return response;
   } catch (error) {
-    console.error(error);
+    console.log(error);
     throw error;
   }
 };
@@ -127,6 +123,9 @@ request.interceptors.response.use(
         });
         localStorage.removeItem("token"); //清除缓存的token
         //重定向页面
+        setTimeout(() => {
+          window.location.href = "/login/index";
+        }, 2000);
       } else {
         if (response.data.json.message_zh) {
           Message.error({
@@ -135,6 +134,7 @@ request.interceptors.response.use(
             duration: 2000,
           });
         }
+        throw response.data;
       }
     } else {
       // 浏览器请求状态失败;
