@@ -2,7 +2,7 @@
 import axios from "axios";
 import { Message } from "@arco-design/web-vue";
 // 创建 axios 副本对象
-let baseURL = "http://192.168.10.2:3030"; //大洋本地域名
+let baseURL = "https://api.xuanwoo.com"; //大洋本地域名
 // let baseURL = "http://192.168.10.100:3030";
 let request = axios.create({
   baseURL: baseURL,
