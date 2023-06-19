@@ -47,7 +47,7 @@ export default {
     background-image: url('https://utility-01.oss-cn-beijing.aliyuncs.com/xw_bgc_big.png');
     background-size: cover;
     background-position: center;
-    position: relative;
+    // position: relative;
     top: 0;
     left: 0;
   }
@@ -58,7 +58,7 @@ export default {
     background-image: url('https://utility-01.oss-cn-beijing.aliyuncs.com/xu_bgc_s.png');
     background-size: cover;
     background-position: center;
-    position: relative;
+    // position: relative;
     top: 0;
     left: 0;
   }

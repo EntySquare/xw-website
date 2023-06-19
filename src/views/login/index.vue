@@ -14,8 +14,8 @@ import HomeFooter from './components/home-footer.vue'
 <style scoped lang="less">
 .page-home {
   position: relative;
-  height: 200vh;
-  max-height: calc(100vh - 85px);
+  // height: 200vh;
+  // max-height: calc(100% - 85px);
   overflow: hidden;
 }
 </style>

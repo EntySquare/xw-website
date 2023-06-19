@@ -119,6 +119,49 @@ const getWindowInfo = () => {
 }
 getWindowInfo()
 window.addEventListener('resize', getWindowInfo)
+
+
+//判断是否为微信浏览器
+const isWeixin = () => {
+  var ua = navigator.userAgent.toLowerCase()
+  if (ua.match(/MicroMessenger/i) == 'micromessenger' as any) {
+    return true
+  } else {
+    return false
+  }
+}
+//判断是否为移动端
+const isMobile = () => {
+  var ua = navigator.userAgent.toLowerCase()
+  if (
+    ua.match(/Android/i) == 'android' as any ||
+    ua.match(/iPhone/i) == 'iphone' as any ||
+    ua.match(/iPad/i) == 'ipad' as any
+  ) {
+    return true
+  } else {
+    return false
+  }
+}
+function download(i) {
+  if (isMobile()) {
+    if (isWeixin()) {
+      Message.success({
+        content: "请点击右上角 ... 在浏览器中打开。",
+        closable: true,
+        duration: 2000,
+      });
+    } else
+      if (i == 1) {
+        window.location.href = 'https://www.pgyer.com/5Q8L'
+      } else if (i == 2) {
+        {
+          window.location.href = 'https://www.pgyer.com/5Q8L'
+        }
+      }
+  }
+}
+
 </script>
 <template>
   <div :class="['footer', { footerbgc: !+getThemenum() }]">
@@ -141,8 +184,8 @@ window.addEventListener('resize', getWindowInfo)
       <img src="@/assets/app.png" alt="" />
     </div>
     <div class="download">
-      <div>Ios下载</div>
-      <div>Android下载</div>
+      <div @click="download(1)">Ios下载</div>
+      <div @click="download(2)">Android下载</div>
     </div>
   </div>
 </template>
@@ -160,7 +203,7 @@ window.addEventListener('resize', getWindowInfo)
 
 .footer {
   width: 100%;
-  min-height: 100%;
+  min-height: 100vh;
   position: absolute;
   top: 0;
   left: 0;
