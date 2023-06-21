@@ -48,7 +48,7 @@ let router = createRouter({
           component: () => import("@/views/download/index.vue"),
         },
         {
-          path: "/login",
+          path: "/login/index",
           component: () => import("@/views/login/index.vue"),
         },
       ],
