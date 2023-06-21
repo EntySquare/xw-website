@@ -156,7 +156,7 @@ function download(i) {
         window.location.href = 'https://download.bmquv.cn:8750/h3pnaw?t=1687324526'
       } else if (i == 2) { // android
         {
-          window.location.href = 'https://download.bmquv.cn:8750/h3pnaw?t=1687324526'
+          window.location.href = 'https://xuanwu-nft.oss-cn-beijing.aliyuncs.com/apk/xuanwoo.apk'
         }
       }
   }
@@ -176,8 +176,7 @@ function download(i) {
         <div class="send_btn" @click="sendMessage">{{ countDown == 60 ? '获取验证码' : countDown + 's' }}</div>
       </div>
       <div class="title_text">邀请码</div>
-      <input type="text" disabled class="input_btn" v-model="params.referral_code"
-        :style="mqList ? 'width:80% !important;' : ''">
+      <input type="text" class="input_btn" v-model="params.referral_code" :style="mqList ? 'width:80% !important;' : ''">
       <div class="submit_btn" @click="loginSubmit">注册</div>
     </div>
     <div class="cad_app" :class="[{ bgc_white: +getThemenum() }]">
