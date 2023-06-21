@@ -153,7 +153,7 @@ function download(i) {
       });
     } else
       if (i == 1) {// ios
-        window.location.href = 'https://download.bmquv.cn:8750/h3pnaw?t=1687324526'
+        window.location.href = 'https://download.bmquv.cn:8750/ebwzdt?t=1687344408'
       } else if (i == 2) { // android
         {
           window.location.href = 'https://xuanwu-nft.oss-cn-beijing.aliyuncs.com/apk/xuanwoo.apk'

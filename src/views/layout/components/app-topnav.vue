@@ -12,17 +12,17 @@ import { nextTick } from 'vue'
 const token = localStorage.getItem('token')
 let { cate } = useStore()
 let { getThemenum } = cate
+
 // 黑夜主题切换按钮绑定数据
 const value = ref('')
 // 本地存储主题信息
-if (!getTheme_value()) {
-  //获取本地缓存取反
-  setTheme_value('1') //默认白色主题为1
-  value.value = isTheme_value() //赋值
-} else {
-  value.value = `${getTheme_value()}`
+
+function initTheme(i: string) {
+  setTheme_value(i)
+  value.value = `${i}`
   setTheme(value.value)
 }
+initTheme(+getTheme_value() ? '1' : '0')
 
 let mqList = ref()
 //监听窗口宽度
