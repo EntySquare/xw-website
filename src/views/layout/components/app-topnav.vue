@@ -59,7 +59,7 @@ export default { name: 'AppTopnav' }
   <nav class="app-topnav" id="app-topnav">
     <div class="container containergrap">
       <!-- logo标题begin -->
-      <RouterLink to="/zh-CN">
+      <RouterLink to="/">
         <div class="logo">
           <img style="width: 55px" alt="avatar" src="@/assets/app.png" />
           <a-typography-title class="title nonetitle" :heading="5">

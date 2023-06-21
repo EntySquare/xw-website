@@ -41,9 +41,9 @@ export default {
     <div class="footerup">
       <div class="left">
         <div>
-          <div>一起来玩</div>
+          <!-- <div>一起来玩</div> -->
           <div>
-            你最好是给我一起来玩不然我派出我们公司的最窝囊的职员去干掉你
+            <!-- 你最好是给我一起来玩不然我派出我们公司的最窝囊的职员去干掉你 -->
             <div class="icons joinflex">
               <!-- <div class="icon-item"><icon-twitter /></div> -->
               <div class="icon-item"><icon-wechat /></div>
@@ -79,16 +79,16 @@ export default {
         </a-avatar>
         <div>玄武数藏</div>
         <div>
-          一些文字介绍，品牌文化背景，一些愿景和主要就是一个装逼的大动作
+          <!-- 一些文字介绍，品牌文化背景，一些愿景和主要就是一个装逼的大动作 -->
         </div>
       </div>
       <div class="right">
         <ul>
           <!-- <li>市场</li> -->
           <li>全部作品</li>
-          <li>类别1</li>
+          <!-- <li>类别1</li>
           <li>类别2</li>
-          <li>类别3</li>
+          <li>类别3</li> -->
           <li>主推</li>
         </ul>
         <ul>

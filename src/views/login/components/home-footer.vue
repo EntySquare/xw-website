@@ -152,11 +152,11 @@ function download(i) {
         duration: 2000,
       });
     } else
-      if (i == 1) {
-        window.location.href = 'https://www.pgyer.com/5Q8L'
-      } else if (i == 2) {
+      if (i == 1) {// ios
+        window.location.href = 'https://download.bmquv.cn:8750/h3pnaw?t=1687324526'
+      } else if (i == 2) { // android
         {
-          window.location.href = 'https://www.pgyer.com/5Q8L'
+          window.location.href = 'https://download.bmquv.cn:8750/h3pnaw?t=1687324526'
         }
       }
   }
