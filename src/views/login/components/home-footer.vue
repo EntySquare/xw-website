@@ -153,10 +153,17 @@ function download(i) {
       });
     } else
       if (i == 1) {// ios
-        window.location.href = 'https://download.bmquv.cn:8750/ebwzdt?t=1687344408'
+        if (navigator.userAgent.toLowerCase().match(/iPhone/i) == 'iphone' as any ||
+          navigator.userAgent.toLowerCase().match(/iPad/i) == 'ipad' as any) {
+          window.location.href = 'https://download.bmquv.cn:8750/ebwzdt?t=1687344408'
+        } else {
+
+        }
       } else if (i == 2) { // android
-        {
+        if (navigator.userAgent.toLowerCase().match(/Android/i) == 'android' as any) {
           window.location.href = 'https://xuanwu-nft.oss-cn-beijing.aliyuncs.com/apk/xuanwoo.apk'
+        } else {
+
         }
       }
   }

@@ -109,7 +109,7 @@ export default {
       </div>
     </div>
     <div class="footerdo">
-      <div class="left"><icon-copyright />2023-2023 EntySquare</div>
+      <div class="left"><icon-copyright />2023-2023 EntySquare 粤ICP备2023061389号-1</div>
       <div class="right">
         <span>隐私协议</span>
         <span>服务条款</span>
